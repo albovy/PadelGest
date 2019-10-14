@@ -1,0 +1,30 @@
+{
+  "name": "padelgest",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "start": "node ./bin/www"
+  },
+  "dependencies": {
+    "cookie-parser": "~1.4.4",
+    "debug": "~2.6.9",
+    "express": "~4.16.1",
+    "http-errors": "~1.6.3",
+    "mongoose": "^5.7.4",
+    "morgan": "~1.9.1",
+    "twig": "~0.10.3"
+  },
+  "description": "PadelGest",
+  "main": "app.js",
+  "devDependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/albovy/PadelGest.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/albovy/PadelGest/issues"
+  },
+  "homepage": "https://github.com/albovy/PadelGest#readme"
+}
