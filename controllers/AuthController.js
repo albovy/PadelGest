@@ -24,7 +24,8 @@ class AuthController{
                     console.log(user_2);
                     const token = jwt.sign(payload, 'keyboard cat 4 ever', { expiresIn: 129600 });
                     res.cookie('token', token);
-                    return res.redirect('/prueba');
+                    return res.redirect('/');
+                    
                 }
                 else {
                     throw err;
