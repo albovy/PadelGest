@@ -1,37 +1,25 @@
-const User = require("../models/User");
+const UserModel = require("../models/UserModel");
 
-const userController = {};
 
-userController.login = (req,res) =>{
-    if(req.method == "GET"){
-        res.render('user/login');
-    }else{
-        User.findOne({login: req.body.login, passwd: req.body.passwd}).exec((err,user) =>{
-            if( err ){ console.log('Error: ', err); return ; }
+class UserController{
+    constructor(){}
 
-            console.log(user);
-        });
-    }
-}
-
-userController.register = (req,res) =>{
-    if(req.method == "GET"){
-        res.render('user/register');
-    }else{
-        const user = new User(req.body);
-        user.save((err)=>{
-            if( err ){ 
-                console.log('Error: ', err); 
-                return res.redirect('/user/register') ; 
+    async register(req,res){
+        if(req.method == "GET"){
+            res.render('user/register');
+        }else{
+            try {
+                const user = await UserModel.save(req.body);
+                console.log(user);
+                return res.redirect('/auth');
             }
-            console.log("Successfully created a user. :)");
-        
-            res.redirect('/user/login');
-        });
+            catch (err) {
+                return console.log(err);
+            }
+        }
     }
 }
 
 
 
-
-module.exports = userController
+module.exports = new UserController();
