@@ -10,7 +10,6 @@ const indexRouter = require("./routes/index");
 const authRouter = require("./routes/auth");
 const usersRouter = require("./routes/user");
 
-
 const app = express();
 
 const mongoDB = "mongodb://127.0.0.1:27017/padeldb";
@@ -45,8 +44,9 @@ app.use(
       }
 
       return null;
-    }
-  }).unless({ path: ["/","/auth","/user/register"] })
+    },
+    credentialsRequired: false
+  })
 );
 app.use("/", indexRouter);
 app.use("/auth", authRouter);
