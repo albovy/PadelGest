@@ -4,11 +4,12 @@ const path = require("path");
 const cookieParser = require("cookie-parser");
 const logger = require("morgan");
 const mongoose = require("mongoose");
+const jwt = require("express-jwt");
 
 const indexRouter = require("./routes/index");
 const authRouter = require("./routes/auth");
 const usersRouter = require("./routes/user");
-const jwt = require("express-jwt");
+
 
 const app = express();
 
@@ -45,7 +46,7 @@ app.use(
 
       return null;
     }
-  }).unless({ path: ["/user/register"] })
+  }).unless({ path: ["/","/auth","/user/register"] })
 );
 app.use("/", indexRouter);
 app.use("/auth", authRouter);

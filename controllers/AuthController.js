@@ -5,7 +5,7 @@ class AuthController {
   constructor() {}
 
   async authenticate(req, res) {
-    if (!req.user) {
+    if (!req.cookies.token) {
       if (req.method == "GET") {
         res.render("user/login");
       } else {
