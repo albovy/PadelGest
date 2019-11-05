@@ -4,9 +4,8 @@ class UserController {
   constructor() {}
 
   async showAll(req, res) {
-    const users = UserModel.findAll();
-    const users_2 = await users;
-    res.render("user/showAll", { users: users_2 });
+    const users = await UserModel.findAll();
+    res.render("user/showAll", { users: users });
   }
   async register(req, res) {
     if (req.method == "GET") {

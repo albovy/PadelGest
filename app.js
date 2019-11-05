@@ -9,6 +9,7 @@ const jwt = require("express-jwt");
 const indexRouter = require("./routes/index");
 const authRouter = require("./routes/auth");
 const usersRouter = require("./routes/user");
+const tournamentRouter = require("./routes/tournament");
 
 const app = express();
 
@@ -51,6 +52,7 @@ app.use(
 app.use("/", indexRouter);
 app.use("/auth", authRouter);
 app.use("/user", usersRouter);
+app.use("/tournament",tournamentRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

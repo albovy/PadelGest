@@ -1,0 +1,11 @@
+{% extends 'layout.twig' %}
+
+{% block body %}
+<form method=POST action="/tournament/add">
+<input name="title">title</input>
+<input name="description">description</input>
+<input type="date" name="startDate">startDate</input>
+<input type="date" name="finishDate">finishDate</input>
+<button>click</button>
+</form>
+{% endblock %}

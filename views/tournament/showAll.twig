@@ -1,0 +1,12 @@
+{% extends 'layout.twig' %}
+
+{% block body %}
+{% for tournament in tournaments %}
+<a href="/tournament/edit/{{tournament._id}}"> {{tournament._id}}</a>
+<h1>{{tournament.title}}</h1>
+<form method=POST action="/tournament/delete/{{tournament._id}}">
+<button type="submit">borrar</button>
+</form>
+{% endfor %}
+
+{% endblock %}
