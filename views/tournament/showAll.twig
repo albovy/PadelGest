@@ -4,8 +4,13 @@
 {% for tournament in tournaments %}
 <a href="/tournament/edit/{{tournament._id}}"> {{tournament._id}}</a>
 <h1>{{tournament.title}}</h1>
-<form method=POST action="/tournament/delete/{{tournament._id}}">
-<button type="submit">borrar</button>
+<!-- <form method=post action="/inscription/tournament/{{tournament._id}}">
+<button type="submit">borrar</button> 
+</form>-->
+<form method=post action="/inscription/tournament/{{tournament._id}}">
+<input name="user2_login">login pareja</input>
+<input name="category">categoria</input>
+<button type="submit">add inscription</button>
 </form>
 {% endfor %}
 

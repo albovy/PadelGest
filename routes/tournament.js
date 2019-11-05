@@ -1,7 +1,6 @@
 const express = require("express");
 const router = express.Router();
 
-const notLogged = require("../middleware/loggedCantAccess");
 const permit = require("../middleware/permission");
 const tournamentController = require("../controllers/TournamentController.js");
 

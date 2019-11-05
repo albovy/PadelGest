@@ -5,7 +5,10 @@
     <link rel='stylesheet' href='/stylesheets/style.css' />
   </head>
   <body>
-    {% block errors %}{% endblock %}
+{% if expressFlash %}
+  <h1>{{expressFlash}}</h1>
+  <h1>{{sessionFlash}}</h1>
+{% endif %}
     {% block body %}{% endblock %}
   </body>
 </html>

@@ -6,7 +6,7 @@ module.exports = (...allowed) => {
     if (req.user && isAllowed(req.user.role)) next();
     // role is allowed, so continue on the next middleware
     else {
-      res.send("/"); // user is forbidden
+      res.redirect("/"); // user is forbidden
     }
   };
 };

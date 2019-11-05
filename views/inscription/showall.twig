@@ -1,0 +1,14 @@
+{% extends 'layout.twig' %}
+
+{% block body %}
+{% for inscription in inscriptions %}
+<h1>{{inscription.user1_id}}</h1>
+<!-- <form method=post action="/inscription/tournament/{{tournament._id}}">
+<button type="submit">borrar</button> 
+</form>-->
+<form method=post action="/inscription/delete/{{inscription.id}}">
+<button type="submit">borrar</button> 
+</form>
+{% endfor %}
+
+{% endblock %}

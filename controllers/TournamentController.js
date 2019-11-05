@@ -29,19 +29,23 @@ class TournamentController {
         res.render("tournament/edit", { tournament: tournament });
       } else {
         const newData = { $set: req.body };
-        const newTournament = await TournamentModel.update(tournament._id,newData);
+        const newTournament = await TournamentModel.update(
+          tournament._id,
+          newData
+        );
         console.log(newTournament);
       }
     } catch (err) {
-        //CUBRIR CON ERRORES
+      //CUBRIR CON ERRORES
     }
   }
 
-  async delete(req,res){
-    try{
+  async delete(req, res) {
+    try {
       await TournamentModel.delete(req.params.id);
       console.log("ok");
-    }catch(err){
+      res.redirect("/tournament");
+    } catch (err) {
       //CUBRIR CON ERRORES NO SE PUEDO BORRAR
     }
   }

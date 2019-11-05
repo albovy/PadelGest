@@ -8,7 +8,7 @@ const userController = require("../controllers/UserController.js");
 router.get("/", permit("ADMIN"), userController.showAll);
 router.get("/edit/:id", permit("ADMIN", "ATHLETE"), userController.edit);
 router.put("/edit/:id", permit("ADMIN","ATHLETE"), userController.edit);
-router.delete("/delete/:id", permit("ADMIN"), userController.delete);
+router.post("/delete/:id", permit("ADMIN"), userController.delete);
 router.get("/register", notLogged(), userController.register);
 router.post("/register", notLogged(), userController.register);
 

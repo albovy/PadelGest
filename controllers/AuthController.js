@@ -4,6 +4,11 @@ const jwt = require("jsonwebtoken");
 class AuthController {
   constructor() {}
 
+  logout(req,res){
+    res.clearCookie("token");
+    res.redirect("/");
+  }
+
   async authenticate(req, res) {
     if (req.method == "GET") {
       res.render("user/login");

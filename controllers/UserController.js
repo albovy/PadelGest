@@ -52,6 +52,7 @@ class UserController {
     try{
       await UserModel.delete(req.params.id);
       console.log("ok");
+      res.redirect("/user");
     }catch(err){
       //CUBRIR CON ERRORES NO SE PUEDO BORRAR
     }
