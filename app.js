@@ -12,6 +12,7 @@ const indexRouter = require("./routes/index");
 const authRouter = require("./routes/auth");
 const usersRouter = require("./routes/user");
 const tournamentRouter = require("./routes/tournament");
+const courtRouter = require("./routes/court");
 const inscriptionRouter = require("./routes/inscription");
 
 const app = express();
@@ -79,6 +80,7 @@ app.use("/", indexRouter);
 app.use("/auth", authRouter);
 app.use("/user", usersRouter);
 app.use("/tournament", tournamentRouter);
+app.use("/court",courtRouter);
 app.use("/inscription", inscriptionRouter);
 
 // catch 404 and forward to error handler
