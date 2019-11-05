@@ -1,0 +1,13 @@
+{% extends 'layout.twig' %}
+
+{% block body %}
+<a href="/court/add">ADD</a><br>
+{% for court in courts %}
+<a href="/court/edit/{{court._id}}"> {{court._id}}</a>
+<h1>{{court.name}}</h1>
+<form method=POST action="/court/delete/{{court._id}}">
+<button type="submit">borrar</button>
+</form>
+{% endfor %}
+
+{% endblock %}

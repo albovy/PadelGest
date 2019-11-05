@@ -1,0 +1,18 @@
+{% extends 'layout.twig' %}
+
+{% block body %}
+<form method=POST action="/court/add">
+<input name="name">name</input>
+<select name="surface">
+    <option value="GRASS">Césped artificial</option>
+    <option value="SYNTHETICS">Resina sintética</option>
+    <option value="CONCRETE">Hormigon</option>
+    <option value="CEMENT">Cemento</option>
+</select>
+<select name="type">
+    <option value="OUTSIDE">Exterior</option>
+    <option value="INSIDE">Interior</option>
+</select>
+<button>click</button>
+</form>
+{% endblock %}

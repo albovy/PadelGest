@@ -1,0 +1,46 @@
+{% extends 'layout.twig' %}
+
+{% block body %}
+<form method=POST action="/court/edit/{{court._id}}">
+<input name="name" value={{court.name}}>name</input>
+<select name="surface">
+    {% if court.surface=="GRASS" %}
+        <option value="GRASS" selected>Césped artificial</option>
+    {% else %}
+        <option value="GRASS">Césped artificial</option>
+    {% endif %}
+
+    {% if court.surface=="SYNTHETICS" %}
+        <option value="SYNTHETICS" selected>Resina sintética</option>
+    {% else %}
+        <option value="SYNTHETICS">Resina sintética</option>
+    {% endif %}
+
+    {% if court.surface=="CONCRETE" %}
+        <option value="CONCRETE" selected>Hormigon</option>
+    {% else %}
+        <option value="CONCRETE">Hormigon</option>
+    {% endif %}
+
+    {% if court.surface=="CEMENT" %}
+        <option value="CEMENT" selected>Cemento</option>
+    {% else %}
+        <option value="CEMENT">Cemento</option>
+    {% endif %}
+</select>
+<select name="type">
+    {% if court.type=="OUTSIDE" %}
+        <option value="OUTSIDE" selected>Exterior</option>
+    {% else %}
+        <option value="OUTSIDE">Exterior</option>
+    {% endif %}
+
+    {% if court.type=="INSIDE" %}
+        <option value="INSIDE" selected>Interior</option>
+    {% else %}
+        <option value="INSIDE">Interior</option>
+    {% endif %}
+</select>
+<button>click</button>
+</form>
+{% endblock %}
