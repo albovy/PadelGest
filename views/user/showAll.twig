@@ -1,0 +1,12 @@
+{% extends 'layout.twig' %}
+
+{% block body %}
+{% for user in users %}
+<a href="/user/edit/{{user._id}}"> {{user._id}}</a>
+<h1>{{user.login}}</h1>
+<form method=POST action="/user/delete/{{user._id}}">
+<button type="submit">borrar</button>
+</form>
+{% endfor %}
+
+{% endblock %}

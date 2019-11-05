@@ -1,6 +1,5 @@
 const User = require("../models/User");
 
-
 class UserModel {
   constructor() {}
 
@@ -8,14 +7,36 @@ class UserModel {
     return User.findOne({ login: login });
   }
 
-  save(body) {
+  async save(body) {
     let user = new User(body);
-    return user
-      .save()
-      .then(user => user)
-      .catch(err => new Promise((resolve, reject) => reject(err)));
+    try {
+      const user_1 = await user.save();
+      return user_1;
+    } catch (err) {
+      return await new Promise((resolve, reject) => reject(err));
+    }
   }
 
+  findAll() {
+    return User.find();
+  }
+
+  findById(id) {
+    return User.findById(id);
+  }
+
+  async update(id, data) {
+    try {
+      const user = await User.updateOne({ _id: id }, data);
+      return user;
+    } catch (err) {
+      return await new Promise((resolve, reject) => reject(err));
+    }
+  }
+
+  delete(id) {
+    return User.deleteOne({ _id: id });
+  }
 }
 
 module.exports = new UserModel();

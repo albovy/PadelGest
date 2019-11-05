@@ -11,7 +11,7 @@ class AuthController {
       let user = UserModel.findOne(req.body.login);
 
       let valid = user.then(user => {
-        if (user) return req.body.passwd == req.body.passwd;
+        if (user) return req.body.passwd == user.passwd;
         else throw err;
       });
 
@@ -35,6 +35,7 @@ class AuthController {
         }
       } catch (err) {
         return res.status(401);
+        //ERRORES DE 401
       }
     }
   }
