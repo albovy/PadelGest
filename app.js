@@ -31,8 +31,11 @@ db.on("error", console.error.bind(console, "MongoDB connection error:"));
 
 const sessionStore = new session.MemoryStore();
 // view engine setup
-app.set("views", path.join(__dirname, "views"));
+//app.set("views", path.join(__dirname, "views"));
+
+app.use(express.static(__dirname + '/views'));
 app.set("view engine", "twig");
+
 
 app.use(logger("dev"));
 app.use(express.json());
@@ -48,7 +51,7 @@ app.use(
   })
 );
 app.use(flash());
-app.use(express.static(path.join(__dirname, "public")));
+
 
 // Custom flash middleware -- from Ethan Brown's book, 'Web Development with Node & Express'
 app.use(function(req, res, next) {
