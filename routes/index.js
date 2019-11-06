@@ -5,6 +5,7 @@ const router = express.Router();
 router.get("/", function(req, res, next) {
   res.render("index", {
     title: "Express",
+    user: req.user,
     expressFlash: req.flash("error"),
     sessionFlash: res.locals.sessionFlash
   });

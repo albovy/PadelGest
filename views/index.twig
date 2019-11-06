@@ -1,8 +1,15 @@
 {% extends 'layout.twig' %}
 
 {% block body %}
+{% if not user %}
   <h1>{{title}}</h1>
-  <p>Welcome to {{title}}</p>
-  <a href="/auth">logueate</a>
-  <a href="/user/register">registrate</a>
+  <p>Bienvenido a {{title}}</p>
+  <a href="/auth">Login</a>
+  <a href="/user/register">Registro</a>
+
+
+{% else %}
+  <p>Bienvenido {{user.login}}</p>
+  <a href="/auth/logout">Desconectar</a>
+{% endif %}
 {% endblock %}
