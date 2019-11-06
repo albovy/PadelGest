@@ -1,0 +1,29 @@
+@charset "UTF-8";
+
+.login-container {
+  margin: 0;
+  min-height: 100%;
+  display: block;
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+}
+
+.login-container::after {
+  content: "";
+  background: linear-gradient(rgba(0,0,0,.3), rgba(0,0,0,.3)),url(../img/hombre-padel-login.png) center center no-repeat fixed;
+  background-size: cover;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  position: absolute;
+  z-index: -1;
+}
+
+.align {
+  align-items: center;
+  display: flex;
+  flex-direction: row;
+
+}
