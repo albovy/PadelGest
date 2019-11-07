@@ -11,6 +11,7 @@ const session = require("express-session");
 const indexRouter = require("./routes/index");
 const authRouter = require("./routes/auth");
 const usersRouter = require("./routes/user");
+const bookRouter = require("./routes/book");
 const tournamentRouter = require("./routes/tournament");
 const courtRouter = require("./routes/court");
 const inscriptionRouter = require("./routes/inscription");
@@ -83,6 +84,7 @@ app.use(
 app.use("/", indexRouter);
 app.use("/auth", authRouter);
 app.use("/user", usersRouter);
+app.use("/book", bookRouter);
 app.use("/tournament", tournamentRouter);
 app.use("/court",courtRouter);
 app.use("/inscription", inscriptionRouter);

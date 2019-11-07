@@ -9,7 +9,12 @@ class CourtModel {
     findById(id){
         return Court.findById(id);
     }
-
+    findNotInRange(range){
+        return Court.find({_id:{ $nin: range}});
+    }
+    countCourts(){
+        return Court.count();
+    }
     async add(body) {
         let court = new Court(body);
         try {
