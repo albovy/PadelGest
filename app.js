@@ -14,6 +14,7 @@ const usersRouter = require("./routes/user");
 const tournamentRouter = require("./routes/tournament");
 const courtRouter = require("./routes/court");
 const inscriptionRouter = require("./routes/inscription");
+const promotedRouter = require("./routes/promoted");
 
 const app = express();
 
@@ -85,6 +86,7 @@ app.use("/user", usersRouter);
 app.use("/tournament", tournamentRouter);
 app.use("/court",courtRouter);
 app.use("/inscription", inscriptionRouter);
+app.use("/promoted", promotedRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

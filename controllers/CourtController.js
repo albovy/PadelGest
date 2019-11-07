@@ -13,7 +13,6 @@ class CourtController {
     } else {
       try {
         const court = await courtModel.add(req.body);
-        console.log(court);
         return res.redirect("/court");
       } catch (err) {
         return console.log(err);

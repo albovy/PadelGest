@@ -1,0 +1,10 @@
+{% extends 'layout.twig' %}
+
+{% block body %}
+<form method=POST action="/promoted/add">
+<input name="title">title</input>
+<input type="date" name="date">date</input>
+<input type="hidden" name="numPlayers" value="0"></input>
+<button>click</button>
+</form>
+{% endblock %}
