@@ -1,20 +1,37 @@
 {% extends 'layout.twig' %}
 
 {% block body %}
+
 <div class="login-container">
-  <div class="align">
-      
-      <h2>Sign In</h2>
-
-      <form method="POST" action='/auth'>
-          <input name="login" type="text" placeholder="login">  
-          <input name="passwd" type="password" placeholder="••••••••••••">             
-          <input type="submit" value="Sign Up">
-      </form>
-
-      <p> Not registered yet? <a href="/user/register">Register</a></p>
+  <div class="form">
+    <ul class="tab-group">
+      <li class="tab active">
+        <a href="/auth">Entra</a>
+      </li>
+      <li class="tab">
+        <a href="/user/register">Regístrate</a>
+      </li>
+    </ul>
+    <div class="tab-content">
+      <div id="login">
+        <h1>Bienvenido!</h1>
+        <form action="/auth" method="post">
+          <div class="field-wrap">
+            <input type="text" name="login" placeholder="Login" required autocomplete="off" />
+          </div>
+          <div class="field-wrap">
+            <input type="password" name="passwd" placeholder="Contraseña" required autocomplete="off" />
+          </div>
+          <button class="button button-block" />ENTRA</button>
+        </form>
+      </div>
     </div>
+    <!-- tab-content -->
   </div>
-</form>
+</div>
+
+
+
+
 {% endblock %}
 

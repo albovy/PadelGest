@@ -2,17 +2,22 @@
 <html>
   <head>
     <title>{{ title }}</title>
-    <link rel="stylesheet" type="text/css" href='../css/login_styles.css'/>
-    <link rel="stylesheet" type="text/css" href='../css/layout_styles.css'/>
-     <link rel="stylesheet" type="text/css" href='../css/register_styles.css'/>
-    <link href="https://fonts.googleapis.com/css?family=Montserrat|Roboto&display=swap" rel="stylesheet"> 
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="../css/login-register_styles.css"
+    />
+    <link rel="stylesheet" type="text/css" href="../css/layout_styles.css" />
+    <link rel="stylesheet" type="text/js" href="../js/login-register.js" />
+    <link
+      href="https://fonts.googleapis.com/css?family=Montserrat|Roboto&display=swap"
+      rel="stylesheet"
+    />
   </head>
   <body>
-    
-{% if expressFlash %}
-  <h1>{{expressFlash}}</h1>
-  <h1>{{sessionFlash}}</h1>
-{% endif %}
-    {% block body %}{% endblock %}
+    {% if expressFlash %}
+    <h1>{{ expressFlash }}</h1>
+    <h1>{{ sessionFlash }}</h1>
+    {% endif %} {% block body %}{% endblock %}
   </body>
 </html>
