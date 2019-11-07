@@ -9,8 +9,18 @@ class InscriptionModel {
   findMyInscriptions(id) {
     return Inscription.find({ $or: [{ user1_id: id }, { user2_id: id }] });
   }
+
+   findIfImAlreadyInscripted(tournament_id, user_id) {
+    return Inscription.countDocuments({$and :[{$or :[{user1_id : user_id},{user2_id: user_id}]},{tournament_id : tournament_id}]});
+  }
+  
+
+  findInscriptionsByTournament(id) {
+    return Inscription.find({ tournament_id: id }).sort({inscriptionDate: -1});
+  }
   async add(body) {
     let inscription = new Inscription(body);
+    console.log(inscription);
     try {
       return await inscription.save();
     } catch (err) {

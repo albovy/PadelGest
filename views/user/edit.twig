@@ -1,0 +1,8 @@
+{% extends 'layout.twig' %}
+
+{% block body %}
+<form method=POST action="/user/edit/{{user._id}}">
+<input name="name" value={{user.name}}>name</input>
+<button>click</button>
+</form>
+{% endblock %}

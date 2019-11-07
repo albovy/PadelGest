@@ -6,9 +6,10 @@
     "start": "nodemon ./bin/www"
   },
   "dependencies": {
-    "bcrypt": "^3.0.6",
+    "agenda": "^2.1.0",
     "cookie-parser": "~1.4.4",
     "debug": "~2.6.9",
+    "dotenv": "^8.2.0",
     "express": "^4.16.4",
     "express-flash": "0.0.2",
     "express-jwt": "^5.3.1",

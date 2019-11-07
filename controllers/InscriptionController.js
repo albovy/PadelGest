@@ -13,29 +13,28 @@ class InscriptionController {
 
   async add(req, res) {
     try {
-      console.log(req.body);
       const dateNow = Date.now();
       const tournament = await TournamentModel.findById(req.params.id);
-      console.log(tournament);
+      if(tournament.started) throw err;
       if(tournament.startDate < dateNow){
           req.flash("error","El campeonato ya ha empezado");
           return res.redirect("/tournament");
       }
       const user2 = await UserModel.findOne(req.body.user2_login);
       if (user2 == null) throw err;
-      console.log(user2._id);
-      console.log(req.user.id);
-      console.log(req.body.category);
+      let count = await InscriptionModel.findIfImAlreadyInscripted(tournament._id, req.user.id);
+      if(count > 0) throw err;
+      count = await InscriptionModel.findIfImAlreadyInscripted(tournament._id,user2._id);
+      if(count > 0) throw err;
       let data = {
         user1_id: req.user.id,
         user2_id: user2._id,
         tournament_id: req.params.id,
         category: req.body.category,
+        gender: req.body.gender,
         inscriptionDate: dateNow
       };
-      console.log(data);
       const inscription = await InscriptionModel.add(data);
-      console.log(inscription);
     } catch (err) {
       //ERRORES
       console.log("Error");

@@ -1,5 +1,6 @@
 const UserModel = require("../models/UserModel");
 
+
 class UserController {
   constructor() {}
 
@@ -27,20 +28,23 @@ class UserController {
       try {
         console.log(req.params.id);
         const user = await UserModel.findById(req.params.id);
+        if(user == null)throw err;
         console.log(user);
         if (req.method == "GET") {
           console.log("hola");
           res.render("user/edit", { user: user });
         } else {
           const newData = { $set: { name: req.body.name } };
+          console.log(newData);
           try {
             const newUser = await UserModel.update(user._id, newData);
             console.log(newUser);
+            return res.redirect("/");
           } catch (err) {
             return console.log(err);
           }
         }
-      } catch {
+      } catch(err) {
         //CUBRIR CON ERRORES DE NO ENCONTRADO
       }
     } else {

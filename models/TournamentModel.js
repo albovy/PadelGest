@@ -11,6 +11,7 @@ class TournamentModel {
   }
 
   async add(body) {
+    console.log(body);
     let tournament = new Tournament(body);
     try {
       return await tournament.save();
@@ -21,8 +22,8 @@ class TournamentModel {
 
   async update(id, data) {
     try {
-      const tournament = await tournament.updateOne({ _id: id }, data);
-      return Tournament;
+      const tournament = await Tournament.updateOne({ _id: id }, data);
+      return tournament;
     } catch (err) {
       return await new Promise((resolve, reject) => reject(err));
     }

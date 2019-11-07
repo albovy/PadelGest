@@ -1,0 +1,7 @@
+{% block body %}
+<form method=POST action="/tournament/edit/{{tournament._id}}">
+<input name="title" value={{tournament.title}}>name</input>
+<input name="description" value={{tournament.description}}>name</input>
+<button>click</button>
+</form>
+{% endblock %}

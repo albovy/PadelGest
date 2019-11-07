@@ -1,10 +1,12 @@
 const TournamentModel = require("../models/TournamentModel");
+const agenda = require('../jobs/agenda');
 
 class TournamentController {
   constructor() {}
 
   async showAll(req, res) {
     const tournaments = await TournamentModel.findAll();
+    agenda.schedule('in 5 seconds', 'run tournament',{id: "5dc40127d5a80333b8741ea3"},"");
     res.render("tournament/showAll", { tournaments: tournaments });
   }
   async add(req, res) {
@@ -12,8 +14,12 @@ class TournamentController {
       res.render("tournament/add");
     } else {
       try {
+        if(req.body.startData >= req.body.finishDate || req.body.startData > Date.now()){
+          throw err;
+        }
         const tournament = await TournamentModel.add(req.body);
         console.log(tournament);
+        //agenda.schedule('in 10 minute', 'archive ride',{id: tournament._id},"");
         return res.redirect("/tournament");
       } catch (err) {
         return console.log(err);
@@ -29,11 +35,13 @@ class TournamentController {
         res.render("tournament/edit", { tournament: tournament });
       } else {
         const newData = { $set: req.body };
+        console.log(newData);
         const newTournament = await TournamentModel.update(
           tournament._id,
           newData
         );
         console.log(newTournament);
+        return res.redirect("/tournament");
       }
     } catch (err) {
       //CUBRIR CON ERRORES

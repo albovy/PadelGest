@@ -8,6 +8,9 @@ const jwt = require("express-jwt");
 const flash = require("express-flash");
 const session = require("express-session");
 
+require('dotenv').config();
+
+
 const indexRouter = require("./routes/index");
 const authRouter = require("./routes/auth");
 const usersRouter = require("./routes/user");
@@ -21,6 +24,7 @@ const app = express();
 
 const mongoDB = "mongodb://127.0.0.1:27017/padeldb";
 
+
 //BD
 mongoose.connect(mongoDB, {
   useCreateIndex: true,
@@ -32,8 +36,6 @@ const db = mongoose.connection;
 db.on("error", console.error.bind(console, "MongoDB connection error:"));
 
 const sessionStore = new session.MemoryStore();
-// view engine setup
-//app.set("views", path.join(__dirname, "views"));
 
 app.use(express.static(__dirname + '/views'));
 app.set("view engine", "twig");
@@ -53,6 +55,7 @@ app.use(
   })
 );
 app.use(flash());
+
 
 
 // Custom flash middleware -- from Ethan Brown's book, 'Web Development with Node & Express'
@@ -105,5 +108,6 @@ app.use(function(err, req, res, next) {
   res.status(err.status || 500);
   res.render("error");
 });
+
 
 module.exports = app;
