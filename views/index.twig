@@ -1,15 +1,44 @@
 {% extends 'layout.twig' %}
 
-{% block body %}
+<!--Header container index view-->
+{% block header %}
+<!--If user is not logged show this block-->
 {% if not user %}
-  <h1>{{title}}</h1>
-  <p>Bienvenido a {{title}}</p>
+<div class="guest-user-index-header-container"></div>
+<!--If user is logged show this block-->
+{% else %}
+<div class="logged-user-index-header-container">
+  
+<div class="topnav">
+  <a href="/">Inicio</a>
+  <a href="#">Partidos Promocionados</a>
+  <a href="#">Campeonatos</a>
+  <a href="#">Mis partidos</a>
+  <a href="#">Mis campeonatos</a>
+</div>
+
+</div>
+{% endif %} {% endblock %}
+
+<!--Body container index view-->
+{% block body %}
+
+<!--If user is not logged show this block-->
+{% if not user %}
+<div class="guest-user-index-container">
+  <h1>{{ title }}</h1>
+  <p>Bienvenido a {{ title }}</p>
   <a href="/auth">Login</a>
   <a href="/user/register">Registro</a>
+</div>
 
-
+<!--If user is logged show this block-->
 {% else %}
-  <p>Bienvenido {{user.login}}</p>
+
+<div class="logged-user-index-container">
+  <p>Bienvenido {{ user.login }}</p>
   <a href="/auth/logout">Desconectar</a>
-{% endif %}
-{% endblock %}
+</div>
+
+{% endif %} {% endblock %}
+

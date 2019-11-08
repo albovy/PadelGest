@@ -2,22 +2,32 @@
 <html>
   <head>
     <title>{{ title }}</title>
-    <link
-      rel="stylesheet"
-      type="text/css"
-      href="../css/login-register_styles.css"
-    />
+  
+    <!--CSS styles link-->
+    <link rel="stylesheet" type="text/css" href="../css/login-register_styles.css"/>
     <link rel="stylesheet" type="text/css" href="../css/layout_styles.css" />
+    <link rel="stylesheet" type="text/css" href="../css/index_styles.css" />
+    <link rel="stylesheet" type="text/css" href="../css/navbar_styles.css" />
+
+    <!--JS link-->
     <link rel="stylesheet" type="text/js" href="../js/login-register.js" />
-    <link
-      href="https://fonts.googleapis.com/css?family=Montserrat|Roboto&display=swap"
-      rel="stylesheet"
-    />
+   
+    <!--Fonts link-->
+    <link href="https://fonts.googleapis.com/css?family=Montserrat|Roboto&display=swap" rel="stylesheet"/>
+
   </head>
+  <header>
+    <a href="/">PadelGest</a>
+    {% block header %}{% endblock %}
+  </header>
   <body>
+    <!--Use expressFlash to show errors-->
     {% if expressFlash %}
     <h1>{{ expressFlash }}</h1>
     <h1>{{ sessionFlash }}</h1>
     {% endif %} {% block body %}{% endblock %}
   </body>
+  <footer>
+   <p>PadelGest creado por ABP_47</p>
+  </footer>
 </html>
