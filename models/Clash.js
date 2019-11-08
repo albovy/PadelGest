@@ -10,7 +10,8 @@ const ClashSchema = new Schema({
     user1_id: { type: Schema.Types.ObjectId, required: true, ref: "Group" },
     user2_id: { type: Schema.Types.ObjectId, required: true, ref: "Group" },
     user3_id: { type: Schema.Types.ObjectId, required: true, ref: "Group" },
-    user4_id: { type: Schema.Types.ObjectId, required: true, ref: "Group" }
+    user4_id: { type: Schema.Types.ObjectId, required: true, ref: "Group" },
+    tryDate:  { type: Date, required: true}
   });
   
   module.exports = mongoose.model("Clash", ClashSchema);
