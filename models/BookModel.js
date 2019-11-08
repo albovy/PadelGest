@@ -40,8 +40,6 @@ class BookModel {
   }
 
   async add(body) {
-    
-    //body.startDate.setHour(body.startDate.getHour()+1);
     console.log("hola");
     let book = new Book(body);
     try {
