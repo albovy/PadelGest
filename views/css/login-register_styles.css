@@ -149,3 +149,91 @@ textarea {
   margin-top: -20px;
   text-align: right;
 }
+@media (max-width: 720px) {
+  .form {
+    background: #1b2730fa;
+    padding: 25px;
+    max-width: 75vw;
+    margin: 10px auto;
+    border-radius: 4px;
+    box-shadow: 0 4px 10px 4px #1414144d;
+  }
+  .tab-group {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 10px 0;
+  }
+  .tab-group li a {
+    padding: 10px;
+    font-size: 14px;
+   }
+  
+  h1 {
+    font-weight: 400;
+    margin: 0 0 20px;
+  }
+  
+  input,
+  textarea {
+    font-size: 16px;
+    padding: 4px 8px;
+  }
+
+  textarea {
+    border: 2px solid #929292cb;
+  }
+  .field-wrap {
+    margin-bottom: 20px;
+  }
+ 
+  .button {
+    padding: 7px 0;
+    font-size: 1.1rem;
+    font-weight: 400;
+  }
+}
+
+@media (max-height: 860px )
+and (min-width: 720px) {
+  .form {
+    background: #1b2730fa;
+    padding: 40px;
+    max-width: 600px;
+    margin: 20px auto;
+    border-radius: 4px;
+    box-shadow: 0 4px 10px 4px #1414144d;
+  }
+  .tab-group {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 20px 0;
+  }
+  .tab-group li a {
+    padding: 9px;
+    font-size: 18px;
+   }
+  
+  h1 {
+    font-weight: 500;
+    margin: 0 0 20px;
+  }
+  
+  input,
+  textarea {
+    font-size: 18px;
+    padding: 4px 8px;
+  }
+
+  textarea {
+    border: 2px solid #929292cb;
+  }
+  .field-wrap {
+    margin-bottom: 20px;
+  }
+ 
+  .button {
+    padding: 7px 0;
+    font-size: 1.2rem;
+    font-weight: 400;
+  }
+}
