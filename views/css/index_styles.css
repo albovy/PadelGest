@@ -1,11 +1,6 @@
 
-
-
-
-.guest-user-index-container {
+.logged-user-index-container{
   flex: 1 0 auto;
-}
-
-.logged-user-index-container {
-  flex: 1 0 auto;
+  padding-left:30px;
+  padding-right: 30px;
 }

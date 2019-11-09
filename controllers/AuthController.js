@@ -7,7 +7,7 @@ class AuthController {
 
    logout(req,res){
     res.clearCookie("token");
-    return res.redirect("/");
+    return res.redirect("/auth");
   }
 
   async authenticate(req, res) {

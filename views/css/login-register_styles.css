@@ -12,7 +12,10 @@
 
 .login-container::after {
   content: "";
-  background: url(../img/court.png) center center no-repeat fixed;
+  background: url(../img/court.png), linear-gradient(to right, #807363 0%, #251d16 50%, #3f302b 75%, #100b09 100%)center center no-repeat fixed;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  -webkit-background-size: cover;
   opacity: 0.75;
   background-size: cover;
   top: 0;

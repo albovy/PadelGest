@@ -1,11 +1,13 @@
 {% extends 'layout.twig' %}
 
 {% block body %}
+{% include "topnav.twig" %}
 <a href="/promoted/add">ADD</a><br>
 {% for promo in promos %}
-<h1>{{promo.title}}</h1><h5>{{promo.date}}</h5>
+<h1>{{promo.title}}</h1>
+<h5>{{promo.date}}</h5>
 <form method=post action="/promoted/delete/{{promo._id}}">
-    <button type="submit">borrar</button> 
+    <button type="submit">borrar</button>
 </form>
 {% endfor %}
 

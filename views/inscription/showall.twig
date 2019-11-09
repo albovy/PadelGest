@@ -1,6 +1,7 @@
 {% extends 'layout.twig' %}
 
 {% block body %}
+{% include "topnav.twig" %}
 {% for inscription in inscriptions %}
 <h1>{{inscription.user1_id}}</h1>
 <!-- <form method=post action="/inscription/tournament/{{tournament._id}}">

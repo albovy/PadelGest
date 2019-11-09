@@ -1,44 +1,28 @@
 {% extends 'layout.twig' %}
 
-<!--Header container index view-->
-{% block header %}
-<!--If user is not logged show this block-->
-{% if not user %}
-<div class="guest-user-index-header-container"></div>
-<!--If user is logged show this block-->
-{% else %}
-<div class="logged-user-index-header-container">
-  
-<div class="topnav">
-  <a href="/">Inicio</a>
-  <a href="#">Partidos Promocionados</a>
-  <a href="#">Campeonatos</a>
-  <a href="#">Mis partidos</a>
-  <a href="#">Mis campeonatos</a>
-</div>
-
-</div>
-{% endif %} {% endblock %}
-
 <!--Body container index view-->
 {% block body %}
 
 <!--If user is not logged show this block-->
 {% if not user %}
-<div class="guest-user-index-container">
-  <h1>{{ title }}</h1>
-  <p>Bienvenido a {{ title }}</p>
-  <a href="/auth">Login</a>
-  <a href="/user/register">Registro</a>
+<div class="index-notLogged-container">
+  <h1>Bienvenido a PadelGest</h1>
 </div>
+
 
 <!--If user is logged show this block-->
 {% else %}
 
+{% include "topnav.twig" %}
 <div class="logged-user-index-container">
-  <p>Bienvenido {{ user.login }}</p>
-  <a href="/auth/logout">Desconectar</a>
+  <h2>Disfruta del mejor pádel en PadelGest</h2>
+  <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Eligendi dolore quae inventore cumque numquam, eius ipsam
+    cum sint accusantium alias ullam repellat blanditiis, impedit enim et quis facilis reiciendis soluta vero?
+    Voluptatibus consectetur in deserunt corrupti mollitia velit quibusdam deleniti cupiditate, voluptatum eum facilis?
+    Ipsa voluptatem nulla qui magni inventore nobis, corrupti, unde harum assumenda totam enim in optio. Non doloremque
+    similique inventore adipisci impedit ipsam ducimus eveniet alias qui quas, ad optio, magnam deserunt veniam
+    necessitatibus nulla aliquid vel facere ex commodi distinctio illum culpa voluptatibus molestias! Minus, alias
+    labore.    Culpa eos provident aut alias esse at repudiandae recusandae!</p>
 </div>
 
 {% endif %} {% endblock %}
-

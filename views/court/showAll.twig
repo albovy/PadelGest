@@ -1,6 +1,7 @@
 {% extends 'layout.twig' %}
 
 {% block body %}
+{% include "topnav.twig" %}
 <a href="/court/add">ADD</a><br>
 {% for court in courts %}
 <a href="/court/edit/{{court._id}}"> {{court._id}}</a>

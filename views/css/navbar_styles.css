@@ -1,13 +1,13 @@
 @charset "UTF-8";
-
 .topnav {
   overflow: hidden;
-  background-color: #333;
+  background-color: #fff;
 }
 
 .topnav a {
   float: left;
-  color: #f2f2f2;
+  display: block;
+  color: #222222;
   text-align: center;
   padding: 14px 16px;
   text-decoration: none;
@@ -15,11 +15,37 @@
 }
 
 .topnav a:hover {
-  background-color: #ddd;
-  color: black;
+  background-color: rgb(196, 196, 196);
+  color: #222222;
 }
 
 .topnav a.active {
   background-color: #4CAF50;
-  color: white;
+  color: #222222;
+}
+
+.topnav .icon {
+  display: none;
+}
+
+@media screen and (max-width: 800px) {
+  .topnav a:not(:first-child) {display: none;}
+  .topnav a.icon {
+    float: right;
+    display: block;
+  }
+}
+
+@media screen and (max-width: 800px) {
+  .topnav.responsive {position: relative;}
+  .topnav.responsive .icon {
+    position: absolute;
+    right: 0;
+    top: 0;
+  }
+  .topnav.responsive a {
+    float: none;
+    display: block;
+    text-align: left;
+  }
 }

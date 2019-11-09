@@ -1,18 +1,21 @@
 {% extends 'layout.twig' %}
 
 {% block body %}
-{% for tournament in tournaments %}
-<a href="/tournament/edit/{{tournament._id}}"> {{tournament._id}}</a>
-<h1>{{tournament.title}}</h1>
-<!-- <form method=post action="/inscription/tournament/{{tournament._id}}">
+{% include "topnav.twig" %}
+<div class="tournament-showall-container">
+  {% for tournament in tournaments %}
+  <a href="/tournament/edit/{{tournament._id}}"> {{tournament._id}}</a>
+  <h1>{{tournament.title}}</h1>
+  <!-- <form method=post action="/inscription/tournament/{{tournament._id}}">
 <button type="submit">borrar</button> 
 </form>-->
-<form method=post action="/inscription/tournament/{{tournament._id}}">
-<input name="user2_login">login pareja</input>
-<input name="category">categoria</input>
-<input name="gender">gender</input>
-<button type="submit">add inscription</button>
-</form>
-{% endfor %}
+  <form method=post action="/inscription/tournament/{{tournament._id}}">
+    <input name="user2_login">login pareja</input>
+    <input name="category">categoria</input>
+    <input name="gender">gender</input>
+    <button type="submit">add inscription</button>
+  </form>
+  {% endfor %}
+</div>
 
 {% endblock %}

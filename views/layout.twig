@@ -1,33 +1,40 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>{{ title }}</title>
-  
-    <!--CSS styles link-->
-    <link rel="stylesheet" type="text/css" href="../css/login-register_styles.css"/>
-    <link rel="stylesheet" type="text/css" href="../css/layout_styles.css" />
-    <link rel="stylesheet" type="text/css" href="../css/index_styles.css" />
-    <link rel="stylesheet" type="text/css" href="../css/navbar_styles.css" />
 
-    <!--JS link-->
-    <link rel="stylesheet" type="text/js" href="../js/login-register.js" />
-   
-    <!--Fonts link-->
-    <link href="https://fonts.googleapis.com/css?family=Montserrat|Roboto&display=swap" rel="stylesheet"/>
+<head>
+  <title>PadelGest</title>
 
-  </head>
-  <header>
-    <a href="/">PadelGest</a>
-    {% block header %}{% endblock %}
-  </header>
-  <body>
+  <!--CSS styles link-->
+  <link rel="stylesheet" type="text/css" href="../css/login-register_styles.css" />
+  <link rel="stylesheet" type="text/css" href="../css/layout_styles.css" />
+  <link rel="stylesheet" type="text/css" href="../css/index_styles.css" />
+  <link rel="stylesheet" type="text/css" href="../css/navbar_styles.css" />
+  <link rel="stylesheet" type="text/css" href="../css/header_styles.css" />
+  <!--JS scripts-->
+  <script src="../js/login-register.js"></script>
+  <script src="../js/topnav.js"></script>
+  <!--Fonts link-->
+  <link href="https://fonts.googleapis.com/css?family=Montserrat|Roboto&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+</head>
+<header>
+  {% include "header.twig" %}
+</header>
+
+<body>
+  <div class="body-container">
     <!--Use expressFlash to show errors-->
     {% if expressFlash %}
     <h1>{{ expressFlash }}</h1>
     <h1>{{ sessionFlash }}</h1>
     {% endif %} {% block body %}{% endblock %}
-  </body>
-  <footer>
-   <p>PadelGest creado por ABP_47</p>
-  </footer>
+  </div>
+</body>
+<footer>
+  {% if user %}
+  {% include "footer.twig" %}
+  {% endif %}
+</footer>
+
 </html>
