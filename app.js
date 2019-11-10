@@ -19,6 +19,7 @@ const tournamentRouter = require("./routes/tournament");
 const courtRouter = require("./routes/court");
 const inscriptionRouter = require("./routes/inscription");
 const promotedRouter = require("./routes/promoted");
+const promotedInscriptionRouter = require("./routes/promotedInscription");
 
 const app = express();
 
@@ -92,6 +93,7 @@ app.use("/tournament", tournamentRouter);
 app.use("/court",courtRouter);
 app.use("/inscription", inscriptionRouter);
 app.use("/promoted", promotedRouter);
+app.use("/promotedInscription", promotedInscriptionRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

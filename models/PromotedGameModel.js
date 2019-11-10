@@ -9,6 +9,10 @@ class PromotedGameModel {
     findById(id){
         return PromotedGame.findById(id);
     }
+    
+    async incrementNumPlayers(id, data){
+        return await PromotedGame.updateOne({_id: id}, data);
+    }
 
     async add(body) {
         let promo = new PromotedGame(body);

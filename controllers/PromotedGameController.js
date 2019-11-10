@@ -1,7 +1,25 @@
 const PromotedGameModel = require("../models/PromotedGameModel");
+const PromotedInscriptionModel = require("../models/PromotedInscriptionModel");
 
 class PromotedGameController {
   constructor() {}
+
+  deleteOutOfDate(id){
+    const dateNow = Date.now();
+  }
+
+  async showMyInscriptions(req,res){
+    const myPromotedInscriptions = await PromotedInscriptionModel.findMyInscriptions(req.user.id);
+    console.log(myPromotedInscriptions);
+    let array = await Promise.all(myPromotedInscriptions.map(async element=>{
+      const promoid = element.promoted_id;  
+      const game = await PromotedGameModel.findById(promoid);
+      return game;
+    }));
+    
+    res.render("promoted/showInscriptions", {myPromotedInscriptions : array});
+  }
+
 
   async showAll(req, res) {
     const promos = await PromotedGameModel.findAll();

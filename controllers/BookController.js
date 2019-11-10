@@ -7,8 +7,10 @@ class BookController{
 
     async show(req,res){
         console.log("showBook");
-        const myBooks = await BookModel.findByLogin(req.user.id); //ver reservas de un deportista
-        //INTRO render vista ---------------
+        const myBooks = await BookModel.findMyBooks(req.user.id); //ver reservas de un deportista
+        //Ahora mismo se muestra el id de la pista al user como identificador de la reserva
+        
+        res.render("book/showMyBooks", {myBooks : myBooks});
     }
     
     async add(req,res){

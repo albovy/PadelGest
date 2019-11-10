@@ -1,0 +1,13 @@
+{% extends 'layout.twig' %}
+
+{% block body %}
+<a href="/promotedInscription">Volver</a><br>
+<h3>Partidos promocionados a los que estás inscrito</h3>
+{% for promo in myPromotedInscriptions %}
+<h1>{{promo.title}}</h1><h5>{{promo.date}}</h5>
+<form method=post action="/promotedInscription/delete/{{promo._id}}">
+    <button type="submit">Eliminar</button> 
+</form>
+{% endfor %}
+
+{% endblock %}

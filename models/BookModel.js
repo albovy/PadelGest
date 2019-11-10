@@ -7,6 +7,10 @@ class BookModel {
     return Book.findById(id);
   }
 
+  findMyBooks(id) {
+    return Book.find({ user_id: id });
+  }
+
   findByLogin(login) {
     return Book.find({
       user_id: login
