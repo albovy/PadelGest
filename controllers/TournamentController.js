@@ -7,10 +7,25 @@ class TournamentController {
 
   async showAll(req, res) {
     const tournaments = await TournamentModel.findAll();
-    const myInscriptions = await InscriptionModel.findMyInscriptions(req.user.id)
+ 
+    let tournamentMoreInscription = await Promise.all(tournaments.map(async element=>{
+        let data ={
+          started : element.started,
+          _id : element._id,
+          title: element.title,
+          description: element.description,
+          startDate : element.startDate,
+          finishDate : element.finishDate
+        }
+        let ins = await InscriptionModel.findIfImAlreadyInscripted(element._id,req.user.id);
+        if(ins>0)data.inscripted = true;
+
+        return data;
+    }));
+
     agenda.schedule('in 5 seconds', 'run tournament',{id: "5dc40127d5a80333b8741ea3"},"");
     console.log("hola");
-    res.render("tournament/showAll", { tournaments: tournaments, myInscriptions: myInscriptions, user: req.user});
+    res.render("tournament/showAll", { tournaments: tournamentMoreInscription, user: req.user});
   }
   async add(req, res) {
     if (req.method == "GET") {

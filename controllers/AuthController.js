@@ -28,7 +28,8 @@ class AuthController {
           let payload = {
             id: user_2._id,
             login: user_2.login,
-            role: user_2.role
+            role: user_2.role,
+            gender: user_2.gender
           };
 
           console.log(user_2);

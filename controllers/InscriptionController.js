@@ -20,21 +20,35 @@ class InscriptionController {
           req.flash("error","El campeonato ya ha empezado");
           return res.redirect("/tournament");
       }
+
       const user2 = await UserModel.findOne(req.body.user2_login);
       if (user2 == null) throw err;
+
       let count = await InscriptionModel.findIfImAlreadyInscripted(tournament._id, req.user.id);
       if(count > 0) throw err;
       count = await InscriptionModel.findIfImAlreadyInscripted(tournament._id,user2._id);
       if(count > 0) throw err;
+
+      let gender = "MAN";
+      console.log(user2);
+      if(req.user.gender == user2.gender == "WOMAN"){
+        gender = "WOMAN";
+      }else{
+        if(user2.gender != req.user.gender){
+          gender= "MIXED";
+        }
+      }
+
       let data = {
         user1_id: req.user.id,
         user2_id: user2._id,
         tournament_id: req.params.id,
         category: req.body.category,
-        gender: req.body.gender,
+        gender: gender,
         inscriptionDate: dateNow
       };
       const inscription = await InscriptionModel.add(data);
+      console.log("INSCRITO");
       return res.redirect("/tournament");
     } catch (err) {
       console.log("Error");
