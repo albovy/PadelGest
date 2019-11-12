@@ -13,7 +13,7 @@ class CompetitionModel {
   }
 
   findByTournament(idTournament){
-    return Competition.find({tournament_id: idTournament});
+    return Competition.findOne({tournament_id: idTournament});
   }
 
   async add(body) {

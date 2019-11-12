@@ -9,6 +9,7 @@ class TournamentController {
     const tournaments = await TournamentModel.findAll();
     const myInscriptions = await InscriptionModel.findMyInscriptions(req.user.id)
     agenda.schedule('in 5 seconds', 'run tournament',{id: "5dc40127d5a80333b8741ea3"},"");
+    console.log("hola");
     res.render("tournament/showAll", { tournaments: tournaments, myInscriptions: myInscriptions });
   }
   async add(req, res) {

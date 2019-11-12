@@ -40,8 +40,10 @@ db.on("error", console.error.bind(console, "MongoDB connection error:"));
 
 const sessionStore = new session.MemoryStore();
 
-app.use(express.static(__dirname + '/views'));
-app.use(express.static(__dirname + '/node_modules'));
+
+app.use('/static', express.static('views'));
+app.use('/node', express.static('node_modules'));
+
 app.set("view engine", "twig");
 
 

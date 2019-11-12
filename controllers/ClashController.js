@@ -15,7 +15,11 @@ class ClashController{
     async showTournament(req,res){
         console.log("showTournament");
         const comp = await CompetitionModel.findByTournament(req.params.id);
+        console.log(comp._id);
         const myClash = await ClashModel.findByUserAndCompetition(comp._id,req.user.id);
+        console.log(comp);
+        console.log(myClash);
+        console.log("prueba");
         res.render("clash/showAll",{clashes : myClash});
     }
     

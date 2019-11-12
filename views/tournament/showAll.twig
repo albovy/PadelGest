@@ -1,7 +1,7 @@
 {% extends 'layout.twig' %}
 
 {% block body %}
-{% include "topnav.twig" %}
+{% include "navbar.twig" %}
 <div class="tournament-showall-container">
   {% for tournament in tournaments %}
   <a href="/tournament/edit/{{tournament._id}}"> {{tournament._id}}</a>

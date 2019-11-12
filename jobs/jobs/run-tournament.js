@@ -8,14 +8,15 @@ const ClashModel = require("../../models/ClashModel");
 
 module.exports = function(agenda) {
   agenda.define("run tournament", async function(job, done) {
+    console.log("hola");
     const tournament = await TournamentModel.findById(job.attrs.data.id);
     if (tournament.started) {
       done();
     } else {
       //GET ALL INSCRIPTIONS
       const inscriptions = await InscriptionModel.findInscriptionsByTournament(
-        tournament._id
-      );
+        tournament._id);
+      console.log(inscriptions);
 
       //FILTER BY CATEGORY
       let m1 = inscriptions.filter(item => {
@@ -172,12 +173,13 @@ module.exports = function(agenda) {
           clash.user1_id = hashSubGroups[key][z].user1_id;
           clash.user2_id = hashSubGroups[key][z].user2_id;
           clash.user3_id = hashSubGroups[key][w].user1_id;
-          clash.user4_id = hashSubGroups[key][z].user2_id;
+          clash.user4_id = hashSubGroups[key][w].user2_id;
           
           await ClashModel.add(clash);
         }
       }
     }
+    console.log("hola");
     TournamentModel.update(tournament._id,{$set:{started : true}});
     console.log("sii");
 

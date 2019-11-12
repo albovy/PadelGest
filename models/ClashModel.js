@@ -11,12 +11,10 @@ class ClashModel{
         return Clash.find({ $or: [{ user1_id: idUser }, { user2_id: idUser }, {user3_id: idUser}, {user4_id: idUser}] });
     }
 
-    findByUserAndCompetition(idCompetition, idUser){
-        return Clash.find({
-            $and : [{competition_id: idCompetition}, 
-                {$or: [{ user1_id: idUser }, { user2_id: idUser }, {user3_id: idUser}, {user4_id: idUser}]} 
-            ]
-        });
+    async findByUserAndCompetition(idCompetition, idUser){
+        console.log("hola3");
+        console.log(idCompetition);
+        return await Clash.find({$or :[{user3_id: idUser},{user1_id : idUser},{user2_id: idUser},{user4_id: idUser}],competition_id : idCompetition});
     }
 
     async add(body){
