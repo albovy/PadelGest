@@ -6,8 +6,8 @@ const tournamentController = require("../controllers/TournamentController.js");
 
 /* GET users listing. */
 router.get("/", tournamentController.showAll);
-router.get("/add", permit("ATHLETE", "ADMIN"), tournamentController.add);
-router.post("/add", permit("ATHLETE","ADMIN"), tournamentController.add);
+router.get("/add", permit("ADMIN"), tournamentController.add);
+router.post("/add", permit("ADMIN"), tournamentController.add);
 router.get("/edit/:id", permit("ADMIN"), tournamentController.edit);
 router.post("/edit/:id", permit("ADMIN"), tournamentController.edit);
 router.post("/delete/:id", permit("ADMIN"), tournamentController.delete);
