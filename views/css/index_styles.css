@@ -2,8 +2,30 @@
 
 .logged-user-index-container {
   flex: 1 0 auto;
-  padding-left: 30px;
-  padding-right: 30px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-left: 200px;
+  padding-right: 200px;
+}
+
+.logged-user-index-container img {
+  max-width: 600px;
+  max-height: 600px;
+}
+
+@media (max-width: 720px) {
+  .logged-user-index-container {
+    padding-left: 50px;
+    padding-right: 50px;
+  }
+}
+
+@media (max-width: 1280px) {
+  .logged-user-index-container {
+    padding-left: 150px;
+    padding-right: 150px;
+  }
 }
 
 /*Styles to notLogged user*/

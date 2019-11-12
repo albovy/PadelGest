@@ -21,7 +21,8 @@ footer {
   min-height: 10vh;
   display: flex;
   flex-shrink: 0;
-  background-color: #172b3a83;
+  background: #1b2730fa;
+  color: white;
   justify-content: center;
   align-items: center;
 }
