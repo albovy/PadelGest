@@ -15,8 +15,8 @@ class CourtController {
         const court = await courtModel.add(req.body);
         return res.redirect("/court");
       } catch (err) {
-        return console.log(err);
-        //CUBRIR CON ERRORES DE ERROR (visto en internet un 200 OK con un mensaje de error)
+        req.flash("error","Error al insertar la pista");
+        res.redirect("/court");
       }
     }
   }
@@ -32,7 +32,8 @@ class CourtController {
          return res.redirect('/court');
       }
     } catch (err) {
-        //CUBRIR CON ERRORES
+        req.flash("error", "Error al editar su pista");
+        res.redirect("/court");
     }
   }
 
@@ -41,7 +42,7 @@ class CourtController {
       await courtModel.delete(req.params.id);
       return res.redirect('/court');
     }catch(err){
-      //CUBRIR CON ERRORES NO SE PUEDO BORRAR
+      req.flash("error","Error al borrar su pista");
     }
   }
 }

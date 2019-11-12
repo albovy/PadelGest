@@ -34,8 +34,8 @@ class PromotedGameController {
         console.log(promo);
         return res.redirect("/promoted");
       } catch (err) {
-        return console.log(err);
-        //CUBRIR CON ERRORES DE ERROR (visto en internet un 200 OK con un mensaje de error)
+       req.flash("error", "Error al insertar su partido promocionado");
+       res.redirect("/promoted");
       }
     }
   }
@@ -45,7 +45,8 @@ class PromotedGameController {
       await PromotedGameModel.delete(req.params.id);
       return res.redirect('/promoted');
     }catch(err){
-      //CUBRIR CON ERRORES NO SE PUEDO BORRAR
+      req.flash("error", "Error al borrar su partido promocionado");
+       res.redirect("/promoted");
     }
   }
 }

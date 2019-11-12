@@ -39,8 +39,9 @@ class BookController {
 
       } catch (err) {
         console.log("Error getADDBook: ", err);
+        req.flash("error", "Error al procesar su reserva");
       }
-    } else {
+    } else {     
       //Añade una reserva concreta
       try {
         console.log("Dentro addBookController");
@@ -48,7 +49,8 @@ class BookController {
         const desiredDate = req.body.startDate; //fecha deseada
 
         if (desiredDate < dateNow) {
-          throw err;
+          req.flash("error","No es posible reservar esta franja de tiempo");
+          return res.redirect("/book");   //redireccion a la vista show
         }
 
         const booksOnDate = await BookModel.findByDate(desiredDate); //reservas en date
@@ -61,8 +63,8 @@ class BookController {
         const courtsAvailable = await CourtModel.findNotInRange(arrOcuped); //pistas disponibles(Array de JSONs)
         //Comprobacion para ver si el array esta vacio
         if (courtsAvailable.length == 0) {
-          throw err;
-          //Redireccion
+          req.flash("error","No hay pistas libres en la hora especificada");
+          return res.redirect("/book");   //redireccion a la vista show
         }
 
         //Ver que devuelve mongoDB en una consulta vacia
@@ -76,11 +78,9 @@ class BookController {
         startDate.setMinutes(time.split(":")[1]);
         console.log(startDate);
 
-
         const endDate = new Date(
           new Date(new Date(startDate).getTime() + 5400000)
         ); //startDate + 90min
-
 
         //Recuperamos datos de req
         //$SESSION = req.user.id
@@ -95,8 +95,9 @@ class BookController {
         console.log(book);
         return res.redirect("/book");
       } catch (err) {
-        //Falta tratamiento errores
         console.log("Error addBookController");
+        req.flash("error","Se ha encontrado un error al insertar la reserva :(");
+        return res.redirect("/book");
       }
     }
   }
@@ -107,8 +108,9 @@ class BookController {
       console.log("pos-deleteBook");
       res.redirect("/book");
     } catch (err) {
-      //Falta tratamiento errores
       console.log("Error deleteBookController");
+      req.flash("error", "Error al borrar su reserva");
+      res.redirect("/book");
     }
   }
 }

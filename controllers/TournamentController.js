@@ -25,8 +25,8 @@ class TournamentController {
         //agenda.schedule('in 10 minute', 'archive ride',{id: tournament._id},"");
         return res.redirect("/tournament");
       } catch (err) {
-        return console.log(err);
-        //CUBRIR CON ERRORES DE ERROR (visto en internet un 200 OK con un mensaje de error)
+        req.flash("error", "Error al insertar el torneo");
+        res.redirect("/tournament");
       }
     }
   }
@@ -47,7 +47,8 @@ class TournamentController {
         return res.redirect("/tournament");
       }
     } catch (err) {
-      //CUBRIR CON ERRORES
+      req.flash("error", "Error al editar su torneo");
+        res.redirect("/tournament");
     }
   }
 
@@ -57,7 +58,8 @@ class TournamentController {
       console.log("ok");
       res.redirect("/tournament");
     } catch (err) {
-      //CUBRIR CON ERRORES NO SE PUEDO BORRAR
+      req.flash("error", "Error al borrar su torneo");
+        res.redirect("/tournament");
     }
   }
 }

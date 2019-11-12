@@ -17,8 +17,8 @@ class UserController {
         console.log(user);
         return res.redirect("/auth");
       } catch (err) {
-        return console.log(err);
-        //CUBRIR CON ERRORES DE ERROR (visto en internet un 200 OK con un mensaje de error)
+        req.flash("error", "Error en el registro");
+        res.redirect("/");
       }
     }
   }
@@ -45,10 +45,11 @@ class UserController {
           }
         }
       } catch(err) {
-        //CUBRIR CON ERRORES DE NO ENCONTRADO
+        req.flash("error", "Error al editar el usuario");
+        res.redirect("/");
       }
     } else {
-      //CUBRIR CON ERRORES DE PROHIBICION
+      return res.status(401); //No autorizado
     }
   }
 
@@ -58,7 +59,8 @@ class UserController {
       console.log("ok");
       res.redirect("/user");
     }catch(err){
-      //CUBRIR CON ERRORES NO SE PUEDO BORRAR
+      req.flash("error", "Error al borrar el usuario");
+      res.redirect("/");
     }
   }
 }

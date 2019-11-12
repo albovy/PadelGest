@@ -71,6 +71,7 @@ class PromotedInscriptionController{
             }
         }catch(err){
             console.log(err);
+            req.flash("error","Error al insertar su inscripcion al partido promocionado");
         }
     }
 
@@ -84,6 +85,8 @@ class PromotedInscriptionController{
             res.redirect("/promoted/showInscriptions");
         } catch (err) {
             console.log("F");
+            req.flash("error","Error al borrar su inscripcion del partido promocionado");
+            res.redirect("/promotedInscription");
         }
       }
 }

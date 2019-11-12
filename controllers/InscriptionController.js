@@ -37,8 +37,9 @@ class InscriptionController {
       const inscription = await InscriptionModel.add(data);
       return res.redirect("/tournament");
     } catch (err) {
-      //ERRORES
       console.log("Error");
+      req.flash("error", "Error al procesar su inscripcion :(");
+      res.redirect("/tournament");
     }
   }
 
@@ -48,7 +49,7 @@ class InscriptionController {
       console.log("ok");
       res.redirect("/inscription");
     } catch (err) {
-      //CUBRIR CON ERRORES NO SE PUEDO BORRAR
+      req.flash("error", "Error al borrar su inscripcion");
     }
   }
 }
