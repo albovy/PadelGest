@@ -3,23 +3,45 @@
 {% block body %}
 {% include "navbar.twig" %}
 <div class="tournament-showall-container">
+  {% if not tournaments %}
+   <h1>No hay torneos disponibles</h1>
+  {% else %}
+   
   {% for tournament in tournaments %}
-  <a href="/tournament/edit/{{tournament._id}}"> {{tournament._id}}</a>
-  <h1>{{tournament.title}}</h1>
+  <div class="tournament-row">
+  <div class="tournament-information-container">
+    <div class="card">
+   {% if user.role == 'ADMIN' %}
+     <a href="/tournament/add">Crear torneo</a>
+     <a href="/tournament/edit/{{tournament._id}}">Editar torneo</a>
+   {% endif %}
+    
+    <h2>{{tournament.title}}</h2>
+    <p>{{tournament.description}}</p>
+    <p>{{tournament.startDate}}</p>
+    <p>{{tournament.finishDate}}</p>
   <!-- <form method=post action="/inscription/tournament/{{tournament._id}}">
 <button type="submit">borrar</button> 
 </form>-->
-  <form method=post action="/inscription/tournament/{{tournament._id}}">
-    <input name="user2_login">login pareja</input>
-    <input name="category">categoria</input>
-    <input name="gender">gender</input>
-    <button type="submit">add inscription</button>
-  </form>
-  {% if tournament.started %}
-  <a href="/clash/tournament/{{tournament._id}}">Mis enfrentamientos</a>
-  <a href="/clasification/tournament/{{tournament._id}}">Clasificación</a>
-  {% endif %}
+{% if user.role == 'ATHLETE' %}
+   <div class="tournament-inscription-form-container">
+    <form method=post action="/inscription/tournament/{{tournament._id}}">
+      <input name="user2_login">Login pareja</input>
+      <input name="category">Categoria</input>
+      <button type="submit">Inscribirse</button>
+    </form>
+  
+    {% if tournament.started %}
+    <a href="/clash/tournament/{{tournament._id}}">Mis enfrentamientos</a>
+    <a href="/clasification/tournament/{{tournament._id}}">Clasificación</a>
+    {% endif %}
+{% endif %}
+ </div>
+    </div>
+    </div>
+   </div>
   {% endfor %}
+  
+    {% endif %}
 </div>
-
 {% endblock %}
