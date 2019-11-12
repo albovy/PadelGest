@@ -1,40 +1,48 @@
 <!DOCTYPE html>
 <html>
+  <head>
+    <title>PadelGest</title>
 
-<head>
-  <title>PadelGest</title>
+    <!--CSS styles link-->
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="../css/login-register_styles.css"
+    />
+    <link rel="stylesheet" type="text/css" href="../css/layout_styles.css" />
+    <link rel="stylesheet" type="text/css" href="../css/index_styles.css" />
+    <link rel="stylesheet" type="text/css" href="../css/navbar_styles.css" />
+    <link rel="stylesheet" type="text/css" href="../css/header_styles.css" />
+    <!--JS scripts-->
+    <script src="../js/login-register.js"></script>
+    <script src="../js/topnav.js"></script>
+    <!--Fonts link-->
+    <link
+      href="https://fonts.googleapis.com/css?family=Montserrat|Roboto&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+    />
+  </head>
+  <header>
+    {% include "header.twig" %}
+  </header>
 
-  <!--CSS styles link-->
-  <link rel="stylesheet" type="text/css" href="../css/login-register_styles.css" />
-  <link rel="stylesheet" type="text/css" href="../css/layout_styles.css" />
-  <link rel="stylesheet" type="text/css" href="../css/index_styles.css" />
-  <link rel="stylesheet" type="text/css" href="../css/navbar_styles.css" />
-  <link rel="stylesheet" type="text/css" href="../css/header_styles.css" />
-  <!--JS scripts-->
-  <script src="../js/login-register.js"></script>
-  <script src="../js/topnav.js"></script>
-  <!--Fonts link-->
-  <link href="https://fonts.googleapis.com/css?family=Montserrat|Roboto&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <body>
+    <div class="body-container">
+      <!--Use expressFlash to show errors-->
+      {% if expressFlash %}
+      <h1>{{ expressFlash }}</h1>
+      <h1>{{ sessionFlash }}</h1>
+      {% endif %} {% block body %}{% endblock %}
+    </div>
+  </body>
 
-</head>
-<header>
-  {% include "header.twig" %}
-</header>
-
-<body>
-  <div class="body-container">
-    <!--Use expressFlash to show errors-->
-    {% if expressFlash %}
-    <h1>{{ expressFlash }}</h1>
-    <h1>{{ sessionFlash }}</h1>
-    {% endif %} {% block body %}{% endblock %}
-  </div>
-</body>
-<footer>
   {% if user %}
-  {% include "footer.twig" %}
+  <footer>
+    {% include "footer.twig" %}
+  </footer>
   {% endif %}
-</footer>
-
 </html>

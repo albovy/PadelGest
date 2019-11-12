@@ -6,23 +6,32 @@
 <!--If user is not logged show this block-->
 {% if not user %}
 <div class="index-notLogged-container">
-  <h1>Bienvenido a PadelGest</h1>
+  <div class="index-notLogged-text-container">
+    <span>Bienvenido a PadelGest</span>
+    <p>Estás intentando acceder a la página sin estar autenticado.</p>
+    <p>
+      Por favor accede mediante tu <a href="auth">login</a> o
+      <a href="/user/register">regístrate</a>
+    </p>
+  </div>
 </div>
 
-
 <!--If user is logged show this block-->
-{% else %}
-
-{% include "topnav.twig" %}
+{% else %} {% include "topnav.twig" %}
 <div class="logged-user-index-container">
   <h2>Disfruta del mejor pádel en PadelGest</h2>
-  <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Eligendi dolore quae inventore cumque numquam, eius ipsam
-    cum sint accusantium alias ullam repellat blanditiis, impedit enim et quis facilis reiciendis soluta vero?
-    Voluptatibus consectetur in deserunt corrupti mollitia velit quibusdam deleniti cupiditate, voluptatum eum facilis?
-    Ipsa voluptatem nulla qui magni inventore nobis, corrupti, unde harum assumenda totam enim in optio. Non doloremque
-    similique inventore adipisci impedit ipsam ducimus eveniet alias qui quas, ad optio, magnam deserunt veniam
-    necessitatibus nulla aliquid vel facere ex commodi distinctio illum culpa voluptatibus molestias! Minus, alias
-    labore.    Culpa eos provident aut alias esse at repudiandae recusandae!</p>
+  <p>
+    Lorem ipsum dolor sit amet consectetur adipisicing elit. Eligendi dolore
+    quae inventore cumque numquam, eius ipsam cum sint accusantium alias ullam
+    repellat blanditiis, impedit enim et quis facilis reiciendis soluta vero?
+    Voluptatibus consectetur in deserunt corrupti mollitia velit quibusdam
+    deleniti cupiditate, voluptatum eum facilis? Ipsa voluptatem nulla qui magni
+    inventore nobis, corrupti, unde harum assumenda totam enim in optio. Non
+    doloremque similique inventore adipisci impedit ipsam ducimus eveniet alias
+    qui quas, ad optio, magnam deserunt veniam necessitatibus nulla aliquid vel
+    facere ex commodi distinctio illum culpa voluptatibus molestias! Minus,
+    alias labore. Culpa eos provident aut alias esse at repudiandae recusandae!
+  </p>
 </div>
 
 {% endif %} {% endblock %}

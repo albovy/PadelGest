@@ -1,6 +1,65 @@
+@charset "UTF-8";
 
-.logged-user-index-container{
+.logged-user-index-container {
   flex: 1 0 auto;
-  padding-left:30px;
+  padding-left: 30px;
   padding-right: 30px;
+}
+
+/*Styles to notLogged user*/
+.index-notLogged-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+.index-notLogged-container::after {
+  content: "";
+  background: url(../img/court.png),
+    linear-gradient(
+        to right,
+        #807363 0%,
+        #251d16 50%,
+        #3f302b 75%,
+        #100b09 100%
+      )
+      center center no-repeat fixed;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  -webkit-background-size: cover;
+  opacity: 0.75;
+  background-size: cover;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  position: absolute;
+  z-index: -1;
+}
+
+.index-notLogged-text-container {
+  color: white;
+  background: #1b2730fa;
+  padding: 50px;
+  max-width: 600px;
+  margin: 40px auto;
+  border-radius: 4px;
+  box-shadow: 0 4px 10px 4px #1414144d;
+}
+
+.index-notLogged-text-container span {
+  font-size: 2em;
+}
+
+.index-notLogged-text-container p {
+  font-size: 1.5em;
+}
+
+.index-notLogged-text-container a {
+  text-decoration: none;
+  color: #1a7040;
+}
+.index-notLogged-text-container a:hover {
+  color: #00471f;
 }
