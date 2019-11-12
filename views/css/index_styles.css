@@ -5,26 +5,28 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding-left: 200px;
-  padding-right: 200px;
+  padding-left: 40px;
+  padding-right: 40px;
 }
 
 .logged-user-index-container img {
   max-width: 600px;
   max-height: 600px;
+  margin-bottom: 60px;
+  margin-top: 25px;
 }
 
-@media (max-width: 720px) {
-  .logged-user-index-container {
-    padding-left: 50px;
-    padding-right: 50px;
-  }
-}
-
-@media (max-width: 1280px) {
+@media screen and (min-width: 720px) {
   .logged-user-index-container {
     padding-left: 150px;
     padding-right: 150px;
+  }
+}
+
+@media screen and (min-width: 1280px) {
+  .logged-user-index-container {
+    padding-left: 200px;
+    padding-right: 200px;
   }
 }
 

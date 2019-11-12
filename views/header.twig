@@ -1,13 +1,23 @@
 <header>
   <!--The check has to go here so that you don't see any part of the header in case there is no user.-->
   {% if user %}
-  <div class="header">
-    <a href="/" class="logo">PadelGest</a>
+  <div class="header" id="myHeader">
+    <div class="logo-container">
+      <a href="/" class="logo">PadelGest</a>
+    </div>
     <div class="header-right">
-      <span>Usuario: {{user.login}}</span>
+      <span id="show-user-connected-container">Usuario: {{ user.login }}</span>
       <div class="header-icons-container">
-        <a href="#"><img src="../img/user-silhouette.svg" alt="Perfil"></a>
-        <a href="/auth/logout"><img src="../img/logout.svg" alt="Desconectarse"></a>
+        <div class="icons-text-container">
+          <a href="#"><img src="/static/icons/user.svg" alt="Perfil"/></a>
+          <span>Mi perfil</span>
+        </div>
+        <div class="icons-text-container">
+          <a href="/auth/logout"
+            ><img src="/static/icons/logout.svg" alt="Desconectarse"
+          /></a>
+          <span>Desconectarse</span>
+        </div>
       </div>
     </div>
   </div>

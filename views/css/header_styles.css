@@ -1,55 +1,76 @@
 .header {
   overflow: hidden;
+  display: flex;
   color: white;
   background: #1b2730fa;
   padding: 10px 5px;
-  border-bottom: 2px solid #00461b;
+}
+
+.sticky {
+  position: fixed;
+  top: 0;
+  width: 100%
+}
+
+.sticky + .header {
+  padding-top: 102px;
+}
+
+.header > div {
+  width: 50vw;
+  padding: 10px;
+}
+
+.logo-container {
+  display: flex;
+  align-items: center;
 }
 
 .header a {
-  float: left;
   color: white;
   text-align: center;
-  padding: 10px;
   text-decoration: none;
   font-size: 18px;
+  padding: 8px;
   line-height: 25px;
   border-radius: 4px;
 }
 
-.header span {
-  float: left;
-  text-align: center;
-  margin-right: 100px;
-  padding: 10px;
-  font-size: 14px;
-  line-height: 25px;
-  border-radius: 4px;
-}
-
-.header a.logo {
-  font-size: 24px;
+header a.logo {
+  font-size: 40px;
   font-weight: bold;
 }
 
-.header a.active {
-  background-color: dodgerblue;
-  color: white;
-}
 
 .header-right {
-  float: right;
   display: flex;
+  padding-right: 10px;
   flex-direction: column;
+  align-items: flex-end;
 }
 
+.header-right #show-user-connected-container {
+  margin-right: 100px;
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+
+.icons-text-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-right: 15px;
+  padding-top: 5px;
+  color: white;
+}
 .header-right img {
-  width: 25px;
-  height: 25px;
+  width: 40px;
+  height: 40px;
 }
 
 .header-icons-container {
   display: flex;
+  padding-right: 10px;
 }
 
 @media screen and (max-width: 550px) {
@@ -58,16 +79,30 @@
     display: block;
     text-align: left;
   }
+
+  header a.logo {
+    font-size: 15px;
+  }
+
   .header span {
     float: none;
     display: block;
     text-align: left;
   }
+
   .header-right {
     float: none;
   }
+  .header span {
+    font-size: 12px;
+  }
+
   .header-right img {
-    height: 20px;
-    width: 20px;
+    height: 25px;
+    width: 25px;
+  }
+
+  header a.logo {
+    font-size: 30px;
   }
 }
