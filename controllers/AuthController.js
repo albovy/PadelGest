@@ -41,8 +41,8 @@ class AuthController {
           throw err;
         }
       } catch (err) {
-        return res.status(401);
-        //ERRORES DE 401
+        req.flash("error", "Error al autentificar");
+        return res.redirect("/auth");
       }
     }
   }

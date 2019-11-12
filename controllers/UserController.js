@@ -41,7 +41,8 @@ class UserController {
             console.log(newUser);
             return res.redirect("/");
           } catch (err) {
-            return console.log(err);
+            req.flash("error", "Error en al actualizar el usuario");
+            res.redirect("/");
           }
         }
       } catch(err) {

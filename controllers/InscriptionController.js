@@ -50,6 +50,7 @@ class InscriptionController {
       res.redirect("/inscription");
     } catch (err) {
       req.flash("error", "Error al borrar su inscripcion");
+      res.redirect("/tournament");
     }
   }
 }

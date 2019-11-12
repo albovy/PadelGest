@@ -72,6 +72,7 @@ class PromotedInscriptionController{
         }catch(err){
             console.log(err);
             req.flash("error","Error al insertar su inscripcion al partido promocionado");
+            res.redirect("/promotedInscription");
         }
     }
 

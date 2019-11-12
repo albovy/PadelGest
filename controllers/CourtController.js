@@ -43,6 +43,7 @@ class CourtController {
       return res.redirect('/court');
     }catch(err){
       req.flash("error","Error al borrar su pista");
+      res.redirect("/court");
     }
   }
 }
