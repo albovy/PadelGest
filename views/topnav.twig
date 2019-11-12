@@ -1,9 +1,15 @@
 <div class="topnav" id="myTopnav">
     <a href="/">Inicio</a>
-    <a href="promoted/showAll">Partidos Promocionados</a>
-    <a href="/tournament/showAll">Campeonatos</a>
+    <a href="/book/add">Reservar</a>
+    <a href="/promoted">Partidos Promocionados</a>
+    <a href="/tournament">Campeonatos</a>
     <a href="#">Mis partidos</a>
     <a href="#">Mis campeonatos</a>
+    {% if user.role == "ADMIN" %}
+    <a href="/court">Gestionar pistas</a>
+    <a href="/tournament">Gestionar campeonatos</a>
+
+    {% endif %}
   
     <a href="javascript:void(0);" class="icon" onclick="topnavDisplay()">
       <i class="fa fa-bars"></i>

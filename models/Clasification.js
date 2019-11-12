@@ -7,9 +7,7 @@ const ClasificationSchema = new Schema({
     required: true,
     ref: "Competition"
     },  
-    user1_id: { type: Schema.Types.ObjectId, required: true, ref: "Group" },
-    user2_id: { type: Schema.Types.ObjectId, required: true, ref: "Group" },
-    points: { type: Number, required: true },
+    group_id :{type:Schema.Types.ObjectId, required: true, ref : "Group"}
 });
 
 module.exports = mongoose.model("Clasification", ClasificationSchema);

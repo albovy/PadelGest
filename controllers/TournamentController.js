@@ -1,13 +1,15 @@
 const TournamentModel = require("../models/TournamentModel");
 const agenda = require('../jobs/agenda');
+const InscriptionModel = require("../models/InscriptionModel");
 
 class TournamentController {
   constructor() {}
 
   async showAll(req, res) {
     const tournaments = await TournamentModel.findAll();
+    const myInscriptions = await InscriptionModel.findMyInscriptions(req.user.id)
     agenda.schedule('in 5 seconds', 'run tournament',{id: "5dc40127d5a80333b8741ea3"},"");
-    res.render("tournament/showAll", { tournaments: tournaments });
+    res.render("tournament/showAll", { tournaments: tournaments, myInscriptions: myInscriptions });
   }
   async add(req, res) {
     if (req.method == "GET") {

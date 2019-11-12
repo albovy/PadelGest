@@ -12,8 +12,8 @@ class CourtModel {
     findNotInRange(range){
         return Court.find({_id:{ $nin: range}});
     }
-    countCourts(){
-        return Court.count();
+    async countCourts(){
+        return await Court.countDocuments();
     }
     async add(body) {
         let court = new Court(body);

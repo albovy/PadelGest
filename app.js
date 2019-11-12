@@ -20,13 +20,15 @@ const courtRouter = require("./routes/court");
 const inscriptionRouter = require("./routes/inscription");
 const promotedRouter = require("./routes/promoted");
 const promotedInscriptionRouter = require("./routes/promotedInscription");
+const clashRouter = require("./routes/clash");
+const gameRouter = require("./routes/game");
 
 const app = express();
 
 const mongoDB = "mongodb://127.0.0.1:27017/padeldb";
 
 
-//BD
+//BD©
 mongoose.connect(mongoDB, {
   useCreateIndex: true,
   useNewUrlParser: true,
@@ -39,6 +41,7 @@ db.on("error", console.error.bind(console, "MongoDB connection error:"));
 const sessionStore = new session.MemoryStore();
 
 app.use(express.static(__dirname + '/views'));
+app.use(express.static(__dirname + '/node_modules'));
 app.set("view engine", "twig");
 
 
@@ -94,6 +97,8 @@ app.use("/court",courtRouter);
 app.use("/inscription", inscriptionRouter);
 app.use("/promoted", promotedRouter);
 app.use("/promotedInscription", promotedInscriptionRouter);
+app.use("/clash",clashRouter);
+app.use("/game",gameRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

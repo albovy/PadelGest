@@ -27,27 +27,25 @@ class BookModel {
    findAllDistinctDatesInRange(){
     console.log("findAllDistinct");
     const dateNow = new Date();
-    let myToday = new Date(dateNow.getFullYear(), dateNow.getMonth(), dateNow.getDate(), 0, 0, 0);
-    console.log("myToday: ", Date.now());
-    let date = new Date(Date.now());
-    console.log(date);
-    date.setUTCMinutes(0);
-    console.log(date);
-    const thresholdDate = new Date(myToday.getFullYear(), myToday.getMonth(), myToday.getDate()+7, 0, 0, 0);
-    console.log("thresholdDate: ",thresholdDate);
-    return  Book.distinct("startDate",{startDate: {$gt:myToday, $lt:thresholdDate}} );
+
+    dateNow.setHours(1,0,0,0);
+    console.log(dateNow);
+
+    const thresholdDate = new Date(dateNow.getFullYear(), dateNow.getMonth(), dateNow.getDate()+7, 0, 0, 0);
+    console.log(thresholdDate);
+    return  Book.distinct("startDate",{startDate: {$gt:dateNow, $lt:thresholdDate}} );
   }
 
   //Funcion que devuelve el numero de reservas para una fecha concreta
-  countBooksOnDate(date){
-    return Book.count({startDate: date});
+   countBooksOnDate(date){
+    return  Book.countDocuments({startDate: date});
   }
 
   async add(body) {
-    console.log("hola");
     let book = new Book(body);
     try {
       return await book.save();
+      
     } catch (err) {
       return await new Promise((resolve, reject) => reject(err));
     }

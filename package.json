@@ -6,6 +6,7 @@
     "start": "nodemon ./bin/www"
   },
   "dependencies": {
+    "@chenfengyuan/datepicker": "^1.0.9",
     "agenda": "^2.1.0",
     "cookie-parser": "~1.4.4",
     "debug": "~2.6.9",
@@ -15,6 +16,7 @@
     "express-jwt": "^5.3.1",
     "express-session": "^1.17.0",
     "http-errors": "~1.6.3",
+    "jquery": "^3.4.1",
     "jsonwebtoken": "^8.5.1",
     "mongodb": "^3.3.3",
     "mongoose": "^5.7.4",

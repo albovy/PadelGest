@@ -35,6 +35,7 @@ class InscriptionController {
         inscriptionDate: dateNow
       };
       const inscription = await InscriptionModel.add(data);
+      return res.redirect("/tournament");
     } catch (err) {
       //ERRORES
       console.log("Error");

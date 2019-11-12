@@ -15,6 +15,10 @@
     <input name="gender">gender</input>
     <button type="submit">add inscription</button>
   </form>
+  {% if tournament.started %}
+  <a href="/clash/tournament/{{tournament._id}}">Mis enfrentamientos</a>
+  <a href="/clasification/tournament/{{tournament._id}}">Clasificación</a>
+  {% endif %}
   {% endfor %}
 </div>
 

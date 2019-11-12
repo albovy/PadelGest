@@ -4,7 +4,7 @@ const router = express.Router();
 const permit = require("../middleware/permission");
 const PromotedGameController = require("../controllers/PromotedGameController.js");
 
-router.get("/", permit("ADMIN"), PromotedGameController.showAll);
+router.get("/", permit("ATHLETE","ADMIN"), PromotedGameController.showAll);
 router.get("/showInscriptions", permit("ATHLETE"), PromotedGameController.showMyInscriptions);
 router.post("/showInscriptions", permit("ATHLETE"), PromotedGameController.showMyInscriptions);
 router.get("/add", permit("ADMIN"), PromotedGameController.add);
