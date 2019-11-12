@@ -8,7 +8,7 @@ class PromotedInscriptionController{
 
     async showAll(req,res){
         const promos = await PromotedGameModel.findAll();
-        res.render("promotedInscription/showAll", { promos: promos });
+        res.render("promoted/showAll", { promos: promos,user:req.user });
     }
 
     async add(req,res){

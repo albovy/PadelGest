@@ -17,13 +17,20 @@ class PromotedGameController {
       return game;
     }));
     
-    res.render("promoted/showInscriptions", {myPromotedInscriptions : array});
+    res.render("promoted/showInscriptions", {myPromotedInscriptions : array,user: req.user});
   }
 
 
   async showAll(req, res) {
     const promos = await PromotedGameModel.findAll();
-    res.render("promoted/showAll", { promos: promos });
+    const myInscriptions = await PromotedInscriptionModel.findMyInscriptions(req.user.id);
+        let array = [];
+        myInscriptions.forEach(element=>{
+            array.push({_id: element.promoted_id});
+        });
+        console.log(promos);
+        console.log(array);
+        res.render("promoted/showAll", { promos: promos, user: req.user, inscriptions: array});
   }
   async add(req, res) {
     if (req.method == "GET") {
