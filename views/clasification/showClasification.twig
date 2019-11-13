@@ -1,0 +1,13 @@
+{% extends 'layout.twig' %}
+{% include "header.twig" %}
+
+
+{% block body %}
+{% include "navbar.twig" %}
+{% for clasification in clasifications %}
+<h1>{{clasification._id}}</h1>
+
+
+{% endfor %}
+
+{% endblock %}

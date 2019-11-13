@@ -11,7 +11,7 @@ const ClashSchema = new Schema({
     user2_id: { type: Schema.Types.ObjectId, required: true, ref: "Group" },
     user3_id: { type: Schema.Types.ObjectId, required: true, ref: "Group" },
     user4_id: { type: Schema.Types.ObjectId, required: true, ref: "Group" },
-    tryDate:  { type: Date, required: true,default: new Date(0,0,0,0,0,0,0)}
+    agree : {type:Boolean, required:true,default:false}
   });
   
   module.exports = mongoose.model("Clash", ClashSchema);

@@ -17,6 +17,10 @@ class PromotedInscriptionController{
             const dateNow = Date.now();
             const promo = await PromotedGameModel.findById(req.params.id);
             if(promo.date < dateNow){
+                const getInscripted = await PromotedInscriptionModel.findInscriptionsByGame(req.params.id);
+                getInscripted.forEach(async elemnt=>{
+                    await PromotedInscriptionModel.delete(elemnt._id);
+                });
                 req.flash("error","El partido promocionado ya se ha jugado.");
                 await PromotedGameModel.delete(req.params.id);
                 return res.redirect("/promotedInscription");
@@ -25,6 +29,7 @@ class PromotedInscriptionController{
             let data = {user_id: req.user.id, promoted_id: req.params.id};
             
             if(await PromotedInscriptionModel.findIfImAlreadyInscripted(data)>0){
+                
                 req.flash("error","Ya estás inscrito en este partido promocionado.");
                 return res.redirect("/promotedInscription");
             }
@@ -38,6 +43,11 @@ class PromotedInscriptionController{
             }else{ //Hay 3 apuntados al promo y se va a apuntar el cuarto, se efectua reserva si hay pista libre
                 console.log("Prueba cuarto miembro promocionado");
                 if(CourtModel.countCourts() == BookModel.countBooksOnDate()){
+                    const getInscripted = await PromotedInscriptionModel.findInscriptionsByGame(req.params.id);
+                    getInscripted.forEach(async elemnt=>{
+                        await PromotedInscriptionModel.delete(elemnt._id);
+                    });
+                    
                     console.log("Salta el error de pistas no disponibles");
                     req.flash("error","No se ha podido efectuar la reserva.");
                     await PromotedGameModel.delete(req.params.id);

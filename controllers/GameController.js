@@ -7,8 +7,17 @@ class GameController {
   show(req,res){
     
   }
-  add(req,res){
+  async add(req,res){
+    try{
+      const clash = await ClashModel.findById(req.params.id);
+      const date = req.body.date;
 
+      if(date< Date.now()){
+        throw err;
+      }
+    }catch(err){
+      
+    }
   }
 
 }

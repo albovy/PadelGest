@@ -13,6 +13,9 @@ class InscriptionModel {
    findIfImAlreadyInscripted(tournament_id, user_id) {
     return Inscription.countDocuments({$and :[{$or :[{user1_id : user_id},{user2_id: user_id}]},{tournament_id : tournament_id}]});
   }
+  findMyInscriptionInTournament(tournament_id, user_id) {
+    return Inscription.findOne({$and :[{$or :[{user1_id : user_id},{user2_id: user_id}]},{tournament_id : tournament_id}]});
+  }
   
 
   findInscriptionsByTournament(id) {

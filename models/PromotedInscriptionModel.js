@@ -14,7 +14,9 @@ class PromotedInscriptionModel {
     return await PromotedInscription.countDocuments(data);
 
   }
-
+  findInscriptionsByGame(id){
+    return PromotedInscription.findById({promoted_id:id});
+  }
 
   async add(body) {
     let promotedInscription = new PromotedInscription(body);

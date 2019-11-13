@@ -3,11 +3,13 @@
     <a href="/book/add">Reservar pista</a>
     <a href="/promoted">Partidos Promocionados</a>
     <a href="/tournament">Campeonatos</a>
+    <a href="/book">Mis reservas</a>
     <a href="#">Mis partidos</a>
     <a href="#">Mis campeonatos</a>
     {% if user.role == "ADMIN" %}
     <a href="/court">Gestionar pistas</a>
     <a href="/tournament">Gestionar campeonatos</a>
+    <a href="/promoted">Gestionar partidos</a>
 
     {% endif %}
   

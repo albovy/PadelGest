@@ -18,10 +18,10 @@ class ClashController{
         console.log(comp._id);
         const myClash = await ClashModel.findByUserAndCompetition(comp._id,req.user.id);
         console.log(comp);
-        console.log(myClash);
         console.log("prueba");
         res.render("clash/showAll",{clashes : myClash});
     }
+
     
 }
 

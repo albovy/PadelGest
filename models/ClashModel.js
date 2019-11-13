@@ -12,8 +12,7 @@ class ClashModel{
     }
 
     async findByUserAndCompetition(idCompetition, idUser){
-        console.log("hola3");
-        console.log(idCompetition);
+
         return await Clash.find({$or :[{user3_id: idUser},{user1_id : idUser},{user2_id: idUser},{user4_id: idUser}],competition_id : idCompetition});
     }
 

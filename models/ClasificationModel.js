@@ -3,13 +3,10 @@ const Clasification = require("../models/Clasification");
 class ClasificationModel{
     constructor(){}
 
-    //Devuelve todas las clasificaciones de una pareja/equipo
-    findByTeam(userId, user2Id){
-        return Clasification.find({
-            user1_id: userId,
-            user2_id: user2Id
-        });
+    findByCatAndCompSub(idComp,cat,sub){
+        return Clasification.find({category:cat,competition_id : idComp,subGroup:sub}).sort({points:-1});
     }
+
 
     async add(body){
         let clasification = new Clasification(body);

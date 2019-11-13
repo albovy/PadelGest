@@ -21,6 +21,7 @@ const inscriptionRouter = require("./routes/inscription");
 const promotedRouter = require("./routes/promoted");
 const promotedInscriptionRouter = require("./routes/promotedInscription");
 const clashRouter = require("./routes/clash");
+const clasificationRouter = require("./routes/clasification");
 const gameRouter = require("./routes/game");
 
 const app = express();
@@ -100,6 +101,7 @@ app.use("/inscription", inscriptionRouter);
 app.use("/promoted", promotedRouter);
 app.use("/promotedInscription", promotedInscriptionRouter);
 app.use("/clash",clashRouter);
+app.use("/clasification",clasificationRouter);
 app.use("/game",gameRouter);
 
 // catch 404 and forward to error handler

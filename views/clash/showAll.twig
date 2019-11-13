@@ -5,6 +5,10 @@
 
 {% for clash in clashes %}
 <h1>{{clash.user1_id}}</h1>
+<form method=POST action="/game/clash/{{clash._id}}">
+<input type="date" name="date">fecha</input>
+<button>click</button>
+</form>
 
 {% endfor %}
 
