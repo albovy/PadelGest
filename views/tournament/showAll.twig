@@ -17,7 +17,6 @@
 <div class="tournament-wrapper">
 	{% for tournament in tournaments %}
 	<div class="tournament-container card">
-
 		<h2>{{tournament.title}}</h2>
 		<p>Descripción: {{tournament.description}}</p>
 		<p>Fecha inicio: {{tournament.startDate}}</p>
@@ -26,7 +25,7 @@
 			<a href="/tournament/edit/{{tournament._id}}">
 			<div class="tournament-showall-edit">
 				<img src="/static/icons/edit.svg" alt="edit"> 
-				<span>Editar campeonato</span> 
+				<span>Editar torneo</span> 
 			</div>
 			</a>
 		{% endif %}
@@ -44,12 +43,29 @@
 				{% endif %}
 			{% else %}
 				{% if not tournament.inscripted %}
+				<button id="modal-btn" idvalue="{{tournament._id}}" onclick="ShowModal(idvalue)">Incribirse</button>
 					<div class="tournament-inscription-form-container">
-						<form method="post" action="/inscription/tournament/{{tournament._id}}">
-							<input name="user2_login">Login pareja</input>
-							<input name="category">Categoria</input>
-							<button type="submit">Inscribirse</button>
-						</form>
+						<div id="modal-{{tournament._id}}" class="modal">
+							<div class="modal-content">
+								<span class="close">&times;</span>
+								<div class="modal-body">	
+									<span>Inscripción al torneo: {{tournament.title}}</span>
+									<form method="post" action="/inscription/tournament/{{tournament._id}}">
+										<div class="field-wrap">
+												<input type="text" name="user2_login" placeholder="Login pareja" required/>
+										</div>
+										<div class="field-wrap">
+											<select name="category" >
+												<option value="1">1</option>
+												<option value="2">2</option>
+												<option value="2">3</option>
+											</select>
+										</div>
+										<button type="submit">Inscribirse</button>
+									</form>
+								</div>
+							</div>
+						</div>					
 					</div>
 				{% endif %}
 			{% endif %}
