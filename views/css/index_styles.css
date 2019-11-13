@@ -10,10 +10,10 @@
 }
 
 .logged-user-index-container img {
-  max-width: 600px;
-  max-height: 600px;
-  margin-bottom: 60px;
-  margin-top: 25px;
+  max-width: 300px;
+  max-height: 300px;
+  margin-bottom: 40px;
+  margin-top: 15px;
 }
 
 @media screen and (min-width: 720px) {
@@ -21,12 +21,26 @@
     padding-left: 150px;
     padding-right: 150px;
   }
+
+  .logged-user-index-container img {
+    max-width: 600px;
+    max-height: 600px;
+    margin-bottom: 50px;
+    margin-top: 20px;
+  }
 }
 
 @media screen and (min-width: 1280px) {
   .logged-user-index-container {
     padding-left: 200px;
     padding-right: 200px;
+  }
+
+  .logged-user-index-container img {
+    max-width: 800px;
+    max-height: 800px;
+    margin-bottom: 60px;
+    margin-top: 25px;
   }
 }
 
