@@ -1,0 +1,22 @@
+{% extends 'layout.twig' %}
+
+{% block body %}
+{% include "navbar.twig" %}
+{% if user.role == "ADMIN" %}
+<a href="/promoted/add">ADD</a><br>
+{% endif %}
+{% for promo in promos %}
+    <h1>{{promo.title}}</h1>
+    <h5>{{promo.date}}</h5>
+    {% if user.role == "ADMIN" %}
+        <form method=post action="/promoted/delete/{{promo._id}}">
+            <button type="submit">borrar</button>
+        </form>
+    {% else %}
+    <form method=post action="/promotedInscription/add/{{promo._id}}">
+        <button type="submit">Inscribirse</button>
+    </form>
+    {% endif %}
+{% endfor %}
+
+{% endblock %}

@@ -3,8 +3,8 @@ const PromotedGame = require("../models/PromotedGame");
 class PromotedGameModel {
     constructor() {}
 
-    findAll(){
-        return PromotedGame.find();
+    async findAll(){
+        return await PromotedGame.find();
     }
     findById(id){
         return PromotedGame.findById(id);
