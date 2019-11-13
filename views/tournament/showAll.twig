@@ -43,9 +43,9 @@
 				{% endif %}
 			{% else %}
 				{% if not tournament.inscripted %}
-				<button id="modal-btn" idvalue="{{tournament._id}}" onclick="ShowModal(idvalue)">Incribirse</button>
-					<div class="tournament-inscription-form-container">
-						<div id="modal-{{tournament._id}}" class="modal">
+				<button class="modal-btn" idvalue="{{tournament._id}}">Incribirse</button>
+					<div class="tournament-inscription-form-container" >
+						<div id="modal-{{tournament._id}}" class="modal" style="display:none">
 							<div class="modal-content">
 								<span class="close">&times;</span>
 								<div class="modal-body">	

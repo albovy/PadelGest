@@ -1,15 +1,81 @@
 {% extends 'layout.twig' %}
 {% include "header.twig" %}
 
+
 {% block body %}
+    {% include "navbar.twig" %}
 
-{% for clash in clashes %}
-<h1>{{clash.user1_id}}</h1>
-<form method=POST action="/game/clash/{{clash._id}}">
-<input type="date" name="date">fecha</input>
-<button>click</button>
-</form>
+    {% for clash in clashes %}
+        <h1>{{clash.user1_id}}</h1>
+        <form method="POST" action="/game/clash/{{clash._id}}">
+            <input id="data" data-toggle="datepicker" name="startDate">
+            <input type="text" class="timepicker" name="time"/>
+            <button>click</button>
+        </form>
+    {% endfor %}
+    <script>
+        var date = new Date({{dateComp.startDate}});
+        var date2 = new Date({{dateComp.finishDate}});
 
-{% endfor %}
 
+        console.log(date2);
+
+
+        $('[data-toggle="datepicker"]').datepicker({format: 'yyyy-mm-dd', startDate: date, endDate: date2, autoHide: true});
+        $('[data-toggle="datepicker"]').datepicker('setDate', date);
+
+
+        (function ($) {
+            $(function () {
+                $('.timepicker').timepicker({
+                    timeFormat: 'HH:mm',
+                    interval: 90,
+                    minTime: '9',
+                    maxTime: '23:00',
+                    startTime: '09:00',
+                    dynamic: false,
+                    dropdown: true,
+                    scrollbar: true
+                });
+            });
+        })(jQuery);
+    </script>
+
+    <script>
+
+        $('.timepicker').click(() => {
+            console.log(Date.now());
+            let now = new Date(Date.now());
+            console.log(now.getHours());
+            let g = new Date(document.getElementById("data").value);
+            let x = document.getElementsByClassName("ui-menu-item");
+            for (let i = 0; i < x.length; i++) {
+                x[i].style.display = "block";
+                x[i].id = parseInt(x[i].firstChild.text.split(":")[0]);
+                if (g.getDate() == now.getDate() && parseInt(x[i].id) < now.getHours()) {
+                    x[i].style.display = "none";
+                }else{
+                if (g.getDate() == now.getDate() && parseInt(x[i].id) == now.getHours() && parseInt(x[i].firstChild.text.split(":")[0]) <= now.getMinutes()) {
+                    x[i].style.display = "none";
+                }
+                }
+            }
+
+            let arrSameDates = [];
+            let l;{% for da in arrOcuped %}l = new Date({{ da }});
+                if (g.getDate() == l.getDate()) {
+                    arrSameDates.push(l);
+                }
+            {% endfor %}arrSameDates.forEach(date => {
+                console.log(date);
+                let elem = document.getElementById(date.getHours());
+                console.log(elem)
+                if (elem != null) {
+                    elem.style.display = "none";
+                }
+            });
+
+
+        });
+    </script>
 {% endblock %}

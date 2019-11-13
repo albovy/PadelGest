@@ -46,14 +46,22 @@ class BookController {
       try {
         console.log("Dentro addBookController");
         const dateNow = Date.now();
-        const desiredDate = req.body.startDate; //fecha deseada
 
-        if (desiredDate < dateNow) {
+        const startDate = new Date(new Date(req.body.startDate).getTime()); //data inicio ya formateada
+        const time = req.body.time;
+        console.log(startDate);
+   
+        startDate.setHours(parseInt(time.split(":")[0])+1);
+        console.log(startDate);
+        startDate.setMinutes(time.split(":")[1]);
+        console.log(startDate);
+
+        if (startDate < dateNow) {
           req.flash("error","No es posible reservar esta franja de tiempo");
           return res.redirect("/book");   //redireccion a la vista show
         }
 
-        const booksOnDate = await BookModel.findByDate(desiredDate); //reservas en date
+        const booksOnDate = await BookModel.findByDate(startDate); //reservas en date
 
         const arrOcuped = [];
         booksOnDate.forEach(element => {
@@ -69,14 +77,7 @@ class BookController {
 
         //Ver que devuelve mongoDB en una consulta vacia
         const courtAv = courtsAvailable[0]._id; //id pista disponible
-        const startDate = new Date(new Date(req.body.startDate).getTime()); //data inicio ya formateada
-        const time = req.body.time;
-        console.log(startDate);
-   
-        startDate.setHours(parseInt(time.split(":")[0])+1);
-        console.log(startDate);
-        startDate.setMinutes(time.split(":")[1]);
-        console.log(startDate);
+
 
         const endDate = new Date(
           new Date(new Date(startDate).getTime() + 5400000)

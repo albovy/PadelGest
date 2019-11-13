@@ -7,7 +7,7 @@ const gameController = require("../controllers/GameController");
 
 /* GET users listing. */
 router.get("/", gameController.show);
-router.post("/clash/:id", permit("ADMIN"), gameController.add);
+router.post("/clash/:id", permit("ATHLETE"), gameController.add);
 
 
 //router.get('/edit:id',user.edit);

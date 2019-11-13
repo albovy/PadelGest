@@ -4,7 +4,7 @@ class ClashModel{
     constructor(){}
 
     findById(id){
-        return Clash.find({_id: id});
+        return Clash.findById({_id: id});
     }
 
     findByUser(idUser){
