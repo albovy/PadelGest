@@ -3,49 +3,60 @@
 {% block body %}
 {% include "navbar.twig" %}
 <div class="tournament-showall-container">
-    {% if not tournaments %}
-        <h1>No hay torneos disponibles</h1>
-    {% else %}
+	{% if not tournaments %}
+		<h1>No hay torneos disponibles</h1>
+	{% else %}
+	{% if user.role == 'ADMIN' %}
+			<a href="/tournament/add">
+				<div class="tournament-showall-add">
+					<img src="/static/icons/add.svg" alt="add"> 
+					<span>Crear campeonato</span> 
+				</div>
+			</a>
+		{% endif %}
+<div class="tournament-wrapper">
+	{% for tournament in tournaments %}
+	<div class="tournament-container card">
 
-        {% for tournament in tournaments %}
-            <div class="tournament-row">
-                <div class="tournament-information-container">
-                    <div class="card">
-                        {% if user.role == 'ADMIN' %}
-                            <a href="/tournament/add">Crear torneo</a>
-                            <a href="/tournament/edit/{{tournament._id}}">Editar torneo</a>
-                        {% endif %}
-
-                        <h2>{{tournament.title}}</h2>
-                        <p>{{tournament.description}}</p>
-                        <p>{{tournament.startDate}}</p>
-                        <p>{{tournament.finishDate}}</p>
-                        <!-- <form method=post action="/inscription/tournament/{{tournament._id}}">
-                                                                        <button type="submit">borrar</button> 
-                                                                        </form>-->
-                        {% if user.role == 'ATHLETE' %}
-                            {% if tournament.started %}
-                                {% if tournament.inscripted %}
-
-                                    <a href="/clash/tournament/{{tournament._id}}">Mis enfrentamientos</a>
-                                    <a href="/clasification/tournament/{{tournament._id}}">Clasificación</a>
-                                {% endif %}
-                            {% else %}
-                                {% if not tournament.inscripted %}
-                                    <div class="tournament-inscription-form-container">
-                                        <form method="post" action="/inscription/tournament/{{tournament._id}}">
-                                            <input name="user2_login">Login pareja</input>
-                                        <input name="category">Categoria</input>
-                                    <button type="submit">Inscribirse</button>
-
-                                </form>
-                            {% endif %}
-                        {% endif %}
-
-
-                    {% endif %}
-                </div>
-            </div>
-        </div>
-    </div>
-{% endfor %}{% endif %}</div>{% endblock %}
+		<h2>{{tournament.title}}</h2>
+		<p>Descripción: {{tournament.description}}</p>
+		<p>Fecha inicio: {{tournament.startDate}}</p>
+		<p>Fecha fin: {{tournament.finishDate}}</p>
+		{% if user.role == 'ADMIN' %}
+			<a href="/tournament/edit/{{tournament._id}}">
+			<div class="tournament-showall-edit">
+				<img src="/static/icons/edit.svg" alt="edit"> 
+				<span>Editar campeonato</span> 
+			</div>
+			</a>
+		{% endif %}
+		{% if user.role == 'ATHLETE' %}
+			{% if tournament.started %}
+				{% if tournament.inscripted %}
+					<a href="/clash/tournament/{{tournament._id}}"><div class="tournament-showall-my-clashes">
+				<img src="/static/icons/clashes.svg" alt="-mis_enfrentamientos"> 
+				<span>Mis enfrentamientos</span> 
+			</div></a>
+					<a href="/clasification/tournament/{{tournament._id}}"><div class="tournament-showall-classification">
+				<img src="/static/icons/classification.svg" alt="edit"> 
+				<span>Clasificación</span> 
+			</div></a>
+				{% endif %}
+			{% else %}
+				{% if not tournament.inscripted %}
+					<div class="tournament-inscription-form-container">
+						<form method="post" action="/inscription/tournament/{{tournament._id}}">
+							<input name="user2_login">Login pareja</input>
+							<input name="category">Categoria</input>
+							<button type="submit">Inscribirse</button>
+						</form>
+					</div>
+				{% endif %}
+			{% endif %}
+		{% endif %}
+			</div>
+	{% endfor %}
+	</div>
+	{% endif %}
+</div>
+{% endblock %}
