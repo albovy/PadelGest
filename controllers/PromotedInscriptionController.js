@@ -23,7 +23,7 @@ class PromotedInscriptionController{
                 });
                 req.flash("error","El partido promocionado ya se ha jugado.");
                 await PromotedGameModel.delete(req.params.id);
-                return res.redirect("/promotedInscription");
+                return res.redirect("/promoted/showInscriptions");
             }
             
             let data = {user_id: req.user.id, promoted_id: req.params.id};
@@ -31,10 +31,11 @@ class PromotedInscriptionController{
             if(await PromotedInscriptionModel.findIfImAlreadyInscripted(data)>0){
                 
                 req.flash("error","Ya estás inscrito en este partido promocionado.");
-                return res.redirect("/promotedInscription");
+                return res.redirect("/promoted/showInscriptions");
             }
             if(promo.numPlayers < 3){ //Solo hay dos apuntados al promocionado
-                //console.log("Vamos bien");
+                console.log("Vamos bien");
+            
                 await PromotedInscriptionModel.add(data);
                 const newData = {$set: {numPlayers: promo.numPlayers+=1}};
                 await PromotedGameModel.incrementNumPlayers(req.params.id,newData);
@@ -51,7 +52,7 @@ class PromotedInscriptionController{
                     console.log("Salta el error de pistas no disponibles");
                     req.flash("error","No se ha podido efectuar la reserva.");
                     await PromotedGameModel.delete(req.params.id);
-                    return res.redirect("/promotedInscription");
+                    return res.redirect("/promoted/showInscriptions");
                 }else if(promo.numPlayers==3){
                     const startDate = promo.date;
                     console.log("Vamos bien");

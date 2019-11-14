@@ -1,5 +1,7 @@
 {% extends 'layout.twig' %}
+{% include "header.twig" %}
 {% block body %}
+{% include "navbar.twig" %}
     <form method="POST" action="/book/add">
         <input id="data" data-toggle="datepicker" name="startDate">
         <input type="text" class="timepicker" name="time"/>

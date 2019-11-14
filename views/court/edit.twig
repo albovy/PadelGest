@@ -1,6 +1,8 @@
 {% extends 'layout.twig' %}
+{% include "header.twig" %}
 
 {% block body %}
+{% include "navbar.twig" %}
 <form method=POST action="/court/edit/{{court._id}}">
 <input name="name" value={{court.name}}>name</input>
 <select name="surface">

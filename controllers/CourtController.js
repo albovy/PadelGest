@@ -5,7 +5,7 @@ class CourtController {
 
   async showAll(req, res) {
     const courts = await courtModel.findAll();
-    res.render("court/showAll", { courts: courts });
+    res.render("court/showAll", { courts: courts ,user:req.user});
   }
   async add(req, res) {
     if (req.method == "GET") {
@@ -25,7 +25,7 @@ class CourtController {
     try {
       const court = await courtModel.findById(req.params.id);
       if (req.method == "GET") {
-        res.render("court/edit", { court: court });
+        res.render("court/edit", { court: court ,user:req.user});
       } else {
         const newData = { $set: req.body };
         const newCourt = await courtModel.update(court._id,newData);

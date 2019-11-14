@@ -2,6 +2,7 @@ const CompetitionModel = require("../models/CompetitionModel");
 const GroupModel = require("../models/GroupModel");
 const ClasificationModel = require("../models/ClasificationModel");
 const InscriptionModel = require("../models/InscriptionModel");
+const UserModel = require("../models/UserModel");
 
 class ClasificationController {
   constructor() {}
@@ -25,9 +26,26 @@ class ClasificationController {
       group.subGroup
     );
     console.log(clasifications);
+    let array = [];
+    array = await Promise.all(clasifications.map(async element=>{
+      const user1 = await UserModel.findById(element.user1_id)
+      const user2 = await UserModel.findById(element.user1_id);
+        let data={
+          _id: element._id,
+          competition_id: element.competition_id,
+          user1_id: user1.login,
+          user2_id: user2.login,
+          category: element.category,
+          subGroup: element.subGroup,
+          points: element.points
+        }
+        return data
+    })
+    );
 
+    console.log(array);
     res.render("clasification/showClasification", {
-      clasifications: clasifications,
+      clasifications: array,
       user: req.user
     });
   }

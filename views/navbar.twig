@@ -1,11 +1,14 @@
 <div class="topnav" id="myTopnav">
     <a href="/">Inicio</a>
+    {% if user.role =="ATHLETE" %}
+    
     <a href="/book/add">Reservar pista</a>
     <a href="/promoted">Partidos Promocionados</a>
     <a href="/tournament">Campeonatos</a>
     <a href="/book">Mis reservas</a>
-    <a href="#">Mis partidos</a>
+    <a href="/promoted/showInscriptions">Mis partidos</a>
     <a href="#">Mis campeonatos</a>
+    {% endif %}
     {% if user.role == "ADMIN" %}
     <a href="/court">Gestionar pistas</a>
     <a href="/tournament">Gestionar campeonatos</a>

@@ -13,9 +13,12 @@
             <button type="submit">borrar</button>
         </form>
     {% else %}
+    {% if not promo.inscripted %}
+    
     <form method=post action="/promotedInscription/add/{{promo._id}}">
         <button type="submit">Inscribirse</button>
     </form>
+    {% endif %}
     {% endif %}
 {% endfor %}
 

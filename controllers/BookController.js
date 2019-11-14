@@ -35,7 +35,7 @@ class BookController {
         
         console.log(arrayDatesFullBooked);
     
-        res.render("book/add", {arrOcuped : arrayDatesFullBooked}); //numPistas
+        res.render("book/add", {arrOcuped : arrayDatesFullBooked, user:req.user}); //numPistas
 
       } catch (err) {
         console.log("Error getADDBook: ", err);
