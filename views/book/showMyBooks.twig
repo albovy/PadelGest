@@ -1,13 +1,21 @@
 {% extends 'layout.twig' %}
+{% include "header.twig" %}
 
 {% block body %}
-<a href="/promotedInscription">Volver</a><br><!--Esto tendra que volver al index o donde?-->
-<h3>Reservas pendientes</h3>
-{% for book in myBooks %}
-<h1>{{book.court_id}}</h1><h5>{{book.startDate}}</h5>
-<form method=post action="/book/delete/{{book._id}}">
-    <button type="submit">Eliminar</button> 
-</form>
-{% endfor %}
-
+    {% include "navbar.twig" %}
+    <div class="tournament-showall-container">
+        <h3>Mis Reservas</h3>
+        <div class="tournament-wrapper">
+            {% for book in myBooks %}
+                <div class="tournament-container card">
+                    <h3>Pista:
+                        {{book.court_id}}</h3>
+                    <p>{{book.startDate}}</p>
+                    <form method="post" action="/book/delete/{{book._id}}">
+                        <button class="btn btn-danger" type="submit">Eliminar</button>
+                    </form>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
 {% endblock %}

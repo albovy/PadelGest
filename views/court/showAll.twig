@@ -2,14 +2,32 @@
 {% include "header.twig" %}
 
 {% block body %}
-{% include "navbar.twig" %}
-<a href="/court/add">ADD</a><br>
-{% for court in courts %}
-<a href="/court/edit/{{court._id}}"> {{court._id}}</a>
-<h1>{{court.name}}</h1>
-<form method=POST action="/court/delete/{{court._id}}">
-<button type="submit">borrar</button>
-</form>
-{% endfor %}
+    {% include "navbar.twig" %}
+    <div class="tournament-showall-container">
+        <a href="/court/add">
+            <div class="tournament-showall-add">
+                <img src="/static/icons/add.svg" alt="add">
+                <span>Crear pista</span>
+            </div>
+        </a>
+        <div class="tournament-wrapper">
+            {% for court in courts %}
+                <div class="tournament-container card">
+                    <h1>{{court.name}}</h1>
+                    <p>{{court.surface}}</p>
+                    <p>{{court.type}}</p>
+                    <a href="/tournament/edit/{{tournament._id}}">
+                        <div class="tournament-showall-edit">
+                            <img src="/static/icons/edit.svg" alt="edit">
+                            <span>Editar pista</span>
+                        </div>
+                    </a>
+                    <form method="POST" action="/court/delete/{{court._id}}">
+                        <button type="submit">borrar</button>
+                    </form>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
 
 {% endblock %}

@@ -4,31 +4,80 @@
 
 {% block body %}
     {% include "navbar.twig" %}
+    <div class="tournament-showall-container">
+        <div class="tournament-wrapper">
+            {% for clash in clashes %}
+                <div class="tournament-container card">
+                    <p>{{clash.user1_id}},{{clash.user2_id}}
+                        vs
+                        {{clash.user3_id}},{{clash.user4_id}}
+                    </p>
 
-    {% for clash in clashes %}
-        <h1>{{clash.user1_id}}</h1>
-        <form method="POST" action="/game/clash/{{clash._id}}">
-            <input id="data" data-toggle="datepicker" name="startDate">
-            <input type="text" class="timepicker" name="time"/>
-            <button>click</button>
-        </form>
-    {% endfor %}
+                    {% if not clash.agree %}
+
+
+                        <button type="button" idvalue={{clash._id}} class="btn btn-primary concretarButton" data-toggle="modal" data-target="#exampleModal">
+                            Concretar Hora
+                        </button>
+                    {% endif %}
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Concretar hora </h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form id="formInsc" method="POST" >
+                        <input id="data" data-toggle="datepicker" name="startDate">
+                        <input type="text" class="timepicker" name="time"/>
+
+
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                            <button type="submit" class="btn btn-primary">Aceptar</button>
+                        </div>
+                    </form>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
     <script>
-        var date = new Date({{dateComp.startDate}});
-        var date2 = new Date({{dateComp.finishDate}});
+        var date = new Date({{ dateComp.startDate }});
+        var date2 = new Date({{ dateComp.finishDate }});
 
 
         console.log(date2);
 
+        $(function () {
+            $('[data-toggle="datepicker"]').datepicker({
+                autoHide: true,
+                zIndex: 2048,
+                format: 'yyyy-mm-dd',
+                startDate: date,
+                endDate: date2,
 
-        $('[data-toggle="datepicker"]').datepicker({format: 'yyyy-mm-dd', startDate: date, endDate: date2, autoHide: true});
-        $('[data-toggle="datepicker"]').datepicker('setDate', date);
+            });
+        });
+
+
+        /*$('[data-toggle="datepicker"]').datepicker({format: 'yyyy-mm-dd', startDate: date, endDate: date2, autoHide: true,zIndex: 2048});
+        $('[data-toggle="datepicker"]').datepicker('setDate', date);*/
 
 
         (function ($) {
             $(function () {
                 $('.timepicker').timepicker({
                     timeFormat: 'HH:mm',
+                    zindex: 2048,
                     interval: 90,
                     minTime: '9',
                     maxTime: '23:00',
@@ -54,10 +103,10 @@
                 x[i].id = parseInt(x[i].firstChild.text.split(":")[0]);
                 if (g.getDate() == now.getDate() && parseInt(x[i].id) < now.getHours()) {
                     x[i].style.display = "none";
-                }else{
-                if (g.getDate() == now.getDate() && parseInt(x[i].id) == now.getHours() && parseInt(x[i].firstChild.text.split(":")[0]) <= now.getMinutes()) {
-                    x[i].style.display = "none";
-                }
+                } else {
+                    if (g.getDate() == now.getDate() && parseInt(x[i].id) == now.getHours() && parseInt(x[i].firstChild.text.split(":")[0]) <= now.getMinutes()) {
+                        x[i].style.display = "none";
+                    }
                 }
             }
 
@@ -78,4 +127,6 @@
 
         });
     </script>
+
+
 {% endblock %}

@@ -15,6 +15,10 @@ class ClashModel{
 
         return await Clash.find({$or :[{user3_id: idUser},{user1_id : idUser},{user2_id: idUser},{user4_id: idUser}],competition_id : idCompetition});
     }
+    async findByUserCompetitionAndAgree(idCompetition, idUser){
+
+        return await Clash.find({$or :[{user3_id: idUser},{user1_id : idUser},{user2_id: idUser},{user4_id: idUser}],competition_id : idCompetition, agree:true});
+    }
 
     async add(body){
         let clash = new Clash(body);
@@ -27,6 +31,10 @@ class ClashModel{
 
     delete(id){
         return Clash.deleteOne({_id: id});
+    }
+
+    async edit(id,data){
+        return Clash.updateOne({_id:id},data);
     }
 }
 

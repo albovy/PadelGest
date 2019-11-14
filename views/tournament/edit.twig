@@ -1,7 +1,34 @@
+{% extends "layout.twig" %}
+{% include "header.twig" %}
 {% block body %}
-<form method=POST action="/tournament/edit/{{tournament._id}}">
-<input name="title" value={{tournament.title}}>name</input>
-<input name="description" value={{tournament.description}}>name</input>
-<button>click</button>
-</form>
+{% include "navbar.twig" %}
+
+
+<div class=" card-outline-secondary">
+                        <div class="card-header">
+                            <h3 class="mb-0">Información del torneo</h3>
+                        </div>
+                        <div class="card-body">
+                            <form method=POST action="/tournament/edit/{{tournament._id}}" role="form" autocomplete="off">
+                                <div class="form-group row">
+                                    <label class="col-lg-3 col-form-label form-control-label">Título</label>
+                                    <div class="col-lg-9">
+                                        <input class="form-control" type="text" name="title" value={{tournament.title}}>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-lg-3 col-form-label form-control-label">Descripcion</label>
+                                    <div class="col-lg-9">
+                                        <input class="form-control" type="text"  name="description" value={{tournament.description}}>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-lg-3 col-form-label form-control-label"></label>
+                                    <div class="col-lg-9">
+                                        <button type="submit" class="btn btn-primary">Editar</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
 {% endblock %}

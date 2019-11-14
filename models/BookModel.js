@@ -8,7 +8,7 @@ class BookModel {
   }
 
   findMyBooks(id) {
-    return Book.find({ user_id: id });
+    return Book.find({ user_id: id }).sort({startDate:-1});
   }
 
   findByLogin(login) {
@@ -34,6 +34,11 @@ class BookModel {
     const thresholdDate = new Date(dateNow.getFullYear(), dateNow.getMonth(), dateNow.getDate()+7, 0, 0, 0);
     console.log(thresholdDate);
     return  Book.distinct("startDate",{startDate: {$gt:dateNow, $lt:thresholdDate}} );
+  }
+
+  findAllDistinctDatesInRange(date1,date2){
+
+    return  Book.distinct("startDate",{startDate: {$gt:date1, $lt:date2}} );
   }
 
   //Funcion que devuelve el numero de reservas para una fecha concreta

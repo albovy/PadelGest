@@ -6,8 +6,9 @@ const permit = require("../middleware/permission");
 const gameController = require("../controllers/GameController");
 
 /* GET users listing. */
-router.get("/", gameController.show);
+
 router.post("/clash/:id", permit("ATHLETE"), gameController.add);
+router.get("/tournament/:id",permit("ATHLETE"), gameController.showForTournament);
 
 
 //router.get('/edit:id',user.edit);

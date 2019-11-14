@@ -19,17 +19,18 @@ class TournamentController {
         }
         let ins = await InscriptionModel.findIfImAlreadyInscripted(element._id,req.user.id);
         if(ins>0)data.inscripted = true;
+        
 
         return data;
     }));
 
-    agenda.schedule('in 5 seconds', 'run tournament',{id: "5dc40127d5a80333b8741ea3"},"");
+    agenda.schedule('in 5 seconds', 'run tournament',{id: "5dcd9e111b498ee4eaea8796"},"");
     console.log("hola");
     res.render("tournament/showAll", { tournaments: tournamentMoreInscription, user: req.user});
   }
   async add(req, res) {
     if (req.method == "GET") {
-      res.render("tournament/add");
+      res.render("tournament/add",{user:req.user});
     } else {
       try {
         if(req.body.startData >= req.body.finishDate || req.body.startData > Date.now()){
@@ -50,15 +51,14 @@ class TournamentController {
     try {
       const tournament = await TournamentModel.findById(req.params.id);
       if (req.method == "GET") {
-        res.render("tournament/edit", { tournament: tournament });
+        res.render("tournament/edit", { tournament: tournament,user:req.user });
       } else {
+        console.log(req.body);
         const newData = { $set: req.body };
-        console.log(newData);
         const newTournament = await TournamentModel.update(
           tournament._id,
           newData
         );
-        console.log(newTournament);
         return res.redirect("/tournament");
       }
     } catch (err) {

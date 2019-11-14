@@ -9,7 +9,7 @@ class CourtController {
   }
   async add(req, res) {
     if (req.method == "GET") {
-      res.render("court/add");
+      res.render("court/add",{user:req.user});
     } else {
       try {
         const court = await courtModel.add(req.body);

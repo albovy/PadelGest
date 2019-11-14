@@ -1,22 +1,22 @@
 <div class="topnav" id="myTopnav">
     <a href="/">Inicio</a>
     {% if user.role =="ATHLETE" %}
-    
-    <a href="/book/add">Reservar pista</a>
-    <a href="/promoted">Partidos Promocionados</a>
-    <a href="/tournament">Campeonatos</a>
-    <a href="/book">Mis reservas</a>
-    <a href="/promoted/showInscriptions">Mis partidos</a>
-    <a href="#">Mis campeonatos</a>
-    {% endif %}
-    {% if user.role == "ADMIN" %}
-    <a href="/court">Gestionar pistas</a>
-    <a href="/tournament">Gestionar campeonatos</a>
-    <a href="/promoted">Gestionar partidos</a>
+        <a href="/book">Mis reservas</a>
+
+        <a href="/promoted/showInscriptions">Mis partidos</a>
+        <a href="/book/add">Reservar pista</a>
+        <a href="/promoted">Partidos Promocionados</a>
+        <a href="/tournament">Campeonatos</a>
 
     {% endif %}
-  
+    {% if user.role == "ADMIN" %}
+        <a href="/court">Gestionar pistas</a>
+        <a href="/tournament">Gestionar campeonatos</a>
+        <a href="/promoted">Gestionar partidos</a>
+
+    {% endif %}
+
     <a href="javascript:void(0);" class="icon" onclick="topnavDisplay()">
-      <i class="fa fa-bars"></i>
+        <i class="fa fa-bars"></i>
     </a>
-  </div>
+</div>

@@ -1,13 +1,25 @@
 {% extends 'layout.twig' %}
+{% include "header.twig" %}
 
 {% block body %}
-<a href="/promotedInscription">Volver</a><br>
-<h3>Partidos promocionados a los que estás inscrito</h3>
-{% for promo in myPromotedInscriptions %}
-<h1>{{promo.title}}</h1><h5>{{promo.date}}</h5>
-<form method=post action="/promotedInscription/delete/{{promo._id}}">
-    <button type="submit">Eliminar</button> 
-</form>
-{% endfor %}
+    {% include "navbar.twig" %}
+    <div class="tournament-showall-container">
+                <h3>Partidos a los que estas inscrito</h3>
+        <div class="tournament-wrapper">
 
+            {% for promo in myPromotedInscriptions %}
+                <div class="tournament-container card">
+                {% if promo.granted %}
+                <small> Reserva para el partido confirmada</small>
+                {% endif %}
+                
+                    <h1>{{promo.title}}</h1>
+                    <h5>{{promo.date}}</h5>
+                    <form method="post" action="/promotedInscription/delete/{{promo._id}}">
+                        <button type="submit" class="btn btn-danger">Cancelar inscripción</button>
+                    </form>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
 {% endblock %}

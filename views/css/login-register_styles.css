@@ -82,7 +82,7 @@
 
 h1 {
   text-align: center;
-  color: #e8e8e8;
+  color: #e8e8e8!important;
   font-weight: 300;
   margin: 0 0 40px;
 }
@@ -97,7 +97,7 @@ textarea {
   background: none;
   background-image: none;
   border: 1px solid #d6d6d6dc;
-  color: #e8e8e8;
+  color: grey;
   border-radius: 0;
   transition: border-color 0.25s ease, box-shadow 0.25s ease;
 }

@@ -1,23 +1,22 @@
-
-
-$(function(){
-  $(".modal-btn").click(function(){
-
+$(function() {
+  $(".inscriptionButton").click(function() {
     let l = $(this).attr("idValue");
-    ShowModal(l);
+    console.log(l);
+    let x = document.getElementById("formInsc");
+    let s = "/inscription/tournament/" + l;
+    console.log(s);
+    x.action = s;
   });
 });
-function ShowModal(id) {
-  console.log(id);
-  
-  let modal = document.getElementById("modal-"+ id);
-  console.log(modal);
-  modal.style.display = "block";
-  window.onclick = function(event) {
-    if (event.target == modal) {
-      modal.style.display = "none";
-    }
-  };
-}
 
+$(function() {
+  $(".concretarButton").click(function() {
+    let l = $(this).attr("idValue");
+    console.log(l);
+    let x = document.getElementById("formInsc");
+    let s = "/game/clash/" + l;
+    console.log(s);
+    x.action = s;
+  });
+});
 // When the user clicks on the button, open the modal

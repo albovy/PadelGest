@@ -16,7 +16,7 @@ class PromotedGameController {
     const myPromotedInscriptions = await PromotedInscriptionModel.findMyInscriptions(
       req.user.id
     );
-    console.log(myPromotedInscriptions);
+
     let array = await Promise.all(
       myPromotedInscriptions.map(async element => {
         const promoid = element.promoted_id;
@@ -24,9 +24,11 @@ class PromotedGameController {
         return game;
       })
     );
+    let array2 = array.filter(element => element !=null);
+    console.log(array2);
 
     res.render("promoted/showInscriptions", {
-      myPromotedInscriptions: array,
+      myPromotedInscriptions: array2,
       user: req.user
     });
   }
@@ -76,7 +78,7 @@ class PromotedGameController {
   }
   async add(req, res) {
     if (req.method == "GET") {
-      res.render("promoted/add");
+      res.render("promoted/add",{user:req.user});
     } else {
       try {
         const startDate = new Date(new Date(req.body.startDate).getTime()); //data inicio ya formateada

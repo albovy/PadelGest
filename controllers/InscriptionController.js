@@ -30,8 +30,8 @@ class InscriptionController {
       if(count > 0) throw err;
 
       let gender = "MAN";
-      console.log(user2);
-      if(req.user.gender == user2.gender == "WOMAN"){
+      console.log(req.user.gender)
+      if(req.user.gender == "WOMAN" && user2.gender == "WOMAN"){
         gender = "WOMAN";
       }else{
         if(user2.gender != req.user.gender){

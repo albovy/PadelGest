@@ -8,16 +8,30 @@ const ClashModel = require("../../models/ClashModel");
 
 module.exports = function(agenda) {
   agenda.define("run tournament", async function(job, done) {
-    console.log("hola");
+
     const tournament = await TournamentModel.findById(job.attrs.data.id);
+    
     if (tournament.started) {
       done();
     } else {
+
+
+      const finishDate = new Date(
+        (tournament.startDate.getTime() +
+          tournament.finishDate.getTime()) /
+          2
+      );
+
+      let competition = {
+        tournament_id: tournament._id,
+        startDate: tournament.startDate,
+        finishDate: finishDate
+      };
+      competition = await CompetitionModel.add(competition);
       //GET ALL INSCRIPTIONS
       const inscriptions = await InscriptionModel.findInscriptionsByTournament(
         tournament._id
       );
-      console.log(inscriptions);
 
       let arrayLevels = ["1", "2", "3"];
       let arrayGender = ["MAN", "WOMAN", "MIXED"];
@@ -28,6 +42,7 @@ module.exports = function(agenda) {
               return item.category == level && item.gender == gender;
             });
             let numberPeopleGroup = m1.length;
+            console.log(gender+ " " + numberPeopleGroup);
 
             //REMOVE IF LESS THAN 8
             if (numberPeopleGroup < 8) {
@@ -124,32 +139,24 @@ module.exports = function(agenda) {
                   dataArray.push(data2);
                 }
               }
-              const addedGroup = [];
-              dataArray.forEach(item => {
+              let addedGroup = [];
+              addedGroup = await Promise.all(dataArray.map(async item=>{
+                  const group = await GroupModel.add(item);
+                  return group;
+              }));
+              /*dataArray.forEach(item => {
+                console.log("si");
                 GroupModel.add(item).then(group => {
                   addedGroup.push(group);
                 });
-              });
+              });*/
 
-              console.log(tournament.startDate);
-              console.log(tournament.finishDate);
-              const finishDate = new Date(
-                (tournament.startDate.getTime() +
-                  tournament.finishDate.getTime()) /
-                  2
-              );
-
-              let competition = {
-                tournament_id: tournament._id,
-                startDate: tournament.startDate,
-                finishDate: finishDate
-              };
-              competition = await CompetitionModel.add(competition);
               let clasification = {
                 competition_id: competition._id,
                 points: 0
               };
               let hashSubGroups = {};
+
               addedGroup.forEach(async item => {
                 if (!hashSubGroups[item.subGroup]) {
                   let arr = [];
@@ -162,12 +169,14 @@ module.exports = function(agenda) {
                 clasification.user2_id = item.user2_id;
                 clasification.subGroup = item.subGroup;
                 clasification.category = level + gender;
+
                 await ClasificationModel.add(clasification);
               });
 
+
               for (let key in hashSubGroups) {
                 const arrSubGroups = hashSubGroups[key];
-                console.log(hashSubGroups[key].length);
+
 
                 let clash = {
                   competition_id: competition._id

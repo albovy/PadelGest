@@ -73,6 +73,7 @@ class PromotedInscriptionController{
                     await PromotedGameModel.incrementNumPlayers(req.params.id,inc);
                     console.log(book);
                     console.log("Tiene pinta de que ha funcionao");
+                    await PromotedGameModel.edit(req.params.id,{$set:{granted:true}});
                     res.redirect("/book");
                 }else{
                     console.log("4 personas inscritas ya");

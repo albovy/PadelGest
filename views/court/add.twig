@@ -1,18 +1,50 @@
 {% extends 'layout.twig' %}
-
+{% include "header.twig" %}
 {% block body %}
-<form method=POST action="/court/add">
-<input name="name">name</input>
-<select name="surface">
-    <option value="GRASS">Césped artificial</option>
-    <option value="SYNTHETICS">Resina sintética</option>
-    <option value="CONCRETE">Hormigon</option>
-    <option value="CEMENT">Cemento</option>
-</select>
-<select name="type">
-    <option value="OUTSIDE">Exterior</option>
-    <option value="INSIDE">Interior</option>
-</select>
-<button>click</button>
-</form>
+{% include "navbar.twig" %}
+
+
+<div class=" card-outline-secondary">
+    <div class="card-header">
+        <h3 class="mb-0">Información de la pista</h3>
+    </div>
+    <div class="card-body">
+        <form method="POST" action="/court/add" role="form" autocomplete="off">
+            <div class="form-group row">
+                <label class="col-lg-3 col-form-label form-control-label">Nombre</label>
+                <div class="col-lg-9">
+                    <input class="form-control" type="text" name="name">
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-lg-3 col-form-label form-control-label">Superficie</label>
+                <div class="col-lg-9">
+                    <select class="form-control" name="surface">
+                        <option value="GRASS">Césped artificial</option>
+                        <option value="SYNTHETICS">Resina sintética</option>
+                        <option value="CONCRETE">Hormigon</option>
+                        <option value="CEMENT">Cemento</option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-lg-3 col-form-label form-control-label">Tipo</label>
+                <div class="col-lg-9">
+                    <select class="form-control" name="type">
+                        <option value="OUTSIDE">Exterior</option>
+                        <option value="INSIDE">Interior</option>
+                    </select>
+                </div>
+            </div>
+
+
+            <div class="form-group row">
+                <label class="col-lg-3 col-form-label form-control-label"></label>
+                <div class="col-lg-9">
+                    <button type="submit" class="btn btn-primary">Crear</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
 {% endblock %}

@@ -1,6 +1,8 @@
 {% extends 'layout.twig' %}
+{% include "header.twig" %}
 
 {% block body %}
+{% include "navbar.twig" %}
 <form method=POST action="/promoted/add">
 <input name="title">title</input>
 <input id="data" data-toggle="datepicker" name="startDate">

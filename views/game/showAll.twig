@@ -1,0 +1,26 @@
+{% extends 'layout.twig' %}
+{% include "header.twig" %}
+
+{% block body %}
+    {% include "navbar.twig" %}
+    <div class="tournament-showall-container">
+        {% if user.role == "ADMIN" %}
+            <a href="/promoted/add">
+                <div class="tournament-showall-add">
+                    <img src="/static/icons/add.svg" alt="add">
+                    <span>Crear partido</span>
+                </div>
+            </a>
+        {% endif %}
+        <div class="tournament-wrapper">
+            {% for game in games %}
+                <div class="tournament-container card">
+                    <h3>Pista:
+                        {{game.court_id}}</h3>
+                    <p>{{game.date}}</p>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+
+{% endblock %}

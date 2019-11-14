@@ -1,25 +1,42 @@
 {% extends 'layout.twig' %}
+{% include "header.twig" %}
 
 {% block body %}
-{% include "navbar.twig" %}
-{% if user.role == "ADMIN" %}
-<a href="/promoted/add">ADD</a><br>
-{% endif %}
-{% for promo in promos %}
-    <h1>{{promo.title}}</h1>
-    <h5>{{promo.date}}</h5>
-    {% if user.role == "ADMIN" %}
-        <form method=post action="/promoted/delete/{{promo._id}}">
-            <button type="submit">borrar</button>
-        </form>
-    {% else %}
-    {% if not promo.inscripted %}
-    
-    <form method=post action="/promotedInscription/add/{{promo._id}}">
-        <button type="submit">Inscribirse</button>
-    </form>
-    {% endif %}
-    {% endif %}
-{% endfor %}
+    {% include "navbar.twig" %}
+    <div class="tournament-showall-container">
+        {% if user.role == "ADMIN" %}
+            <a href="/promoted/add">
+                <div class="tournament-showall-add">
+                    <img src="/static/icons/add.svg" alt="add">
+                    <span>Crear partido</span>
+                </div>
+            </a>
+        {% endif %}
+        <div class="tournament-wrapper">
+            {% for promo in promos %}
+                <div class="tournament-container card">
+                    <h1>{{promo.title}}</h1>
+                    <p>{{promo.date}}</p>
+                    <p>
+                        {% if user.role == "ADMIN" %}
+
+                            <form method="post" action="/promoted/delete/{{promo._id}}">
+                                <button type="submit" class="btn btn-danger">borrar</button>
+                            </form>
+
+                        {% else %}
+                            {% if not promo.inscripted %}
+                                <form method="POST" action="/promotedInscription/add/{{promo._id}}">
+                                    <button type="submit"class="btn btn-primary inscriptionButton">
+                                        Inscribirse
+                                    </button>
+                                </form>
+                            {% endif %}
+                        {% endif %}
+                    </p>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
 
 {% endblock %}

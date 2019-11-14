@@ -8,7 +8,7 @@ class GameModel{
     }
 
     findByClash(clashId){
-        return Game.find({clash_id: clashId});
+        return Game.findOne({clash_id: clashId});
     }
 
     async add(body){

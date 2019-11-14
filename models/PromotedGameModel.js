@@ -14,6 +14,10 @@ class PromotedGameModel {
         return await PromotedGame.updateOne({_id: id}, data);
     }
 
+    async edit(id,data){
+        return await PromotedGame.updateOne({_id:id},data);
+    }
+
     async add(body) {
         let promo = new PromotedGame(body);
         try {
