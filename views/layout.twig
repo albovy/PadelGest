@@ -31,8 +31,6 @@
         <script src="//cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.js"></script>
 
     </head>
-    <header>
-
         {% if user %}
             <header>
                 {% include "header.twig" %}
@@ -40,8 +38,7 @@
         {% endif %}
 
         <body>
-            <div
-                class="body-container">
+            <div class="body-container">
                 <!--Use expressFlash to show errors-->
                 {% if expressFlash %}
                     <h1>{{ expressFlash }}</h1>
@@ -57,4 +54,3 @@
             </footer>
         {% endif %}
     </html>
-</html></head></html></head></html>

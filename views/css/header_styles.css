@@ -35,12 +35,15 @@
   line-height: 25px;
   border-radius: 4px;
 }
+.header a:hover{
+  text-decoration: none;
+  color: #688ab6;
+}
 
 header a.logo {
   font-size: 40px;
   font-weight: bold;
 }
-
 
 .header-right {
   display: flex;

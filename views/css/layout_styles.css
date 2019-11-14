@@ -17,7 +17,7 @@ body {
   flex: 1 0 auto;
 }
 
-footer {
+.footer{
   min-height: 10vh;
   display: flex;
   flex-shrink: 0;

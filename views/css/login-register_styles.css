@@ -80,12 +80,33 @@
   color: #e8e8e8;
 }
 
-h1 {
+.login-container h1 {
   text-align: center;
-  color: #e8e8e8!important;
+  color: #e8e8e8;
   font-weight: 300;
   margin: 0 0 40px;
 }
+
+select {
+  position: relative;
+  width: 100%;
+  padding: 3px;
+}
+
+.select-input{
+  background: #1b2730fa;
+  color: white;
+}
+
+#man-select{
+  left: 100px;
+}
+
+#woman-select{
+  left: 100px;
+}
+
+
 
 input,
 textarea {
@@ -97,7 +118,7 @@ textarea {
   background: none;
   background-image: none;
   border: 1px solid #d6d6d6dc;
-  color: grey;
+  color: #e7e7e7;
   border-radius: 0;
   transition: border-color 0.25s ease, box-shadow 0.25s ease;
 }

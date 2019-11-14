@@ -28,7 +28,7 @@
   display: none;
 }
 
-@media screen and (max-width: 900px) {
+@media screen and (max-width: 850px) {
   .topnav a:not(:first-child) {
     display: none;
   }
@@ -38,7 +38,7 @@
   }
 }
 
-@media screen and (max-width: 900px) {
+@media screen and (max-width: 850px) {
   .topnav.responsive {
     position: relative;
   }
