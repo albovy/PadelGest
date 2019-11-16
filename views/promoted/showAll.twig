@@ -2,45 +2,50 @@
 {% include "header.twig" %}
 
 {% block body %}
-    {% include "navbar.twig" %}
-    <div class="tournament-showall-container">
-        {% if user.role == "ADMIN" %}
-            <a href="/promoted/add">
-                <div class="tournament-showall-add">
-                    <img src="/static/icons/add.svg" alt="add">
-                    <span>Crear partido</span>
-                </div>
-            </a>
-        {% endif %}
-        <div class="tournament-wrapper">
-            {% for promo in promos %}
-                <div class="tournament-container card">
-                {% if promo.numPlayers == 4  %}
-                <small>Partido lleno </small>
-                {% endif %}
-                
-                    <h1>{{promo.title}}</h1>
-                    <p>{{promo.date}}</p>
-                    <p>
-                        {% if user.role == "ADMIN" %}
+{% include "navbar.twig" %}
+<div class="tournament-showall-container">
+	{% if user.role == "ADMIN" %}
+	<a href="/promoted/add">
+		<div class="tournament-showall-add">
+			<img src="/static/icons/add.svg" alt="add">
+			<span>Crear partido</span>
+		</div>
+	</a>
+	{% endif %}
+	<div class="tournament-wrapper">
+		{% for promo in promos %}
+		<div class="tournament-container card">
+			{% if promo.numPlayers == 4  %}
+			<small>Partido lleno </small>
+			{% endif %}
 
-                            <form method="post" action="/promoted/delete/{{promo._id}}">
-                                <button type="submit" class="btn btn-danger">borrar</button>
-                            </form>
+			<h1>{{promo.title}}</h1>
+			<p>{{promo.date}}</p>
+			<p>
+				{% if user.role == "ADMIN" %}
 
-                        {% else %}
-                            {% if not promo.inscripted and promo.numPlayers < 4 %}
-                                <form method="POST" action="/promotedInscription/add/{{promo._id}}">
-                                    <button type="submit"class="btn btn-primary inscriptionButton">
-                                        Inscribirse
-                                    </button>
-                                </form>
-                            {% endif %}
-                        {% endif %}
-                    </p>
-                </div>
-            {% endfor %}
-        </div>
-    </div>
+				<form method="post" action="/promoted/delete/{{promo._id}}">
+					<button type="submit">
+						<div class="tournament-showall-delete">
+							<img src="/static/icons/Delete.svg" alt="delete">
+							<span>Eliminar partido</span>
+						</div>
+					</button>
+				</form>
+
+				{% else %}
+				{% if not promo.inscripted and promo.numPlayers < 4 %}
+				<form method="POST" action="/promotedInscription/add/{{promo._id}}">
+					<button type="submit" class="btn btn-primary inscriptionButton">
+						Inscribirse
+					</button>
+				</form>
+				{% endif %}
+				{% endif %}
+			</p>
+		</div>
+		{% endfor %}
+	</div>
+</div>
 
 {% endblock %}

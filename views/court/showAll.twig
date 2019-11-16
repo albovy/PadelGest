@@ -2,33 +2,37 @@
 {% include "header.twig" %}
 
 {% block body %}
-    {% include "navbar.twig" %}
-    <div class="tournament-showall-container">
-        <a href="/court/add">
-            <div class="tournament-showall-add">
-                <img src="/static/icons/add.svg" alt="add">
-                <span>Crear pista</span>
-            </div>
-        </a>
-        <div class="tournament-wrapper">
-            {% for court in courts %}
-                <div class="tournament-container card">
-                    <h1>{{court.name}}</h1>
-                    <p>{{court.surface}}</p>
-                    <p>{{court.type}}</p>
-                    <a href="/court/edit/{{court._id}}">
-                        <div class="tournament-showall-edit">
-                            <img src="/static/icons/edit.svg" alt="edit">
-                            <span>Editar pista</span>
-                        </div>
-                    </a>
-                    <form method="POST" action="/court/delete/{{court._id}}">
-                    
-                        <button class="btn btn-danger" type="submit">Borrar</button>
-                    </form>
-                </div>
-            {% endfor %}
-        </div>
-    </div>
+{% include "navbar.twig" %}
+<div class="tournament-showall-container">
+	<a href="/court/add">
+		<div class="tournament-showall-add">
+			<img src="/static/icons/add.svg" alt="add">
+			<span>Crear pista</span>
+		</div>
+	</a>
+	<div class="tournament-wrapper">
+		{% for court in courts %}
+		<div class="tournament-container card">
+			<h1>{{court.name}}</h1>
+			<p>{{court.surface}}</p>
+			<p>{{court.type}}</p>
+			<a href="/court/edit/{{court._id}}">
+				<div class="tournament-showall-edit">
+					<img src="/static/icons/edit.svg" alt="edit">
+					<span>Editar pista</span>
+				</div>
+			</a>
+			<form method="POST" action="/court/delete/{{court._id}}">
+				<button type="submit">
+          <div class="tournament-showall-delete">
+            <img src="/static/icons/Delete.svg" alt="delete">
+            <span>Eliminar pista</span>
+          </div>
+        </button>
+			</form>
+		</div>
+		{% endfor %}
+	</div>
+</div>
 
 {% endblock %}

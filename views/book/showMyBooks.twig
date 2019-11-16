@@ -2,20 +2,25 @@
 {% include "header.twig" %}
 
 {% block body %}
-    {% include "navbar.twig" %}
-    <div class="tournament-showall-container">
-        <h3>Mis Reservas</h3>
-        <div class="tournament-wrapper">
-            {% for book in myBooks %}
-                <div class="tournament-container card">
-                    <h3>Pista:
-                        {{book.court_id}}</h3>
-                    <p>{{book.startDate}}</p>
-                    <form method="post" action="/book/delete/{{book._id}}">
-                        <button class="btn btn-danger" type="submit">Eliminar</button>
-                    </form>
-                </div>
-            {% endfor %}
-        </div>
+{% include "navbar.twig" %}
+<div class="tournament-showall-container">
+  <h3>Mis Reservas</h3>
+  <div class="tournament-wrapper">
+    {% for book in myBooks %}
+    <div class="tournament-container card">
+      <h3>Pista:
+        {{book.court_id}}</h3>
+      <p>{{book.startDate}}</p>
+      <form method="post" action="/book/delete/{{book._id}}">
+        <button type="submit">
+          <div class="tournament-showall-delete">
+            <img src="/static/icons/Delete.svg" alt="delete">
+            <span>Eliminar</span>
+          </div>
+        </button>
+      </form>
     </div>
+    {% endfor %}
+  </div>
+</div>
 {% endblock %}

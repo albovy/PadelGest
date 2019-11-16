@@ -6,101 +6,106 @@
 
 
 <div class=" card-outline-secondary">
-                        <div class="card-header">
-                            <h3 class="mb-0">Información del partido</h3>
-                        </div>
-                        <div class="card-body">
-                            <form method=POST action="/promoted/add" role="form" autocomplete="off">
-                                <div class="form-group row">
-                                    <label class="col-lg-3 col-form-label form-control-label">Título</label>
-                                    <div class="col-lg-9">
-                                        <input class="form-control" type="text" name="title">
-                                    </div>
-                                </div>
-                                <div class="form-group row">
-                                    <label class="col-lg-3 col-form-label form-control-label">Fecha Inicio</label>
-                                    <div class="col-lg-9">
-                                        <input class="form-control" id="data" data-toggle="datepicker"  name="startDate" readonly>
-                                    </div>
-                                </div>
-                                <div class="form-group row">
-                                    <label class="col-lg-3 col-form-label form-control-label">Hora</label>
-                                    <div class="col-lg-9">
-                                        <input class="form-control timepicker" type="text" name="time" readonly/>
-                                    </div>
-                                </div>
-                              
-                                <div class="form-group row">
-                                    <label class="col-lg-3 col-form-label form-control-label"></label>
-                                    <div class="col-lg-9">
-                                        <button type="submit" class="btn btn-primary">Crear</button>
-                                    </div>
-                                </div>
-                                <input type="hidden" name="numPlayers" value="0"></input>
-                            </form>
-                        </div>
-                    </div>
+  <div class="card-header">
+    <h3 class="mb-0">Información del partido</h3>
+  </div>
+  <div class="card-body">
+    <form method=POST action="/promoted/add" role="form" autocomplete="off">
+      <div class="form-group row">
+        <label class="col-lg-3 col-form-label form-control-label">Título</label>
+        <div class="col-lg-9">
+          <input class="form-control" type="text" name="title">
+        </div>
+      </div>
+      <div class="form-group row">
+        <label class="col-lg-3 col-form-label form-control-label">Fecha Inicio</label>
+        <div class="col-lg-9">
+          <input class="form-control" id="data" data-toggle="datepicker" name="startDate" readonly>
+        </div>
+      </div>
+      <div class="form-group row">
+        <label class="col-lg-3 col-form-label form-control-label">Hora</label>
+        <div class="col-lg-9">
+          <input class="form-control timepicker" type="text" name="time" readonly />
+        </div>
+      </div>
+
+      <div class="form-group row">
+        <label class="col-lg-3 col-form-label form-control-label"></label>
+        <div class="col-lg-9">
+          <button type="submit">
+            <div class="tournament-add-add">
+              <img src="/static/icons/add.svg" alt="add">
+              <span>Crear</span>
+            </div>
+          </button>
+        </div>
+      </div>
+      <input type="hidden" name="numPlayers" value="0"></input>
+    </form>
+  </div>
+</div>
 
 
 <script>
-    var date = new Date();
-    var date2 = new Date();
-    date2.setDate(date.getDate() + 7);
+  var date = new Date();
+  var date2 = new Date();
+  date2.setDate(date.getDate() + 7);
 
 
-    $('[data-toggle="datepicker"]').datepicker({format: 'yyyy-mm-dd', startDate: date, endDate: date2, autoHide: true});
-    $('[data-toggle="datepicker"]').datepicker('setDate', new Date());
+  $('[data-toggle="datepicker"]').datepicker({ format: 'yyyy-mm-dd', startDate: date, endDate: date2, autoHide: true });
+  $('[data-toggle="datepicker"]').datepicker('setDate', new Date());
 
 
-    (function ($) {
-        $(function () {
-            $('.timepicker').timepicker({
-                timeFormat: 'HH:mm',
-                interval: 90,
-                minTime: '9',
-                maxTime: '23:00',
-                startTime: '09:00',
-                dynamic: false,
-                dropdown: true,
-                scrollbar: true
-            });
-        });
-    })(jQuery);
+  (function ($) {
+    $(function () {
+      $('.timepicker').timepicker({
+        timeFormat: 'HH:mm',
+        interval: 90,
+        minTime: '9',
+        maxTime: '23:00',
+        startTime: '09:00',
+        dynamic: false,
+        dropdown: true,
+        scrollbar: true
+      });
+    });
+  })(jQuery);
 </script>
 
 <script>
 
-    $('.timepicker').click(() => {
-        console.log(Date.now());
-        let now = new Date(Date.now());
-        console.log(now.getHours());
-        let g = new Date(document.getElementById("data").value);
-        let x = document.getElementsByClassName("ui-menu-item");
-        for (let i = 0; i < x.length; i++) {
-            x[i].style.display = "block";
-            x[i].id = parseInt(x[i].firstChild.text.split(":")[0]);
-            if (g.getDate() == now.getDate() && parseInt(x[i].id) < now.getHours()) {
-                x[i].style.display = "none";
-            }else{
-            if (g.getDate() == now.getDate() && parseInt(x[i].id) == now.getHours() && parseInt(x[i].firstChild.text.split(":")[0]) <= now.getMinutes()) {
-                x[i].style.display = "none";
-            }
-            }
+  $('.timepicker').click(() => {
+    console.log(Date.now());
+    let now = new Date(Date.now());
+    console.log(now.getHours());
+    let g = new Date(document.getElementById("data").value);
+    let x = document.getElementsByClassName("ui-menu-item");
+    for (let i = 0; i < x.length; i++) {
+      x[i].style.display = "block";
+      x[i].id = parseInt(x[i].firstChild.text.split(":")[0]);
+      if (g.getDate() == now.getDate() && parseInt(x[i].id) < now.getHours()) {
+        x[i].style.display = "none";
+      } else {
+        if (g.getDate() == now.getDate() && parseInt(x[i].id) == now.getHours() && parseInt(x[i].firstChild.text.split(":")[0]) <= now.getMinutes()) {
+          x[i].style.display = "none";
         }
+      }
+    }
 
-        let arrSameDates = [];
-        let l;{% for da in arrOcuped %}l = new Date({{ da }});
-            if (g.getDate() == l.getDate()) {
-                arrSameDates.push(l);
-            }
-        {% endfor %}arrSameDates.forEach(date => {
-            console.log(date);
-            let elem = document.getElementById(date.getHours());
-            console.log(elem)
-            if (elem != null) {
-                elem.style.display = "none";
-            }
-        });
+    let arrSameDates = [];
+    let l; {% for da in arrOcuped %} l = new Date({{ da }});
+  if (g.getDate() == l.getDate()) {
+    arrSameDates.push(l);
+  }
+  {% endfor %} arrSameDates.forEach(date => {
+    console.log(date);
+    let elem = document.getElementById(date.getHours());
+    console.log(elem)
+    if (elem != null) {
+      elem.style.display = "none";
+    }
+  });
 
 
     });

@@ -2,77 +2,82 @@
 {% include "header.twig" %}
 
 {% block body %}
-    {% include "navbar.twig" %}
+{% include "navbar.twig" %}
 
 
 <div class=" card-outline-secondary">
-    <div class="card-header">
-        <h3 class="mb-0">Información de la pista</h3>
-    </div>
-    <div class="card-body">
-        <form method="POST" action="/court/edit/{{court._id}}" role="form" autocomplete="off">
-            <div class="form-group row">
-                <label class="col-lg-3 col-form-label form-control-label">Nombre</label>
-                <div class="col-lg-9">
-                    <input class="form-control" type="text" name="name" value={{court.name}}>
-                </div>
+  <div class="card-header">
+    <h3 class="mb-0">Información de la pista</h3>
+  </div>
+  <div class="card-body">
+    <form method="POST" action="/court/edit/{{court._id}}" role="form" autocomplete="off">
+      <div class="form-group row">
+        <label class="col-lg-3 col-form-label form-control-label">Nombre</label>
+        <div class="col-lg-9">
+          <input class="form-control" type="text" name="name" value={{court.name}}>
+        </div>
+      </div>
+      <div class="form-group row">
+        <label class="col-lg-3 col-form-label form-control-label">Superficie</label>
+        <div class="col-lg-9">
+          <select class="form-control" name="surface">
+            {% if court.surface=="GRASS" %}
+            <option value="GRASS" selected>Césped artificial</option>
+            {% else %}
+            <option value="GRASS">Césped artificial</option>
+            {% endif %}
+
+            {% if court.surface=="SYNTHETICS" %}
+            <option value="SYNTHETICS" selected>Resina sintética</option>
+            {% else %}
+            <option value="SYNTHETICS">Resina sintética</option>
+            {% endif %}
+
+            {% if court.surface=="CONCRETE" %}
+            <option value="CONCRETE" selected>Hormigon</option>
+            {% else %}
+            <option value="CONCRETE">Hormigon</option>
+            {% endif %}
+
+            {% if court.surface=="CEMENT" %}
+            <option value="CEMENT" selected>Cemento</option>
+            {% else %}
+            <option value="CEMENT">Cemento</option>
+            {% endif %}
+          </select>
+        </div>
+      </div>
+      <div class="form-group row">
+        <label class="col-lg-3 col-form-label form-control-label">Tipo</label>
+        <div class="col-lg-9">
+          <select class="form-control" name="type">
+            {% if court.type=="OUTSIDE" %}
+            <option value="OUTSIDE" selected>Exterior</option>
+            {% else %}
+            <option value="OUTSIDE">Exterior</option>
+            {% endif %}
+
+            {% if court.type=="INSIDE" %}
+            <option value="INSIDE" selected>Interior</option>
+            {% else %}
+            <option value="INSIDE">Interior</option>
+            {% endif %}
+          </select>
+        </div>
+      </div>
+
+
+      <div class="form-group row">
+        <label class="col-lg-3 col-form-label form-control-label"></label>
+        <div class="col-lg-9">
+          <button type="submit">
+            <div class="tournament-showall-edit">
+              <img src="/static/icons/edit.svg" alt="edit">
+              <span>Editar pista</span>
             </div>
-            <div class="form-group row">
-                <label class="col-lg-3 col-form-label form-control-label">Superficie</label>
-                <div class="col-lg-9">
-                    <select class="form-control" name="surface">
-                        {% if court.surface=="GRASS" %}
-                            <option value="GRASS" selected>Césped artificial</option>
-                        {% else %}
-                            <option value="GRASS">Césped artificial</option>
-                        {% endif %}
-
-                        {% if court.surface=="SYNTHETICS" %}
-                            <option value="SYNTHETICS" selected>Resina sintética</option>
-                        {% else %}
-                            <option value="SYNTHETICS">Resina sintética</option>
-                        {% endif %}
-
-                        {% if court.surface=="CONCRETE" %}
-                            <option value="CONCRETE" selected>Hormigon</option>
-                        {% else %}
-                            <option value="CONCRETE">Hormigon</option>
-                        {% endif %}
-
-                        {% if court.surface=="CEMENT" %}
-                            <option value="CEMENT" selected>Cemento</option>
-                        {% else %}
-                            <option value="CEMENT">Cemento</option>
-                        {% endif %}
-                    </select>
-                </div>
-            </div>
-            <div class="form-group row">
-                <label class="col-lg-3 col-form-label form-control-label">Tipo</label>
-                <div class="col-lg-9">
-                    <select class="form-control" name="type">
-                        {% if court.type=="OUTSIDE" %}
-                            <option value="OUTSIDE" selected>Exterior</option>
-                        {% else %}
-                            <option value="OUTSIDE">Exterior</option>
-                        {% endif %}
-
-                        {% if court.type=="INSIDE" %}
-                            <option value="INSIDE" selected>Interior</option>
-                        {% else %}
-                            <option value="INSIDE">Interior</option>
-                        {% endif %}
-                    </select>
-                </div>
-            </div>
-
-
-            <div class="form-group row">
-                <label class="col-lg-3 col-form-label form-control-label"></label>
-                <div class="col-lg-9">
-                    <button type="submit" class="btn btn-primary">Editar</button>
-                </div>
-            </div>
-        </form>
-    </div>
+          </button>
+        </div>
+      </div>
+    </form>
+  </div>
 </div>{% endblock %}

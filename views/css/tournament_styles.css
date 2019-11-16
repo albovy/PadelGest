@@ -52,6 +52,16 @@
   text-decoration: none;
   color: red;
 }
+
+button{
+  background: none;
+	color: inherit;
+	border: none;
+	padding: 0;
+	font: inherit;
+	cursor: pointer;
+	outline: inherit;
+}
 .tournament-showall-container a {
   text-decoration: none;
 }
@@ -131,6 +141,85 @@
   margin-right: 10px;
   width: 35px;
 }
+
+
+.tournament-showall-delete {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 5px;
+  color: white;
+  padding: 10px;
+  background: #dd0000;
+  margin-bottom: 10px;
+  margin-top: 20px;
+
+  -moz-box-shadow: 1px 1px 1px 1px #00000085;
+  -webkit-box-shadow:1px 1px 1px 1px #00000085;
+  box-shadow: 1px 1px 1px 1px #00000085;
+  transition: all 0.1s ease-in-out;
+  -webkit-transition: all 0.1s ease-in-out;
+  position: relative;
+}
+
+.tournament-showall-delete:hover {
+  background: #aa0000;
+  cursor: pointer;
+  color: white;
+}
+
+.tournament-showall-delete:active {
+  top: 4px;
+   -moz-box-shadow: 1px 1px 1px 1px #00000085;
+  -webkit-box-shadow:1px 1px 1px 1px #00000085;
+  box-shadow: 1px 1px 1px 1px #00000085;
+}
+
+.tournament-showall-delete img {
+  height: 35px;
+  margin-right: 10px;
+  width: 35px;
+}
+
+
+.tournament-add-add {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 5px;
+  color: black;
+  padding: 10px;
+  background: #cfcece;
+  margin-bottom: 10px;
+  margin-top: 20px;
+
+  -moz-box-shadow: 1px 1px 1px 1px #00000085;
+  -webkit-box-shadow:1px 1px 1px 1px #00000085;
+  box-shadow: 1px 1px 1px 1px #00000085;
+  transition: all 0.1s ease-in-out;
+  -webkit-transition: all 0.1s ease-in-out;
+  position: relative;
+}
+
+.tournament-add-add:hover {
+  background: #919191;
+  cursor: pointer;
+  color: white;
+}
+
+.tournament-add-add:active {
+  top: 4px;
+   -moz-box-shadow: 1px 1px 1px 1px #00000085;
+  -webkit-box-shadow:1px 1px 1px 1px #00000085;
+  box-shadow: 1px 1px 1px 1px #00000085;
+}
+
+.tournament-add-add img {
+  height: 35px;
+  margin-right: 10px;
+  width: 35px;
+}
+
 
 .tournament-showall-my-clashes {
   display: flex;
