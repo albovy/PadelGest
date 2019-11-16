@@ -15,6 +15,10 @@
         <div class="tournament-wrapper">
             {% for promo in promos %}
                 <div class="tournament-container card">
+                {% if promo.numPlayers == 4  %}
+                <small>Partido lleno </small>
+                {% endif %}
+                
                     <h1>{{promo.title}}</h1>
                     <p>{{promo.date}}</p>
                     <p>
@@ -25,7 +29,7 @@
                             </form>
 
                         {% else %}
-                            {% if not promo.inscripted %}
+                            {% if not promo.inscripted and promo.numPlayers < 4 %}
                                 <form method="POST" action="/promotedInscription/add/{{promo._id}}">
                                     <button type="submit"class="btn btn-primary inscriptionButton">
                                         Inscribirse

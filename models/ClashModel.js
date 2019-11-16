@@ -7,6 +7,10 @@ class ClashModel{
         return Clash.findById({_id: id});
     }
 
+    async findByCompetition(id){
+        return Clash.find({competition_id:id});
+    }
+
     findByUser(idUser){
         return Clash.find({ $or: [{ user1_id: idUser }, { user2_id: idUser }, {user3_id: idUser}, {user4_id: idUser}] });
     }

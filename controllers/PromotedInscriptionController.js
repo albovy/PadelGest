@@ -66,7 +66,7 @@ class PromotedInscriptionController{
                     const courtAv = courtsAvailable[0]._id;
                     const endDate = new Date(new Date(new Date(startDate).getTime()+5400000));
                     
-                    let data2 = {user_id: req.user.id, court_id: courtAv, startDate: startDate, endDate: endDate};
+                    let data2 = {user_id: "5dcd9c80fc13ae03c3000100", court_id: courtAv, startDate: startDate, endDate: endDate};
                     const book = await BookModel.add(data2);
                     await PromotedInscriptionModel.add(data);
                     const inc = {$set: {numPlayers: promo.numPlayers+=1}};
@@ -74,7 +74,7 @@ class PromotedInscriptionController{
                     console.log(book);
                     console.log("Tiene pinta de que ha funcionao");
                     await PromotedGameModel.edit(req.params.id,{$set:{granted:true}});
-                    res.redirect("/book");
+                    res.redirect("/promoted/showInscriptions");
                 }else{
                     console.log("4 personas inscritas ya");
                     req.flash("error","Ya hay 4 personas inscritas.");

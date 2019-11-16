@@ -31,6 +31,19 @@
                                     <span>Editar torneo</span>
                                 </div>
                             </a>
+                            {% if not tournament.started %}
+                                <form method="POST" action="/tournament/delete/{{tournament._id}}">
+                                    <button class="btn btn-danger" type="submit">Borrar</button>
+                                </form>
+                            {% else %}
+
+                                <a href="/game/tournament/{{tournament._id}}">
+                                <div class="tournament-showall-edit">
+                                    <img src="/static/icons/edit.svg" alt="edit">
+                                    <span>Introducir resultados</span>
+                                </div>
+                            </a>
+                            {% endif %}
                         {% endif %}
                         {% if user.role == 'ATHLETE' %}
                             {% if tournament.started %}

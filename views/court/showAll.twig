@@ -16,14 +16,15 @@
                     <h1>{{court.name}}</h1>
                     <p>{{court.surface}}</p>
                     <p>{{court.type}}</p>
-                    <a href="/tournament/edit/{{tournament._id}}">
+                    <a href="/court/edit/{{court._id}}">
                         <div class="tournament-showall-edit">
                             <img src="/static/icons/edit.svg" alt="edit">
                             <span>Editar pista</span>
                         </div>
                     </a>
                     <form method="POST" action="/court/delete/{{court._id}}">
-                        <button type="submit">Borrar</button>
+                    
+                        <button class="btn btn-danger" type="submit">Borrar</button>
                     </form>
                 </div>
             {% endfor %}

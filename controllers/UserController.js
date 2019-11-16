@@ -32,9 +32,10 @@ class UserController {
         console.log(user);
         if (req.method == "GET") {
           console.log("hola");
+          console.log(user);
           res.render("user/edit", { user: user });
         } else {
-          const newData = { $set: { name: req.body.name } };
+          const newData = { $set: { name: req.body.name,gender:req.body.gender} };
           console.log(newData);
           try {
             const newUser = await UserModel.update(user._id, newData);

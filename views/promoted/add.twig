@@ -3,13 +3,43 @@
 
 {% block body %}
 {% include "navbar.twig" %}
-<form method=POST action="/promoted/add">
-<input name="title">title</input>
-<input id="data" data-toggle="datepicker" name="startDate">
-<input type="text" class="timepicker" name="time"/>
-<input type="hidden" name="numPlayers" value="0"></input>
-<button>click</button>
-</form>
+
+
+<div class=" card-outline-secondary">
+                        <div class="card-header">
+                            <h3 class="mb-0">Información del partido</h3>
+                        </div>
+                        <div class="card-body">
+                            <form method=POST action="/promoted/add" role="form" autocomplete="off">
+                                <div class="form-group row">
+                                    <label class="col-lg-3 col-form-label form-control-label">Título</label>
+                                    <div class="col-lg-9">
+                                        <input class="form-control" type="text" name="title">
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-lg-3 col-form-label form-control-label">Fecha Inicio</label>
+                                    <div class="col-lg-9">
+                                        <input class="form-control" id="data" data-toggle="datepicker"  name="startDate" readonly>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-lg-3 col-form-label form-control-label">Hora</label>
+                                    <div class="col-lg-9">
+                                        <input class="form-control timepicker" type="text" name="time" readonly/>
+                                    </div>
+                                </div>
+                              
+                                <div class="form-group row">
+                                    <label class="col-lg-3 col-form-label form-control-label"></label>
+                                    <div class="col-lg-9">
+                                        <button type="submit" class="btn btn-primary">Crear</button>
+                                    </div>
+                                </div>
+                                <input type="hidden" name="numPlayers" value="0"></input>
+                            </form>
+                        </div>
+                    </div>
 
 
 <script>

@@ -4,23 +4,111 @@
 {% block body %}
     {% include "navbar.twig" %}
     <div class="tournament-showall-container">
-        {% if user.role == "ADMIN" %}
-            <a href="/promoted/add">
-                <div class="tournament-showall-add">
-                    <img src="/static/icons/add.svg" alt="add">
-                    <span>Crear partido</span>
-                </div>
-            </a>
-        {% endif %}
+
         <div class="tournament-wrapper">
             {% for game in games %}
                 <div class="tournament-container card">
                     <h3>Pista:
                         {{game.court_id}}</h3>
                     <p>{{game.date}}</p>
+                    <p>
+                        Equipo 1</p>
+                    <p>
+                        {{game.user1}}
+                        y
+                        {{game.user2}}</p>
+                    <p>
+                        Equipo 2</p>
+                    <p>
+                        {{game.user3}}
+                        y
+                        {{game.user4}}</p>
+
+                    {% if user.role == "ADMIN" %}
+                        <button type="button" idvalue={{game._id}} class="btn btn-primary gameButton" data-toggle="modal" data-target="#exampleModal">
+                            Añadir resultados
+                        </button>
+                    {% endif %}
                 </div>
             {% endfor %}
         </div>
     </div>
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Resultados</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form id="formInsc" method="POST">
+                        <div class="row">
+                            <div class="col">
+                                <div class=" card-outline-secondary">
+                                    <div class="card-header">
+                                        <h3 class="mb-0">Equipo 1</h3>
+                                    </div>
+                                    <div class="card-body">
+                                        <div class="form-group row">
+                                            <label class="col-lg-3 col-form-label form-control-label">Set1</label>
+                                            <div class="col-lg-9">
+                                                <input id="set1_team1" type="number" class="form-control results" name="set1_team1">
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label class="col-lg-3 col-form-label form-control-label">Set2</label>
+                                            <div class="col-lg-9">
+                                                <input id="set2_team1" type="number" class="form-control results" name="set2_team1"/>
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label class="col-lg-3 col-form-label form-control-label">Set3</label>
+                                            <div class="col-lg-9">
+                                                <input id="set3_team1" type="number" class="form-control results" name="set3_team1"/>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class=" card-outline-secondary">
+                                    <div class="card-header">
+                                        <h3 class="mb-0">Equipo 2</h3>
+                                    </div>
+                                    <div class="card-body">
+                                        <div class="form-group row">
+                                            <label class="col-lg-3 col-form-label form-control-label">Set1</label>
+                                            <div class="col-lg-9">
+                                                <input id="set1_team2" type="number" class="form-control results" name="set1_team2">
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label class="col-lg-3 col-form-label form-control-label">Set2</label>
+                                            <div class="col-lg-9">
+                                                <input id="set2_team2" type="number" class="form-control results" name="set2_team2"/>
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label class="col-lg-3 col-form-label form-control-label">Set3</label>
+                                            <div class="col-lg-9">
+                                                <input id="set3_team2" type="number" class="form-control results" name="set3_team2"/>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                                <button type="submit" class="btn btn-primary">Aceptar</button>
+                            </div>
+                        </div>
+                    </form>
 
+                </div>
+
+            </div>
+        </div>
+    </div>
 {% endblock %}
