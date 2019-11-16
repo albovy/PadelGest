@@ -35,7 +35,7 @@ class BookController {
       //Lanza vista con las fechas disponibles
       try {
         const atLeastOneBookDates = await BookModel.findAllDistinctDatesInRange();
-        console.log(atLeastOneBookDates);
+        console.log("holaa");
         const numCourts = await CourtModel.countCourts();
 
         let arrayDatesFullBooked = await Promise.all(

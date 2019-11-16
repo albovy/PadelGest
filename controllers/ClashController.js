@@ -29,7 +29,7 @@ class ClashController {
         finishDate: comp.finishDate.getTime()
       };
       console.log(dateComp);
-      const atLeastOneBookDates = await BookModel.findAllDistinctDatesInRange(comp.startDate,comp.finishDate);
+      const atLeastOneBookDates = await BookModel.findAllDistinctDatesInRange2(comp.startDate,comp.finishDate);
       console.log(atLeastOneBookDates);
       const numCourts = await CourtModel.countCourts();
 

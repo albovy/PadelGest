@@ -8,7 +8,7 @@ class BookModel {
   }
 
   findMyBooks(id) {
-    return Book.find({ user_id: id }).sort({startDate:-1});
+    return Book.find({ user_id: id }).sort({ startDate: -1 });
   }
 
   findByLogin(login) {
@@ -23,34 +23,43 @@ class BookModel {
     });
   }
 
-//Devuelve todas las fechas de reserva hasta una fecha limite (sin repetidos)
-   findAllDistinctDatesInRange(){
+  //Devuelve todas las fechas de reserva hasta una fecha limite (sin repetidos)
+  findAllDistinctDatesInRange() {
     console.log("findAllDistinct");
     const dateNow = new Date();
 
-    dateNow.setHours(1,0,0,0);
+    dateNow.setHours(1, 0, 0, 0);
     console.log(dateNow);
 
-    const thresholdDate = new Date(dateNow.getFullYear(), dateNow.getMonth(), dateNow.getDate()+7, 0, 0, 0);
+    const thresholdDate = new Date(
+      dateNow.getFullYear(),
+      dateNow.getMonth(),
+      dateNow.getDate() + 7,
+      0,
+      0,
+      0
+    );
     console.log(thresholdDate);
-    return  Book.distinct("startDate",{startDate: {$gt:dateNow, $lt:thresholdDate}} );
+    return Book.distinct("startDate", {
+      startDate: { $gt: dateNow, $lt: thresholdDate }
+    });
   }
 
-  findAllDistinctDatesInRange(date1,date2){
-
-    return  Book.distinct("startDate",{startDate: {$gt:date1, $lt:date2}} );
+  findAllDistinctDatesInRange2(date1, date2) {
+    return Book.distinct("startDate", {
+      startDate: { $gt: date1, $lt: date2 }
+    });
   }
 
   //Funcion que devuelve el numero de reservas para una fecha concreta
-   countBooksOnDate(date){
-    return  Book.countDocuments({startDate: date});
+  countBooksOnDate(date) {
+    return Book.countDocuments({ startDate: date });
   }
 
   async add(body) {
     let book = new Book(body);
     try {
       return await book.save();
-      
     } catch (err) {
       return await new Promise((resolve, reject) => reject(err));
     }
@@ -61,7 +70,6 @@ class BookModel {
       _id: id
     });
   }
-
 }
 
 module.exports = new BookModel();
