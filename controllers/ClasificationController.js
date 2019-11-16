@@ -29,7 +29,7 @@ class ClasificationController {
     let array = [];
     array = await Promise.all(clasifications.map(async element=>{
       const user1 = await UserModel.findById(element.user1_id)
-      const user2 = await UserModel.findById(element.user1_id);
+      const user2 = await UserModel.findById(element.user2_id);
         let data={
           _id: element._id,
           competition_id: element.competition_id,

@@ -3,11 +3,29 @@
 
 
 {% block body %}
-{% include "navbar.twig" %}
-{% for clasification in clasifications %}
-<h1>{{clasification._id}}</h1>
-<h1>{{clasification.user1_id}}</h1>
+	{% include "navbar.twig" %}
 
-{% endfor %}
+
+	<table class="table">
+		<thead class="black white-text">
+			<tr>
+				<th scope="col">#</th>
+				<th scope="col">Usuario</th>
+				<th scope="col">Usuario</th>
+				<th scope="col">Puntos</th>
+			</tr>
+		</thead>
+		<tbody>
+			{% for clasification in clasifications %}
+				<tr>
+					<th scope="row">{{loop.index}}</th>
+					<td>{{clasification.user1_id}}</td>
+					<td>{{clasification.user2_id}}</td>
+					<td>{{clasification.points}}</td>
+				</tr>
+			{% endfor %}
+		</tbody>
+	</table>
+
 
 {% endblock %}
