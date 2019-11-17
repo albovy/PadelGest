@@ -6,6 +6,7 @@
   z-index: 1; /* Sit on top */
   left: 0;
   top: 0;
+  color: black;
   width: 100%; /* Full width */
   height: 100%; /* Full height */
   overflow: auto; /* Enable scroll if needed */
@@ -27,7 +28,7 @@
 
 /* The Close Button */
 .close {
-  color: #aaa;
+  color: rgb(133, 133, 133);
   float: right;
   font-size: 28px;
   font-weight: bold;

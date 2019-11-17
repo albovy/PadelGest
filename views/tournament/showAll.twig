@@ -74,9 +74,12 @@
       {% endif %}
       {% else %}
       {% if not tournament.inscripted %}
-      <button type="button" idvalue={{tournament._id}} class="btn btn-primary inscriptionButton" data-toggle="modal"
-        data-target="#exampleModal">
-        Inscribirse
+      <button type="button" idvalue={{tournament._id}}  data-toggle="modal"
+      data-target="#exampleModal">
+        <div class="tournament-showall-add">
+          <img src="/static/icons/add.svg" alt="add">
+          <span>Inscribirse</span>
+        </div>
       </button>
       {% else %}
       <small>

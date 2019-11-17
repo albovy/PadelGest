@@ -36,8 +36,11 @@
 				{% else %}
 				{% if not promo.inscripted and promo.numPlayers < 4 %}
 				<form method="POST" action="/promotedInscription/add/{{promo._id}}">
-					<button type="submit" class="btn btn-primary inscriptionButton">
-						Inscribirse
+					<button type="submit">
+						<div class="tournament-showall-add">
+							<img src="/static/icons/add.svg" alt="add">
+							<span>Inscribirse</span>
+						</div>
 					</button>
 				</form>
 				{% endif %}
