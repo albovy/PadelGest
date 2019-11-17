@@ -75,7 +75,23 @@ No es necesario volver a ejecutar el proyecto cada vez que se realiza un cambio 
 
 Abrimos un navegador con `localhost:3000`
 
-Para ver las funciones de administrador se puede utilizar el usuario **admin** con la contraseña **admin**
+##### Usuarios de prueba
+
+Para ver las funciones de administrador:
+
+​	usuario: **admin**  
+
+​	contraseña: **admin**
+
+Para acceder como un deportista:
+
+​	usuario: **adenore0**
+
+​	contraseña: **iz4iCG**
+
+
+
+
 
 
 
