@@ -44,7 +44,7 @@ Es importante hacerlo después de cada cambio de otra persona para que descargue
 
 Linux :  commando `mongorestore -d padeldb `carpeta donde se situa el proyecto `/padeldb`
 
-Windows : Copiamos la carpeta padeldb del proyecto en donde tenemos instalado mongo (mongodb/bin) una vez en bin pulsamos el ejecutable `mongorestore`
+Windows : Abrimos un cmd donde en la carpeta bin de mongod y ponemos el comando comando `mongorestore -d padeldb `carpeta donde se situa el proyecto `/padeldb`
 
 
 
