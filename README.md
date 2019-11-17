@@ -63,7 +63,7 @@ Después habría que ejecutar el siguiente comando :
 
 No es necesario volver a ejecutar el proyecto cada vez que se realiza un cambio porque ya se hace automáticamente utilizando Nodemon.
 
-
+Abrimos un navegador con `localhost:3000`
 
 
 
