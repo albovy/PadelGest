@@ -42,9 +42,19 @@ Es importante hacerlo después de cada cambio de otra persona para que descargue
 
 ### Importar base de datos
 
-Linux :  commando `mongorestore -d padeldb `carpeta donde se situa el proyecto `/padeldb`
+Linux :  
 
-Windows : Abrimos un cmd donde en la carpeta bin de mongod y ponemos el comando comando `mongorestore -d padeldb `carpeta donde se situa el proyecto `/padeldb`
+`cd PadelGest`
+
+`mongorestore -d padeldb padeldb`
+
+con eso dos comandos ya estaría importados los datos en la base de datos.
+
+Windows : 
+
+`C:\Program Files\MongoDB\Server\4.0\bin` o dónde sea que esté instalado mongo.
+
+`mongorestore -d padeldb padeldb`
 
 
 
@@ -64,6 +74,12 @@ Después habría que ejecutar el siguiente comando :
 No es necesario volver a ejecutar el proyecto cada vez que se realiza un cambio porque ya se hace automáticamente utilizando Nodemon.
 
 Abrimos un navegador con `localhost:3000`
+
+Para ver las funciones de administrador se puede utilizar el usuario **admin** con la contraseña **admin**
+
+
+
+
 
 
 
