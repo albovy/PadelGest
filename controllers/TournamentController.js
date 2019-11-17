@@ -9,13 +9,18 @@ class TournamentController {
     const tournaments = await TournamentModel.findAll();
  
     let tournamentMoreInscription = await Promise.all(tournaments.map(async element=>{
+      let options ={
+        weekday:"long",year:"numeric",month:"short",day:"numeric",hour:"2-digit",minute:"2-digit"
+      };
+      element.startDate.setHours(element.startDate.getHours()-1);
+      element.finishDate.setHours(element.finishDate.getHours()-1);
         let data ={
           started : element.started,
           _id : element._id,
           title: element.title,
           description: element.description,
-          startDate : element.startDate,
-          finishDate : element.finishDate
+          startDate : element.startDate.toLocaleTimeString("es-ES",options),
+          finishDate : element.finishDate.toLocaleDateString("es-ES",options)
         }
         let ins = await InscriptionModel.findIfImAlreadyInscripted(element._id,req.user.id);
         if(ins>0)data.inscripted = true;

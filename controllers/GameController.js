@@ -27,6 +27,10 @@ class GameController {
             const user3 = await UserModel.findById(element.user3_id);
             const user4 = await UserModel.findById(element.user4_id);
 
+            let options ={
+              weekday:"long",year:"numeric",month:"short",day:"numeric",hour:"2-digit",minute:"2-digit"
+            };
+            game.date.setHours(game.date.getHours()-1);
             let data = {
               set1_team1: game.set1_team1,
               set1_team2: game.set1_team1,
@@ -43,7 +47,7 @@ class GameController {
               user2: user2.login,
               user3: user3.login,
               user4: user4.login,
-              date: game.date
+              date: game.date.toLocaleDateString("es-ES",options)
             };
 
             return data;
@@ -66,7 +70,10 @@ class GameController {
           const user2 = await UserModel.findById(element.user2_id);
           const user3 = await UserModel.findById(element.user3_id);
           const user4 = await UserModel.findById(element.user4_id);
-
+          let options ={
+            weekday:"long",year:"numeric",month:"short",day:"numeric",hour:"2-digit",minute:"2-digit"
+          };
+          game.date.setHours(game.date.getHours()-1);
           let data = {
             set1_team1: game.set1_team1,
             set1_team2: game.set1_team1,
@@ -83,7 +90,7 @@ class GameController {
             user2: user2.login,
             user3: user3.login,
             user4: user4.login,
-            date: game.date
+            date: game.date.toLocaleDateString("es-ES",options)
           };
 
           return data;

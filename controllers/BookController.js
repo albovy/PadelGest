@@ -16,12 +16,15 @@ class BookController {
           console.log(element);
           const pista = await CourtModel.findById(element.court_id);
           console.log(pista);
+          let options ={
+            weekday:"long",year:"numeric",month:"short",day:"numeric",hour:"2-digit",minute:"2-digit"
+          };
+          element.startDate.setHours(element.startDate.getHours()-1);
           let data = {
             _id: element._id,
             user_id: element.user_id,
             court_id: pista.name,
-            startDate: element.startDate,
-            endDate: element.endDate
+            startDate: element.startDate.toLocaleDateString("es-ES",options)
           };
           return data;
         }
