@@ -24,7 +24,7 @@ class TournamentController {
         return data;
     }));
 
-    agenda.schedule('in 5 seconds', 'run tournament',{id: "5dcd9e111b498ee4eaea8796"},"");
+    agenda.schedule('in 5 seconds', 'run tournament',{id: "5dd131ccfba3cf2e66e10e1e"},"");
     console.log("hola");
     res.render("tournament/showAll", { tournaments: tournamentMoreInscription, user: req.user});
   }

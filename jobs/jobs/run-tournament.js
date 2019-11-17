@@ -8,6 +8,7 @@ const ClashModel = require("../../models/ClashModel");
 
 module.exports = function(agenda) {
   agenda.define("run tournament", async function(job, done) {
+    console.log("holaaaaa");
 
     const tournament = await TournamentModel.findById(job.attrs.data.id);
     

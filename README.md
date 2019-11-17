@@ -26,7 +26,11 @@ Descarga de MongoDB a partir del siguiente enlace:
 
 <https://docs.mongodb.com/manual/administration/install-community/>
 
++ #### Ejecución MongoDB
 
+Linux: abrir una terminal y escribir el comando mongod
+
+Windows: abrir la carpeta donde se instaló mongo y pulsar en mongod en la carpeta bin
 
 + #### Dependencias
 
