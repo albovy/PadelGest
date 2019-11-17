@@ -24,7 +24,7 @@ class TournamentController {
         return data;
     }));
 
-    agenda.schedule('in 5 seconds', 'run tournament',{id: "5dd131ccfba3cf2e66e10e1e"},"");
+    //agenda.schedule('in 5 seconds', 'run tournament',{id: "5dd131ccfba3cf2e66e10e1e"},"");
     console.log("hola");
     res.render("tournament/showAll", { tournaments: tournamentMoreInscription, user: req.user});
   }
@@ -33,12 +33,12 @@ class TournamentController {
       res.render("tournament/add",{user:req.user});
     } else {
       try {
-        if(req.body.startData >= req.body.finishDate || req.body.startData > Date.now()){
+        if(req.body.startDate >= req.body.finishDate || req.body.startDate < Date.now()){
           throw err;
         }
         const tournament = await TournamentModel.add(req.body);
         console.log(tournament);
-        //agenda.schedule('in 10 minute', 'archive ride',{id: tournament._id},"");
+        agenda.schedule(req.body.startDate, 'archive ride',{id: tournament._id},"");
         return res.redirect("/tournament");
       } catch (err) {
         req.flash("error", "Error al insertar el torneo");

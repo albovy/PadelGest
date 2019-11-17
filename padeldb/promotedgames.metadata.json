@@ -1,0 +1,1 @@
+{"options":{},"indexes":[{"v":{"$numberInt":"2"},"key":{"_id":{"$numberInt":"1"}},"name":"_id_","ns":"padeldb.promotedgames"}],"uuid":"3623805b3dd8405892f6689516180ab2"}

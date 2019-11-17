@@ -15,7 +15,7 @@ class PromotedInscriptionModel {
 
   }
   findInscriptionsByGame(id){
-    return PromotedInscription.findById({promoted_id:id});
+    return PromotedInscription.find({promoted_id:id});
   }
 
   async add(body) {

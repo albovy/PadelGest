@@ -1,0 +1,1 @@
+{"options":{},"indexes":[{"v":{"$numberInt":"2"},"key":{"_id":{"$numberInt":"1"}},"name":"_id_","ns":"padeldb.promotedinscriptions"}],"uuid":"67b6c1aa453b4658adf6f0c26b79c0a5"}

@@ -1,0 +1,1 @@
+{"options":{},"indexes":[{"v":{"$numberInt":"2"},"key":{"_id":{"$numberInt":"1"}},"name":"_id_","ns":"padeldb.clashes"}],"uuid":"8fb516e6b9ca4f34ad91076bfadaf03d"}

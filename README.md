@@ -26,11 +26,7 @@ Descarga de MongoDB a partir del siguiente enlace:
 
 <https://docs.mongodb.com/manual/administration/install-community/>
 
-+ #### Ejecución MongoDB
 
-Linux: abrir una terminal y escribir el comando mongod
-
-Windows: abrir la carpeta donde se instaló mongo y pulsar en mongod en la carpeta bin
 
 + #### Dependencias
 
@@ -44,9 +40,20 @@ Es importante hacerlo después de cada cambio de otra persona para que descargue
 
 
 
+### Importar base de datos
+
+Linux :  commando `mongorestore -d padeldb `carpeta donde se situa el proyecto `/padeldb`
+
+Windows : Copiamos la carpeta padeldb del proyecto en donde tenemos instalado mongo (mongodb/bin) una vez en bin pulsamos el ejecutable `mongorestore`
+
+
+
 ### Ejecución
 
-Hay que lanzar el daemon de mongoDB. Este se encuentra en mongoDB/Server/4.2/bin/mongod.
+
+Linux: abrir una terminal y escribir el comando mongod.
+
+Windows: Hay que lanzar el daemon de mongoDB. Este se encuentra en mongoDB/Server/4.2/bin/mongod.
 
 Después habría que ejecutar el siguiente comando :
 
@@ -55,6 +62,7 @@ Después habría que ejecutar el siguiente comando :
 `npm start`
 
 No es necesario volver a ejecutar el proyecto cada vez que se realiza un cambio porque ya se hace automáticamente utilizando Nodemon.
+
 
 
 

@@ -1,0 +1,1 @@
+{"options":{},"indexes":[{"v":{"$numberInt":"2"},"key":{"_id":{"$numberInt":"1"}},"name":"_id_","ns":"padeldb.users"},{"v":{"$numberInt":"2"},"unique":true,"key":{"login":{"$numberInt":"1"}},"name":"login_1","ns":"padeldb.users","background":true}],"uuid":"182dc820dc70400fb494b9c4020388b6"}
