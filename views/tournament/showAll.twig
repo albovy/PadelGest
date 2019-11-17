@@ -74,7 +74,7 @@
       {% endif %}
       {% else %}
       {% if not tournament.inscripted %}
-      <button type="button" idvalue={{tournament._id}}  data-toggle="modal"
+      <button type="button" class="inscriptionButton" idValue={{tournament._id}}  data-toggle="modal"
       data-target="#exampleModal">
         <div class="tournament-showall-add">
           <img src="/static/icons/add.svg" alt="add">
@@ -85,6 +85,14 @@
       <small>
         Ya estás inscrito
       </small>
+      <form method=POST action="/inscription/delete/{{tournament._id}}">
+      <button type="submit">
+        <div class="tournament-showall-delete">
+          <img src="/static/icons/delete.svg" alt="delete">
+          <span>Cancelar inscripción</span>
+        </div>
+      </button>
+      </form>
       {% endif %}
       {% endif %}
       {% endif %}
@@ -108,7 +116,7 @@
       <div class="modal-body">
         <form id="formInsc" method="POST">
           <div class="field-wrap">
-            <input type="text" name="user2_login" placeholder="Login pareja" required />
+            <input type="text" class="form-control" name="user2_login" placeholder="Login pareja" required />
           </div>
           <div class="field-wrap">
             <select name="category">

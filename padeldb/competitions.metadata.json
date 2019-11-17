@@ -1,1 +1,1 @@
-{"options":{},"indexes":[{"v":{"$numberInt":"2"},"key":{"_id":{"$numberInt":"1"}},"name":"_id_","ns":"padeldb.competitions"}],"uuid":"0a1142124ea24a81ae0a82eb415b86d3"}
+{"options":{},"indexes":[{"v":{"$numberInt":"2"},"key":{"_id":{"$numberInt":"1"}},"name":"_id_","ns":"padeldb.competitions"}],"uuid":"aa6e716abe544c32a239902e473f1b2d"}

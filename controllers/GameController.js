@@ -19,7 +19,7 @@ class GameController {
         clashes.map(async element => {
           let game = await GameModel.findByClash(element._id);
 
-          if (game != null && game.total_team1 == 0 && game.total_team2 == 0 && game.date <= Date.now()) {
+          if (game != null && game.total_team1 == 0 && game.total_team2 == 0 && game.date <= Date.now() ) {
             const court = await CourtModel.findById(game.court_id);
 
             const user1 = await UserModel.findById(element.user1_id);
@@ -221,14 +221,22 @@ class GameController {
 
     if (total_team1 > total_team2) {
       let clas = {
-        points: clasification.points + 3
+        points: clasification.points + 4
+      };
+      let point = {
+        points: clasification.points + 1
       };
       clasification = await ClasificationModel.update(clasification._id,{$set:clas});
+      clasification2 = await ClasificationModel.update(clasification2._id,{$set:point});
       console.log(clasification);
     } else {
       let clas = {
-        points: clasification2.points + 3
+        points: clasification2.points + 4
       };
+      let point = {
+        points: clasification.points + 1
+      };
+      clasification = await ClasificationModel.update(clasification._id,{$set:point});
       clasification2 = await ClasificationModel.update(clasification2._id,{$set:clas});
       console.log(clasification2);
     }

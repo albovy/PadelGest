@@ -30,8 +30,8 @@ class InscriptionModel {
       return await new Promise((resolve, reject) => reject(err));
     }
   }
-  delete(id) {
-    return Inscription.deleteOne({ _id: id });
+  delete(tournament_id, user_id) {
+    return Inscription.deleteOne({$and :[{$or :[{user1_id : user_id},{user2_id: user_id}]},{tournament_id : tournament_id}]});
   }
 }
 

@@ -37,6 +37,7 @@ class TournamentController {
     if (req.method == "GET") {
       res.render("tournament/add",{user:req.user});
     } else {
+      console.log("holaaa");
       try {
         if(req.body.startDate >= req.body.finishDate || req.body.startDate < Date.now()){
           throw err;
@@ -55,6 +56,7 @@ class TournamentController {
   async edit(req, res) {
     try {
       const tournament = await TournamentModel.findById(req.params.id);
+      console.log(tournament);
       if (req.method == "GET") {
         res.render("tournament/edit", { tournament: tournament,user:req.user });
       } else {

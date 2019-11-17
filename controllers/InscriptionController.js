@@ -59,9 +59,10 @@ class InscriptionController {
 
   async delete(req,res){
     try {
-      await InscriptionModel.delete(req.params.id);
+
+      await InscriptionModel.delete(req.params.id,req.user.id);
       console.log("ok");
-      res.redirect("/inscription");
+      res.redirect("/tournament");
     } catch (err) {
       req.flash("error", "Error al borrar su inscripcion");
       res.redirect("/tournament");
