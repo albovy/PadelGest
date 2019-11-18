@@ -44,7 +44,7 @@ class TournamentController {
         }
         const tournament = await TournamentModel.add(req.body);
         console.log(tournament);
-        agenda.schedule(req.body.startDate, 'archive ride',{id: tournament._id},"");
+        agenda.schedule(req.body.startDate, 'run tournament',{id: tournament._id},"");
         return res.redirect("/tournament");
       } catch (err) {
         req.flash("error", "Error al insertar el torneo");

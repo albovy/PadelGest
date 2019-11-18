@@ -1,1 +1,1 @@
-{"options":{},"indexes":[{"v":{"$numberInt":"2"},"key":{"_id":{"$numberInt":"1"}},"name":"_id_","ns":"padeldb.groups"}],"uuid":"d30b0f7042a54cd683bf6ced721b78ab"}
+{"options":{},"indexes":[{"v":{"$numberInt":"2"},"key":{"_id":{"$numberInt":"1"}},"name":"_id_","ns":"padeldb.groups"}],"uuid":"2995fd873d5c4f289a70ffd6bf665ea0"}

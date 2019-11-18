@@ -1,1 +1,1 @@
-{"options":{},"indexes":[{"v":{"$numberInt":"2"},"key":{"_id":{"$numberInt":"1"}},"name":"_id_","ns":"padeldb.games"}],"uuid":"4d35a0bb8fd94974b00788fcde841166"}
+{"options":{},"indexes":[{"v":{"$numberInt":"2"},"key":{"_id":{"$numberInt":"1"}},"name":"_id_","ns":"padeldb.games"}],"uuid":"0f74eba1024c4ebbb4947300ae6b9c27"}
