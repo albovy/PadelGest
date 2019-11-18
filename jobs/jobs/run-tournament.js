@@ -11,16 +11,12 @@ module.exports = function(agenda) {
     console.log("holaaaaa");
 
     const tournament = await TournamentModel.findById(job.attrs.data.id);
-    
+
     if (tournament.started) {
       done();
     } else {
-
-
       const finishDate = new Date(
-        (tournament.startDate.getTime() +
-          tournament.finishDate.getTime()) /
-          2
+        (tournament.startDate.getTime() + tournament.finishDate.getTime()) / 2
       );
 
       let competition = {
@@ -43,17 +39,13 @@ module.exports = function(agenda) {
               return item.category == level && item.gender == gender;
             });
             let numberPeopleGroup = m1.length;
-            console.log(gender+ " " + numberPeopleGroup);
+            console.log(gender + " " + numberPeopleGroup);
 
             //REMOVE IF LESS THAN 8
             if (numberPeopleGroup < 8) {
               m1.forEach(async item => {
                 await InscriptionModel.delete(item._id);
               });
-              job.remove(err => {
-                console.log(err);
-              });
-              done();
               //REMOVE IF BETWEEN 12-16
             } else {
               if (numberPeopleGroup > 12 && numberPeopleGroup < 16) {
@@ -141,10 +133,12 @@ module.exports = function(agenda) {
                 }
               }
               let addedGroup = [];
-              addedGroup = await Promise.all(dataArray.map(async item=>{
+              addedGroup = await Promise.all(
+                dataArray.map(async item => {
                   const group = await GroupModel.add(item);
                   return group;
-              }));
+                })
+              );
               /*dataArray.forEach(item => {
                 console.log("si");
                 GroupModel.add(item).then(group => {
@@ -174,10 +168,8 @@ module.exports = function(agenda) {
                 await ClasificationModel.add(clasification);
               });
 
-
               for (let key in hashSubGroups) {
                 const arrSubGroups = hashSubGroups[key];
-
 
                 let clash = {
                   competition_id: competition._id
