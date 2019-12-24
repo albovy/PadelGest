@@ -9,7 +9,7 @@
 .sticky {
   position: fixed;
   top: 0;
-  width: 100%
+  width: 100%;
 }
 
 .sticky + .header {
@@ -36,7 +36,7 @@
   line-height: 25px;
   border-radius: 4px;
 }
-.header a:hover{
+.header a:hover {
   text-decoration: none;
   color: #688ab6;
 }
