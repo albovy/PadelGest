@@ -8,7 +8,7 @@ const authController = require("../controllers/AuthController.js");
 /* GET users listing. */
 router.get("/", notLogged(), authController.authenticate);
 router.post("/", notLogged(), authController.authenticate);
-router.get("/logout",permit("ATHLETE","ADMIN"),authController.logout);
+router.get("/logout",permit("ATHLETE","ADMIN","COACH"),authController.logout);
 
 //router.get('/edit:id',user.edit);
 
