@@ -1,0 +1,25 @@
+{% extends 'layout.twig' %}
+
+{% block body %}
+{% include "navbar.twig" %}
+<div class="tournament-showall-container">
+  {% if not payouts  and user.role == "ATHLETE"%}
+  <h1>Todavia no se ha realizado ningún pago</h1>
+  {% else %}
+  <div class="tournament-wrapper">
+    {% for pay in payouts %}
+    <div class="tournament-container card">
+      <h4>{{pay.concept}}</h4>
+      <p>Importe:
+        {{pay.amount}} €</p>
+      <p>Nº de tarjeta:
+        {{pay.creditCard}}</p>
+      <p>Fecha:
+        {{pay.date}}</p>
+    </div>  
+    {% endfor %}
+  </div>
+  {% endif %}
+</div>
+
+{% endblock %}

@@ -5,7 +5,8 @@ const PromotedGameScheme = new Schema({
   date: { type: Date, required: true },
   title: { type: String, required: true },
   numPlayers: { type: Number, required: true },
-  granted: {type: Boolean, required:true, default:false}
+  granted: {type: Boolean, required:true, default:false},
+  price: { type: Number, required: true }
 });
 
 module.exports = mongoose.model("PromotedGame", PromotedGameScheme);

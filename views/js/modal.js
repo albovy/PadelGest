@@ -1,9 +1,10 @@
 $(function() {
   $(".inscriptionButton").click(function() {
     let l = $(this).attr("idValue");
+    let m = $(this).attr("amount");
     console.log(l);
     let x = document.getElementById("formInsc");
-    let s = "/inscription/tournament/" + l;
+    let s = "/inscription/tournament/" + l + "/" + m;
     console.log(s);
     x.action = s;
   });
@@ -26,6 +27,18 @@ $(function() {
     console.log(l);
     let x = document.getElementById("formInsc");
     let s = "/game/results/" + l;
+    console.log(s);
+    x.action = s;
+  });
+});
+
+$(function() {
+  $(".promotedInscriptionButton").click(function() {
+    let l = $(this).attr("idValue");
+    let m = $(this).attr("amount");
+    console.log(m);
+    let x = document.getElementById("formInsc");
+    let s = "/promotedInscription/add/" + l + "/" + m;
     console.log(s);
     x.action = s;
   });

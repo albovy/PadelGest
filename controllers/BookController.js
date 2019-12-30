@@ -1,5 +1,7 @@
 const BookModel = require("../models/BookModel");
 const CourtModel = require("../models/CourtModel");
+const PayoutModel = require("../models/PayoutModel");
+const UserModel = require("../models/UserModel");
 
 //FALTA INTRODUCIR RENDER VISTAS (comentarios comenzando por INTRO render)
 class BookController {
@@ -40,6 +42,12 @@ class BookController {
         const atLeastOneBookDates = await BookModel.findAllDistinctDatesInRange();
         console.log("holaa");
         const numCourts = await CourtModel.countCourts();
+        const user = await UserModel.findById(req.user.id);
+        let prize = 12;
+        if(user.member==true){
+          prize = 12*0.7;
+          prize = prize.toFixed(2);
+        }
 
         let arrayDatesFullBooked = await Promise.all(
           atLeastOneBookDates.map(async startDate => {
@@ -57,7 +65,8 @@ class BookController {
 
         res.render("book/add", {
           arrOcuped: arrayDatesFullBooked,
-          user: req.user
+          user: user,
+          amount: prize
         }); //numPistas
       } catch (err) {
         console.log("Error getADDBook: ", err);
@@ -103,7 +112,7 @@ class BookController {
         const endDate = new Date(
           new Date(new Date(startDate).getTime() + 5400000)
         ); //startDate + 90min
-
+        
         //Recuperamos datos de req
         //$SESSION = req.user.id
         let data = {
@@ -112,9 +121,21 @@ class BookController {
           startDate: startDate,
           endDate: endDate
         };
-        console.log(data);
+        
+        let payData = {
+          user_id: req.user.id,
+          billingAddress: req.body.billingAddress,
+          creditCard: req.body.creditCard,
+          amount: req.body.amount,
+          concept: req.body.concept,
+          date: dateNow
+        };
+        //let user = UserModel.findOne(req.user.id);
+        //console.log(user);
+        console.log(payData);
         const book = await BookModel.add(data);
-        console.log(book);
+        const pay = await PayoutModel.add(payData);
+        console.log(pay);
         return res.redirect("/book");
       } catch (err) {
         console.log("Error addBookController");

@@ -17,7 +17,9 @@ const UserSchema = new Schema({
     enum: ["ADMIN", "ATHLETE", "COACH"],
     default: "ATHLETE",
     required: true
-  }
+  },
+  member: {type: Boolean, required: true, default: false },
+  memberDate: {type: Date, required: false, default: null}
 });
 
 module.exports = mongoose.model("User", UserSchema);

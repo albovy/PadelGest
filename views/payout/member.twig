@@ -1,0 +1,54 @@
+{% extends 'layout.twig' %}
+{% extends 'layout.twig' %}
+{% include "header.twig" %}
+{% block body %}
+{% include "navbar.twig" %}
+
+
+<div class=" card-outline-secondary">
+  <div class="card-header">
+    <h3 class="mb-0">Datos del pago</h3>
+  </div>
+  <div class="card-body">
+    <form method=POST action="/payout/member" role="form" autocomplete="off">
+      <div class="form-group row">
+        <label class="col-lg-3 col-form-label form-control-label">Dirección de facturación</label>
+        <div class="col-lg-9">
+          <input class="form-control" type="text" name="billingAddress">
+        </div>
+      </div>
+      <div class="form-group row">
+        <label class="col-lg-3 col-form-label form-control-label">Nº de tarjeta</label>
+        <div class="col-lg-9">
+          <input class="form-control" type="text" name="creditCard" />
+        </div>
+      </div>
+      <div class="form-group row">
+        <label class="col-lg-3 col-form-label form-control-label">Importe</label>
+        <div class="col-lg-9">
+          <input class="form-control" type="text" name="amount" readonly value={{amount}} />
+        </div>
+      </div>
+      <div class="form-group row">
+        <label class="col-lg-3 col-form-label form-control-label">Concepto</label>
+        <div class="col-lg-9">
+          <input class="form-control" type="text" name="concept" readonly value="Suscripción al programa de socios" />
+        </div>
+      </div>
+
+      <div class="form-group row">
+        <label class="col-lg-3 col-form-label form-control-label"></label>
+        <div class="col-lg-9">
+          <button type="submit">
+            <div class="tournament-add-add">
+              <img src="/static/icons/pay.svg" alt="add">
+              <span>Pagar</span>
+            </div>
+          </button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
+
+{% endblock %}

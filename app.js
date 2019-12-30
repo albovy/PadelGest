@@ -23,6 +23,7 @@ const promotedInscriptionRouter = require("./routes/promotedInscription");
 const clashRouter = require("./routes/clash");
 const clasificationRouter = require("./routes/clasification");
 const gameRouter = require("./routes/game");
+const payoutRouter = require("./routes/payout");
 const privateCoachingRouter = require("./routes/privateCoaching");
 const privateCoachingInscriptionRouter = require("./routes/privateCoachingInscription");
 
@@ -33,9 +34,9 @@ const mongoDB = "mongodb://127.0.0.1:27017/padeldb";
 
 //BD©
 mongoose.connect(mongoDB, {
+  useUnifiedTopology: true,
   useCreateIndex: true,
-  useNewUrlParser: true,
-  useUnifiedTopology: true
+  useNewUrlParser: true
 });
 mongoose.Promise = global.Promise;
 const db = mongoose.connection;
@@ -107,6 +108,7 @@ app.use("/clasification",clasificationRouter);
 app.use("/game",gameRouter);
 app.use("/privateCoaching", privateCoachingRouter);
 app.use("/privateCoachingInscription", privateCoachingInscriptionRouter);
+app.use("/payout",payoutRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

@@ -1,6 +1,7 @@
 const InscriptionModel = require("../models/InscriptionModel");
 const UserModel = require("../models/UserModel");
 const TournamentModel = require("../models/TournamentModel");
+const PayoutModel = require("../models/PayoutModel");
 
 class InscriptionController {
   constructor() {}
@@ -47,8 +48,19 @@ class InscriptionController {
         gender: gender,
         inscriptionDate: dateNow
       };
+
+      let payData = {
+        user_id: req.user.id,
+        billingAddress: req.body.billingAddress,
+        creditCard: req.body.creditCard,
+        amount: req.params.amount,
+        concept: req.body.concept,
+        date: dateNow
+      };
+      console.log(payData);
       const inscription = await InscriptionModel.add(data);
-      console.log("INSCRITO");
+      const pay = await PayoutModel.add(payData);
+      console.log("INSCRITO y pagao");
       return res.redirect("/tournament");
     } catch (err) {
       console.log("Error");

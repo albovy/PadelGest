@@ -16,11 +16,21 @@ class AuthController {
     } else {
       
       let user = UserModel.findOne(req.body.login);
+      let us = await UserModel.findOne(req.body.login);
 
       let valid = user.then(user => {
         if (user) return req.body.passwd == user.passwd;
         else throw err;
       });
+
+      const dateNow = Date.now();
+      let userDate = us.memberDate;
+      userDate.setMonth(userDate.getMonth()+1);
+      if(userDate<dateNow){
+        const newData = { $set: { member: false} };
+        const newUser = await UserModel.update(us.id, newData);
+        console.log(newUser);
+      }
 
       try {
         const [user_2, valid_1] = await Promise.all([user, valid]);

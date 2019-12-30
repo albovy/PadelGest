@@ -1,16 +1,10 @@
 const PromotedGameModel = require("../models/PromotedGameModel");
 const PromotedInscriptionModel = require("../models/PromotedInscriptionModel");
+const UserModel = require("../models/UserModel");
+const PayoutModel = require("../models/PayoutModel");
 
 class PromotedGameController {
   constructor() {}
-
-  /*async deleteOutOfDate(id){
-    const dateNow = Date.now();
-    const game = await PromotedGameModel.findById(id);
-    if(game.date<dateNow){
-      await this.delete(id);
-    }
-  }*/
 
   async showMyInscriptions(req, res) {
     const myPromotedInscriptions = await PromotedInscriptionModel.findMyInscriptions(
@@ -21,7 +15,7 @@ class PromotedGameController {
       myPromotedInscriptions.map(async element => {
         const promoid = element.promoted_id;
         let game = await PromotedGameModel.findById(promoid);
-        console.log(game);
+        //console.log(game);
         game.date.setHours(game.date.getHours() - 1);
         let options = {
           weekday: "long",
@@ -42,7 +36,7 @@ class PromotedGameController {
       })
     );
     let array2 = array.filter(element => element != null);
-    console.log(array2);
+    //console.log(array2);
 
     res.render("promoted/showInscriptions", {
       myPromotedInscriptions: array2,
@@ -54,6 +48,8 @@ class PromotedGameController {
     const promos = await PromotedGameModel.findAll();
     const dateNow = Date.now();
     let array = [];
+    const user = await UserModel.findById(req.user.id);
+
     array = await Promise.all(
       promos.map(async element => {
         if (element.date < dateNow) {
@@ -82,13 +78,17 @@ class PromotedGameController {
             hour: "2-digit",
             minute: "2-digit"
           };
-          console.log(element);
           element.date.setHours(element.date.getHours() - 1);
+          if(user.member==true){
+            element.price=element.price*0.7;
+          }
+          console.log(element.price);
           let data = {
             _id: element._id,
             title: element.title,
             date: element.date.toLocaleDateString("es-ES", options),
-            numPlayers: element.numPlayers
+            numPlayers: element.numPlayers,
+            price: element.price
           };
           let cont = await PromotedInscriptionModel.findIfImAlreadyInscripted({
             promoted_id: data._id,
@@ -101,8 +101,7 @@ class PromotedGameController {
         }
       })
     );
-    console.log(array);
-    res.render("promoted/showAll", { promos: array, user: req.user });
+    res.render("promoted/showAll", { promos: array, user: user });
   }
   async add(req, res) {
     if (req.method == "GET") {
@@ -117,7 +116,8 @@ class PromotedGameController {
         let data = {
           date: startDate,
           title: req.body.title,
-          numPlayers: req.body.numPlayers
+          numPlayers: req.body.numPlayers,
+          price: req.body.price
         };
         const promo = await PromotedGameModel.add(data);
         return res.redirect("/promoted");

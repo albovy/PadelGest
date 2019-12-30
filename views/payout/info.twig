@@ -1,0 +1,47 @@
+{% extends 'layout.twig' %}
+{% include "header.twig" %}
+{% block body %}
+{% include "navbar.twig" %}
+
+<div class=" card-outline-secondary">
+    <div class="card-header">
+      <h3 class="mb-0">Información del programa de socios</h3>
+    </div>
+    <div class="card-body">
+      {% if user.member == false %}
+        <p>¡Conviertete en socio del club y disfruta de un 30% de descuento en todas
+            nuestras actividades por tan solo 25€ al mes!
+        </p>
+      {% else %}
+        <p>¡Ya perteneces al programa de socios!</p>
+        <p>Disfruta de todas nuestras actividades con un 30% de descuento.</p>
+      {% endif %}
+        <input type="hidden" name="prize" value="25" />
+        <input type="hidden" name="text" value="Suscripción-al-programa-de-socios(1-mes)" />
+        <div class="form-group row">
+          <div class="col-lg-9">
+            {% if user.member == false %}
+            <form method="POST" action="/payout" role="form" autocomplete="off">
+              <button type="submit">
+                <div class="tournament-showall-edit">
+                  <img src="/static/icons/member.svg" alt="member">
+                  <span>Hacerme socio</span>
+                </div>
+              </button>
+            </form>
+            {% endif %}
+            <form method="POST" action="/payout/show" role="form" autocomplete="off">
+              <button type="submit">
+                <div class="tournament-showall-edit">
+                  <img src="/static/icons/pay.svg" alt="payouts">
+                  <span>Ver mis pagos</span>
+                </div>
+              </button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+  
+  
+  {% endblock %}

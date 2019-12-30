@@ -1,12 +1,14 @@
 const TournamentModel = require("../models/TournamentModel");
 const agenda = require('../jobs/agenda');
 const InscriptionModel = require("../models/InscriptionModel");
+const UserModel = require("../models/UserModel");
 
 class TournamentController {
   constructor() {}
 
   async showAll(req, res) {
     const tournaments = await TournamentModel.findAll();
+    const user = await UserModel.findById(req.user.id);
  
     let tournamentMoreInscription = await Promise.all(tournaments.map(async element=>{
       let options ={
@@ -14,13 +16,17 @@ class TournamentController {
       };
       element.startDate.setHours(element.startDate.getHours()-1);
       element.finishDate.setHours(element.finishDate.getHours()-1);
+      if(user.member==true){
+        element.price=element.price*0.7;
+      }
         let data ={
           started : element.started,
           _id : element._id,
           title: element.title,
           description: element.description,
           startDate : element.startDate.toLocaleTimeString("es-ES",options),
-          finishDate : element.finishDate.toLocaleDateString("es-ES",options)
+          finishDate : element.finishDate.toLocaleDateString("es-ES",options),
+          price: element.price
         }
         let ins = await InscriptionModel.findIfImAlreadyInscripted(element._id,req.user.id);
         if(ins>0)data.inscripted = true;
@@ -31,7 +37,7 @@ class TournamentController {
 
     //agenda.schedule('in 5 seconds', 'run tournament',{id: "5dd131ccfba3cf2e66e10e1e"},"");
     console.log("hola");
-    res.render("tournament/showAll", { tournaments: tournamentMoreInscription, user: req.user});
+    res.render("tournament/showAll", { tournaments: tournamentMoreInscription, user: user});
   }
   async add(req, res) {
     if (req.method == "GET") {

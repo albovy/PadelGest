@@ -21,6 +21,8 @@
 
 			<h1>{{promo.title}}</h1>
 			<p>{{promo.date}}</p>
+			<p>Precio: {{promo.price}} €</p>
+			<input type="hidden" name="amount" value={{promo.price}} />
 			<p>
 				{% if user.role == "ADMIN" %}
 
@@ -35,14 +37,13 @@
 
 				{% else %}
 				{% if not promo.inscripted and promo.numPlayers < 4 %}
-				<form method="POST" action="/promotedInscription/add/{{promo._id}}">
-					<button type="submit">
-						<div class="tournament-showall-add">
-							<img src="/static/icons/add.svg" alt="add">
-							<span>Inscribirse</span>
-						</div>
-					</button>
-				</form>
+				<button type="button" class="promotedInscriptionButton" idValue={{promo._id}} 
+				amount={{promo.price}}  data-toggle="modal" data-target="#exampleModal" >
+					<div class="tournament-showall-add">
+						<img src="/static/icons/add.svg" alt="add">
+						<span>Inscribirse</span>
+					</div>
+				</button>
 				{% else %}
 					<small>Ya estás inscrito</small>
 				{% endif %}
@@ -51,6 +52,45 @@
 		</div>
 		{% endfor %}
 	</div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+  aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Inscribete</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form id="formInsc" method="POST">
+          <div class="field-wrap">
+            <input type="text" class="form-control" name="billingAddress" placeholder="Dirección de facturación" required />
+          </div>
+          <div class="field-wrap">
+            <input type="text" class="form-control" name="creditCard" placeholder="Nº de tarjeta" required />
+          </div>
+          <div class="field-wrap">
+			{% if user.member == false %}
+				<input type="hidden" class="form-control" name="concept" readonly value="Inscripción a partido promocionado" />
+			{% else %}
+				<input type="hidden" class="form-control" name="concept" readonly value="Inscripción a partido promocionado (Precio de socio)" />
+			{% endif %}
+          </div>
+
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+            <button type="submit" class="btn btn-primary">Inscribete</button>
+          </div>
+        </form>
+
+      </div>
+
+    </div>
+  </div>
 </div>
 
 {% endblock %}
