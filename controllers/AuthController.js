@@ -25,7 +25,10 @@ class AuthController {
 
       const dateNow = Date.now();
       let userDate = us.memberDate;
-      userDate.setMonth(userDate.getMonth()+1);
+      if(userDate!=null){
+        userDate.setMonth(userDate.getMonth()+1);
+      }
+      
       if(userDate<dateNow){
         const newData = { $set: { member: false} };
         const newUser = await UserModel.update(us.id, newData);
