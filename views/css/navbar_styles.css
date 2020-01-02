@@ -1,8 +1,8 @@
 @charset "UTF-8";
 .topnav {
   overflow: hidden;
-  background-color: #414f5c85;
-}
+  background-color: #9b9b9b;
+  }
 
 .topnav a {
   float: left;
@@ -13,6 +13,11 @@
   text-decoration: none;
   font-size: 17px;
 }
+
+.sticky-nav {
+  position: fixed;
+  width: 100%;
+  }
 
 .topnav a:hover {
   background-color: #003f03;
@@ -28,7 +33,7 @@
   display: none;
 }
 
-@media screen and (max-width: 850px) {
+@media screen and (max-width: 950px) {
   .topnav a:not(:first-child) {
     display: none;
   }
@@ -38,7 +43,7 @@
   }
 }
 
-@media screen and (max-width: 850px) {
+@media screen and (min-width: 0px) and (max-width: 950px) {
   .topnav.responsive {
     position: relative;
   }
@@ -58,3 +63,29 @@
     color: #fff;
   }
 }
+
+@media screen and (min-width: 950px) and (max-width: 1050px) {
+  .topnav a {
+    padding: 11px 13px;
+    font-size: 14px;
+  }
+}
+
+@media screen and (min-width: 1050px) and (max-width: 1100px) {
+  .topnav a {
+    padding: 12px 14px;
+    font-size: 15px;
+  }
+}
+
+@media screen and (min-width: 1100px) and (max-width: 1200px) {
+  .topnav a {
+    padding: 13px 15px;
+    font-size: 16px;
+  }
+}
+
+
+
+
+
