@@ -8,12 +8,12 @@
   <div class="tournament-wrapper">
 
     {% for promo in myPromotedInscriptions %}
-    <div class="tournament-container card">
+    <div class="tournament-container card-container">
       {% if promo.granted %}
       <small> Reserva para el partido confirmada</small>
       {% endif %}
 
-      <h1>{{promo.title}}</h1>
+      <h3>{{promo.title}}</h3>
       <h5>{{promo.date}}</h5>
       <form method="post" action="/promotedInscription/delete/{{promo._id}}">
         <button type="submit">

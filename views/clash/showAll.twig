@@ -1,132 +1,153 @@
-{% extends 'layout.twig' %}
-{% include "header.twig" %}
+{% extends 'layout.twig' %} {% include "header.twig" %} {% block body %} {%
+include "navbar.twig" %}
+<div class="tournament-showall-container">
+  <div class="tournament-wrapper">
+    {% for clash in clashes %}
+    <div class="tournament-container card-container">
+      <p>
+        {{ clash.user1_id }},{{ clash.user2_id }}
+        vs
+        {{ clash.user3_id }},{{ clash.user4_id }}
+      </p>
 
+      {% if not clash.agree %}
 
-{% block body %}
-    {% include "navbar.twig" %}
-    <div class="tournament-showall-container">
-        <div class="tournament-wrapper">
-            {% for clash in clashes %}
-                <div class="tournament-container card">
-                    <p>{{clash.user1_id}},{{clash.user2_id}}
-                        vs
-                        {{clash.user3_id}},{{clash.user4_id}}
-                    </p>
-
-                    {% if not clash.agree %}
-
-
-                        <button type="button" idvalue={{clash._id}} class="btn btn-primary concretarButton" data-toggle="modal" data-target="#exampleModal">
-                            Concretar Hora
-                        </button>
-                    {% endif %}
-                </div>
-            {% endfor %}
-        </div>
+      <button
+        type="button"
+        idvalue="{{ clash._id }}"
+        class="btn btn-primary concretarButton"
+        data-toggle="modal"
+        data-target="#exampleModal"
+      >
+        Concretar Hora
+      </button>
+      {% endif %}
     </div>
-    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Concretar hora </h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <form id="formInsc" method="POST" autocomplete="off">
-                        <input id="data" class="form-control" data-toggle="datepicker" name="startDate">
-                        <input type="text" class="form-control timepicker" name="time"/>
+    {% endfor %}
+  </div>
+</div>
+<div
+  class="modal fade"
+  id="exampleModal"
+  tabindex="-1"
+  role="dialog"
+  aria-labelledby="exampleModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Concretar hora</h5>
+        <button
+          type="button"
+          class="close"
+          data-dismiss="modal"
+          aria-label="Close"
+        >
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form id="formInsc" method="POST" autocomplete="off">
+          <input
+            id="data"
+            class="form-control"
+            data-toggle="datepicker"
+            name="startDate"
+          />
+          <input type="text" class="form-control timepicker" name="time" />
 
-
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-                            <button type="submit" class="btn btn-primary">Aceptar</button>
-                        </div>
-                    </form>
-
-                </div>
-
-            </div>
-        </div>
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="btn btn-secondary"
+              data-dismiss="modal"
+            >
+              Cerrar
+            </button>
+            <button type="submit" class="btn btn-primary">Aceptar</button>
+          </div>
+        </form>
+      </div>
     </div>
-    <script>
-        var date = new Date({{ dateComp.startDate }});
-        var date2 = new Date({{ dateComp.finishDate }});
+  </div>
+</div>
+<script>
+  var date = new Date({{ dateComp.startDate }});
+  var date2 = new Date({{ dateComp.finishDate }});
 
 
-        console.log(date2);
+  console.log(date2);
 
-        $(function () {
-            $('[data-toggle="datepicker"]').datepicker({
-                autoHide: true,
-                zIndex: 2048,
-                format: 'yyyy-mm-dd',
-                startDate: date,
-                endDate: date2,
+  $(function () {
+      $('[data-toggle="datepicker"]').datepicker({
+          autoHide: true,
+          zIndex: 2048,
+          format: 'yyyy-mm-dd',
+          startDate: date,
+          endDate: date2,
 
-            });
-        });
-
-
-        /*$('[data-toggle="datepicker"]').datepicker({format: 'yyyy-mm-dd', startDate: date, endDate: date2, autoHide: true,zIndex: 2048});
-        $('[data-toggle="datepicker"]').datepicker('setDate', date);*/
+      });
+  });
 
 
-        (function ($) {
-            $(function () {
-                $('.timepicker').timepicker({
-                    timeFormat: 'HH:mm',
-                    zindex: 2048,
-                    interval: 90,
-                    minTime: '9',
-                    maxTime: '23:00',
-                    startTime: '09:00',
-                    dynamic: false,
-                    dropdown: true,
-                    scrollbar: true
-                });
-            });
-        })(jQuery);
-    </script>
-
-    <script>
-
-        $('.timepicker').click(() => {
-            console.log(Date.now());
-            let now = new Date(Date.now());
-            console.log(now.getHours());
-            let g = new Date(document.getElementById("data").value);
-            let x = document.getElementsByClassName("ui-menu-item");
-            for (let i = 0; i < x.length; i++) {
-                x[i].style.display = "block";
-                x[i].id = parseInt(x[i].firstChild.text.split(":")[0]);
-                if (g.getDate() == now.getDate() && parseInt(x[i].id) < now.getHours()) {
-                    x[i].style.display = "none";
-                } else {
-                    if (g.getDate() == now.getDate() && parseInt(x[i].id) == now.getHours() && parseInt(x[i].firstChild.text.split(":")[0]) <= now.getMinutes()) {
-                        x[i].style.display = "none";
-                    }
-                }
-            }
-
-            let arrSameDates = [];
-            let l;{% for da in arrOcuped %}l = new Date({{ da }});
-                if (g.getDate() == l.getDate()) {
-                    arrSameDates.push(l);
-                }
-            {% endfor %}arrSameDates.forEach(date => {
-                console.log(date);
-                let elem = document.getElementById(date.getHours());
-                console.log(elem)
-                if (elem != null) {
-                    elem.style.display = "none";
-                }
-            });
+  /*$('[data-toggle="datepicker"]').datepicker({format: 'yyyy-mm-dd', startDate: date, endDate: date2, autoHide: true,zIndex: 2048});
+  $('[data-toggle="datepicker"]').datepicker('setDate', date);*/
 
 
-        });
-    </script>
+  (function ($) {
+      $(function () {
+          $('.timepicker').timepicker({
+              timeFormat: 'HH:mm',
+              zindex: 2048,
+              interval: 90,
+              minTime: '9',
+              maxTime: '23:00',
+              startTime: '09:00',
+              dynamic: false,
+              dropdown: true,
+              scrollbar: true
+          });
+      });
+  })(jQuery);
+</script>
 
+<script>
+
+  $('.timepicker').click(() => {
+      console.log(Date.now());
+      let now = new Date(Date.now());
+      console.log(now.getHours());
+      let g = new Date(document.getElementById("data").value);
+      let x = document.getElementsByClassName("ui-menu-item");
+      for (let i = 0; i < x.length; i++) {
+          x[i].style.display = "block";
+          x[i].id = parseInt(x[i].firstChild.text.split(":")[0]);
+          if (g.getDate() == now.getDate() && parseInt(x[i].id) < now.getHours()) {
+              x[i].style.display = "none";
+          } else {
+              if (g.getDate() == now.getDate() && parseInt(x[i].id) == now.getHours() && parseInt(x[i].firstChild.text.split(":")[0]) <= now.getMinutes()) {
+                  x[i].style.display = "none";
+              }
+          }
+      }
+
+      let arrSameDates = [];
+      let l;{% for da in arrOcuped %}l = new Date({{ da }});
+          if (g.getDate() == l.getDate()) {
+              arrSameDates.push(l);
+          }
+      {% endfor %}arrSameDates.forEach(date => {
+          console.log(date);
+          let elem = document.getElementById(date.getHours());
+          console.log(elem)
+          if (elem != null) {
+              elem.style.display = "none";
+          }
+      });
+
+
+  });
+</script>
 
 {% endblock %}

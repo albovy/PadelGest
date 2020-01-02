@@ -1,23 +1,34 @@
 <div class="topnav" id="myTopnav">
-    <a href="/">Inicio</a>
-    {% if user.role =="ATHLETE" %}
-        <a href="/book">Mis reservas</a>
+  <a href="/">Inicio</a>
+  {% if user.role =="ATHLETE" %}
+  <a href="/book">Mis reservas</a>
+  <a href="/promoted/showInscriptions">Mis partidos</a>
+  <a href="/privateCoaching/showInscriptions">Mis clases</a>
+  <a href="/book/add">Reservar pista</a>
+  <a href="/promoted">Partidos Promocionados</a>
+  <a href="/privateCoaching">Clases particulares</a>
+  <a href="/tournament">Campeonatos</a>
+  <a href="/payout">Socios</a>
 
-        <a href="/promoted/showInscriptions">Mis partidos</a>
-        <a href="/book/add">Reservar pista</a>
-        <a href="/promoted">Partidos Promocionados</a>
-        <a href="/tournament">Campeonatos</a>
-        <a href="/payout">Socios</a>
 
-    {% endif %}
-    {% if user.role == "ADMIN" %}
-        <a href="/court">Gestionar pistas</a>
-        <a href="/tournament">Gestionar campeonatos</a>
-        <a href="/promoted">Gestionar partidos</a>
+  {% endif %} {% if user.role == "COACH" %}
+  <a href="/book">Mis reservas</a>
+  <a href="/promoted/showInscriptions">Mis partidos</a>
+  <a href="/privateCoaching/showCoachInscriptions">Mis clases</a>
+  <a href="/book/add">Reservar pista</a>
+  <a href="/promoted">Partidos Promocionados</a>
+  <a href="/tournament">Campeonatos</a>
+  <a href="/privateCoaching">Gestionar clases</a>
 
-    {% endif %}
+  {% endif %} {% if user.role == "ADMIN" %}
+  <a href="/court">Gestionar pistas</a>
+  <a href="/tournament">Gestionar campeonatos</a>
+  <a href="/promoted">Gestionar partidos</a>
+  <a href="/privateCoaching">Gestionar clases</a>
 
-    <a href="javascript:void(0);" class="icon" onclick="topnavDisplay()">
-        <i class="fa fa-bars"></i>
-    </a>
+  {% endif %}
+
+  <a href="javascript:void(0);" class="icon" onclick="topnavDisplay()">
+    <i class="fa fa-bars"></i>
+  </a>
 </div>

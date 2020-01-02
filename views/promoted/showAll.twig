@@ -14,12 +14,12 @@
 	{% endif %}
 	<div class="tournament-wrapper">
 		{% for promo in promos %}
-		<div class="tournament-container card">
+		<div class="tournament-container card-container">
 			{% if promo.numPlayers == 4  %}
 			<small>Partido lleno </small>
 			{% endif %}
 
-			<h1>{{promo.title}}</h1>
+			<h3>{{promo.title}}</h3>
 			<p>{{promo.date}}</p>
 			<p>Precio: {{promo.price}} €</p>
 			<input type="hidden" name="amount" value={{promo.price}} />
