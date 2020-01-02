@@ -48,6 +48,11 @@
   .topnav.responsive {
     position: relative;
   }
+
+  .sticky-nav{
+   display:none;
+  }
+
   .topnav.responsive .icon {
     position: absolute;
     right: 0;
@@ -85,6 +90,7 @@
     font-size: 16px;
   }
 }
+
 
 
 
