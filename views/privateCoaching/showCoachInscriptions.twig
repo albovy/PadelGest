@@ -1,0 +1,20 @@
+{% extends 'layout.twig' %} 
+{% include "header.twig" %} 
+{% block body %} {%
+include "navbar.twig" %}
+<div class="tournament-showall-container">
+  {% if user.role == "COACH" %}
+  <h3>Clases en las que eres profesor</h3>
+  <div class="tournament-wrapper">
+    {% for privC in coachPrivateCoaching %}
+    <div class="tournament-container card-container">
+      <h3>{{ privC.title }}</h3>
+      <h5>{{ privC.date }}</h5>
+      <h6>{{ privC.description }}</h6>
+      
+    </div>
+   {% endfor %}
+  </div>
+   {% endif %}
+</div>
+{% endblock %}

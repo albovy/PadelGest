@@ -1,0 +1,59 @@
+
+
+{% extends 'layout.twig' %}
+{% include "header.twig" %}
+{% block body %}
+{% include "navbar.twig" %}
+<div class="tournament-showall-container">
+	{% if user.role == "COACH" %}
+	<a href="/privateCoaching/add">
+    <div class="tournament-showall-add">
+      <img src="/static/icons/add.svg" alt="add">
+      <span>Crear clase</span>
+    </div>
+	</a>
+	{% endif %}
+  <div class="tournament-wrapper">
+    {% for privC in privCoach %}
+    <div class="tournament-container card-container">
+      <h3>{{privC.title}}</h3>
+      <p>{{privC.date}}</p>
+      <h6>{{privC.description}}</h6>
+      {% for creator in creators %}
+      {% if privC.coach == creator.id %}
+        <h6><strong>{{creator.login}}</strong></h6>
+      {% endif %}
+      {% endfor %}
+
+      <p>
+        {% if user.role == "COACH" or user.role == "ADMIN" %}
+      <form method="post" action="/privateCoaching/delete/{{privC._id}}">
+        <button type="submit">
+          <div class="tournament-showall-delete">
+            <img src="/static/icons/Delete.svg" alt="delete">
+            <span>Eliminar clase</span>
+          </div>
+        </button>
+      </form>
+      {% endif %}
+      {% if user.role == "ATHLETE" %}
+      {% if not privC.inscripted %}
+      <form method="POST" action="/privateCoachingInscription/add/{{privC._id}}">
+        <button type="submit">
+          <div class="tournament-showall-add">
+            <img src="/static/icons/add.svg" alt="add">
+            <span>Inscribirse</span>
+          </div>
+        </button>
+      </form>
+      {% else %}
+      <small>Ya estás inscrito</small>
+      {% endif %}
+      {% endif %}
+      </p>
+    </div>
+    {% endfor %}
+  </div>
+</div>
+{% endblock %}
+

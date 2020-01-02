@@ -1,0 +1,31 @@
+{% extends 'layout.twig' %}
+{% include "header.twig" %}
+
+{% block body %}
+{% include "navbar.twig" %}
+<div class="tournament-showall-container">
+  {% if user.role == "ATHLETE" %}
+  <h3>Clases a las que estás inscrito</h3>
+  <div class="tournament-wrapper">
+
+    {% for privC in myPrivateCoachingInscriptions %}
+    <div class="tournament-container card-container">
+
+      <h3>{{privC.title}}</h3>
+      <h5>{{privC.date}}</h5>
+      <h6> {{privC.description}}</h6>
+    
+      <form method="post" action="/privateCoachingInscription/delete/{{privC._id}}">
+        <button type="submit">
+          <div class="tournament-showall-delete">
+            <img src="/static/icons/Delete.svg" alt="delete">
+            <span>Cancelar inscripción</span>
+          </div>
+        </button>
+      </form>
+    </div>
+    {% endfor %}
+  </div>
+  {% endif %}
+</div>
+{% endblock %}
