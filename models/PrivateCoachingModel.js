@@ -3,8 +3,12 @@ const PrivateCoaching = require("../models/PrivateCoaching");
 class PrivateCoachingModel {
   constructor() { }
 
-  async findAll() {
+  async findAll() { 
     return await PrivateCoaching.find();
+  }
+
+  async findAllByCoach(id) {
+    return await PrivateCoaching.find({coach : id});
   }
 
   findById(id) {

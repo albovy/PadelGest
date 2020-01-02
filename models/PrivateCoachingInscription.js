@@ -8,7 +8,6 @@ const PrivateCoachingInscriptionSchema = new Schema({
     required: true,
     ref: "PrivateCoaching"
   },
-  inscriptionDate: { type: Date, required: true }
 });
 
 module.exports = mongoose.model("PrivateCoachingInscription", PrivateCoachingInscriptionSchema);
