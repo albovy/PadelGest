@@ -9,7 +9,7 @@
   <a href="/privateCoaching">Clases particulares</a>
   <a href="/tournament">Campeonatos</a>
   <a href="/payout">Socios</a>
-
+  <a href="/blog">Blog</a>
 
   {% endif %} {% if user.role == "COACH" %}
   <a href="/book">Mis reservas</a>
@@ -19,12 +19,14 @@
   <a href="/promoted">Partidos Promocionados</a>
   <a href="/tournament">Campeonatos</a>
   <a href="/privateCoaching">Gestionar clases</a>
+  <a href="/blog">Blog</a>
 
   {% endif %} {% if user.role == "ADMIN" %}
   <a href="/court">Gestionar pistas</a>
   <a href="/tournament">Gestionar campeonatos</a>
   <a href="/promoted">Gestionar partidos</a>
   <a href="/privateCoaching">Gestionar clases</a>
+  <a href="/blog">Blog</a>
 
   {% endif %}
 
