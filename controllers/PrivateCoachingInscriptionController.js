@@ -16,7 +16,7 @@ class PrivateCoachingInscriptionController {
       const dateNow = Date.now();
       const privCoaching = await PrivateCoachingModel.findById(req.params.id);
       if (privCoaching.date < dateNow) {
-        const getInscripted = await PrivateCoachingInscriptionModel.findInscriptionsByGame(
+        const getInscripted = await PrivateCoachingInscriptionModel.findInscriptionsByCoaching(
           req.params.id
         );
         getInscripted.forEach(async elemnt => {
@@ -35,9 +35,9 @@ class PrivateCoachingInscriptionController {
         req.flash("error", "Ya estás inscrito en esta clase.");
         return res.redirect("/privateCoaching/showInscriptions");
       }
-        await PrivateCoachingInscriptionModel.add(data);
+        // await PrivateCoachingInscriptionModel.add(data);
         if (CourtModel.countCourts() == BookModel.countBooksOnDate()) {
-          const getInscripted = await PrivateCoachingInscriptionModel.findInscriptionsByGame(
+          const getInscripted = await PrivateCoachingInscriptionModel.findInscriptionsByCoaching(
             req.params.id
           );
           getInscripted.forEach(async elemnt => {
@@ -103,9 +103,7 @@ class PrivateCoachingInscriptionController {
   async delete(req, res) {
     try {
       const privCoaching = await PrivateCoachingModel.findById(req.params.id);
-      const dataa = { $set: { numPlayers: (privCoaching.numPlayers -= 1) } };
-
-      await PrivateCoachingModel.incrementNumPlayers(req.params.id, dataa); //Es decrementar en verdad
+   
       await PrivateCoachingInscriptionModel.deleteUser(req.params.id, req.user.id);
       res.redirect("/privateCoaching/showInscriptions");
     } catch (err) {

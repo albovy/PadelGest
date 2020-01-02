@@ -1,15 +1,16 @@
 const PrivateCoachingModel = require("../models/PrivateCoachingModel");
-const PrivateCoachingInscriptionModel = require("../models/PromotedInscriptionModel");
+const PrivateCoachingInscriptionModel = require("../models/PrivateCoachingInscriptionModel");
+const UserModel = require("../models/UserModel");
 
 class PrivateCoachingController {
-  constructor() {}
+  constructor() { }
 
   async add(req, res) {
     if (req.method == "GET") {
       res.render("privateCoaching/add", { user: req.user });
     } else {
       try {
-        const startDate = new Date(new Date(req.body.startDate).getTime()); //data inicio ya formateada
+        const startDate = new Date(new Date(req.body.date).getTime()); //data inicio ya formateada
         const time = req.body.time;
 
         startDate.setHours(parseInt(time.split(":")[0]) + 1);
@@ -17,9 +18,10 @@ class PrivateCoachingController {
         let data = {
           title: req.body.title,
           date: startDate,
-          description: req.body.description
+          description: req.body.description,
+          coach: req.user.id
         };
-        const privCoach = await PrivateCoachingModel.add(data);
+        const privC = await PrivateCoachingModel.add(data);
         return res.redirect("/privateCoaching");
       } catch (err) {
         req.flash("error", "Error al insertar su clase particular");
@@ -31,6 +33,7 @@ class PrivateCoachingController {
   async delete(req, res) {
     try {
       await PrivateCoachingModel.delete(req.params.id);
+
       const getInscripted = await PrivateCoachingInscriptionModel.findInscriptionsByCoaching(
         req.params.id
       );
@@ -46,7 +49,9 @@ class PrivateCoachingController {
 
   async showAll(req, res) {
     const privCoach = await PrivateCoachingModel.findAll();
+
     const dateNow = Date.now();
+    let creators = [];
     let array = [];
     array = await Promise.all(
       privCoach.map(async element => {
@@ -56,6 +61,7 @@ class PrivateCoachingController {
             const getInscripted = await PrivateCoachingInscriptionModel.findInscriptionsByCoaching(
               element._id
             );
+
             getInscripted.forEach(async elemnt => {
               await PrivateCoachingInscriptionModel.delete(elemnt._id);
             });
@@ -75,39 +81,60 @@ class PrivateCoachingController {
             hour: "2-digit",
             minute: "2-digit"
           };
-          console.log(element);
+
+
+          let creator = await UserModel.findById(element.coach);
+
+          if (creators.length === 0) {
+            creators.push(creator);
+          }
+
+          let isRepeated = false;
+
+          creators.forEach(async elemnt => {
+            if (elemnt.login === creator.login) {
+              isRepeated = true;
+            }
+          })
+
+          if (isRepeated === false) {
+            creators.push(creator);
+          }
+
           element.date.setHours(element.date.getHours() - 1);
           let data = {
             _id: element._id,
             title: element.title,
             date: element.date.toLocaleDateString("es-ES", options),
-            description: element.description
+            description: element.description,
+            coach: element.coach,
+
           };
-          let cont = await PrivateCoachingModel.findIfImAlreadyInscripted({
+          let cont = await PrivateCoachingInscriptionModel.findIfImAlreadyInscripted({
             privateCoaching_id: data._id,
             user_id: req.user.id
           });
           if (cont > 0) {
             data.inscripted = true;
           }
+
           return data;
         }
       })
     );
-    console.log(array);
-    res.render("privateCoaching/showAll", { privCoach: array, user: req.user });
+    res.render("privateCoaching/showAll", { privCoach: array, user: req.user, creators: creators });
   }
 
-   async showMyInscriptions(req, res) {
-    const myPrivateCoachigInscriptions = await PrivateCoachingInscriptionModel.findMyInscriptions(
+  async showCoachInscriptions(req, res) {
+    const coachPrivateCoaching = await PrivateCoachingModel.findAllByCoach(
       req.user.id
     );
-
+    let creators = [];
     let array = await Promise.all(
-      myPrivateCoachigInscriptions.map(async element => {
-        const privCoachId = element.promoted_id;
+      coachPrivateCoaching.map(async element => {
+
+        const privCoachId = element._id;
         let privateCoaching = await PrivateCoachingModel.findById(privCoachId);
-        console.log(privateCoaching);
         privateCoaching.date.setHours(privateCoaching.date.getHours() - 1);
         let options = {
           weekday: "long",
@@ -117,21 +144,60 @@ class PrivateCoachingController {
           hour: "2-digit",
           minute: "2-digit"
         };
+
         let data = {
           _id: privateCoaching._id,
           title: privateCoaching.title,
           date: privateCoaching.date.toLocaleDateString("es-ES", options),
-          description: privateCoaching.description
+          description: privateCoaching.description,
+          coach: req.user
         };
         return data;
       })
     );
     let array2 = array.filter(element => element != null);
-    console.log(array2);
-
-    res.render("privateCoaching/showInscriptions", {
-      myPrivateCoachigInscriptions: array2,
+    res.render("privateCoaching/showCoachInscriptions", {
+      coachPrivateCoaching: array2,
       user: req.user
+    });
+  }
+
+  async showMyInscriptions(req, res) {
+    const myPrivateCoachingInscriptions = await PrivateCoachingInscriptionModel.findMyInscriptions(
+      req.user.id
+    );
+    let creators = [];
+    let coachings = [];
+    let array = await Promise.all(
+      myPrivateCoachingInscriptions.map(async element => {
+        const privCoachId = element.privateCoaching_id;
+        let privateCoaching = await PrivateCoachingModel.findById(privCoachId);
+        privateCoaching.date.setHours(privateCoaching.date.getHours() - 1);
+        let options = {
+          weekday: "long",
+          year: "numeric",
+          month: "short",
+          day: "numeric",
+          hour: "2-digit",
+          minute: "2-digit"
+        };
+       
+
+        let data = {
+          _id: privateCoaching._id,
+          title: privateCoaching.title,
+          date: privateCoaching.date.toLocaleDateString("es-ES", options),
+          description: privateCoaching.description,
+          coach: req.user
+        };
+        return data;
+      })
+    );
+
+    let array2 = array.filter(element => element != null);;
+    res.render("privateCoaching/showInscriptions", {
+      myPrivateCoachingInscriptions: array2,
+      user: req.user,
     });
   }
 }
