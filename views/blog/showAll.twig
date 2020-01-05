@@ -1,0 +1,49 @@
+{% extends 'layout.twig' %}
+
+{% block body %}
+{% include "navbar.twig" %}
+<div class="tournament-showall-container">
+  {% if not posts and user.role == "ATHLETE"%}
+  <h1>No hay publicaciones disponibles</h1>
+  {% endif %}
+  {% if user.role != "ATHLETE"%}
+  <a href="/blog/add">
+    <div class="tournament-showall-add">
+      <img src="/static/icons/add.svg" alt="add">
+      <span>Insertar publicación</span>
+    </div>
+  </a>
+  {% endif %}
+  <div class="tournament-wrapper">
+    {% for post in posts %}
+    <div class="tournament-container card-container">
+      <h5>{{post.title}}</h5>
+      <p>Autor: {{post.author}}</p>
+      <a href="/blog/show/{{post._id}}">
+        <div class="tournament-showall-my-clashes">
+            <img src="/static/icons/detalle.svg" alt="ver">
+            <span>Ver publicación</span>
+        </div>
+      </a>
+      {% if user.role != 'ATHLETE' %}
+      <a href="/blog/edit/{{post._id}}">
+        <div class="tournament-showall-edit">
+          <img src="/static/icons/edit.svg" alt="edit">
+          <span>Editar publicación</span>
+        </div>
+      </a>
+      <form method="POST" action="/blog/delete/{{post._id}}">
+        <button type="submit">
+          <div class="tournament-showall-delete">
+            <img src="/static/icons/Delete.svg" alt="delete">
+            <span>Eliminar publicación</span>
+          </div>
+        </button>
+      </form>
+      {% endif %}
+    </div>
+    {% endfor %}
+  </div>
+</div>
+
+{% endblock %}

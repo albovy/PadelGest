@@ -26,6 +26,7 @@ const gameRouter = require("./routes/game");
 const payoutRouter = require("./routes/payout");
 const privateCoachingRouter = require("./routes/privateCoaching");
 const privateCoachingInscriptionRouter = require("./routes/privateCoachingInscription");
+const blogRouter = require("./routes/blog");
 
 const app = express();
 
@@ -103,12 +104,13 @@ app.use("/court",courtRouter);
 app.use("/inscription", inscriptionRouter);
 app.use("/promoted", promotedRouter);
 app.use("/promotedInscription", promotedInscriptionRouter);
-app.use("/clash",clashRouter);
-app.use("/clasification",clasificationRouter);
-app.use("/game",gameRouter);
+app.use("/clash", clashRouter);
+app.use("/clasification", clasificationRouter);
+app.use("/game", gameRouter);
 app.use("/privateCoaching", privateCoachingRouter);
 app.use("/privateCoachingInscription", privateCoachingInscriptionRouter);
-app.use("/payout",payoutRouter);
+app.use("/payout", payoutRouter);
+app.use("/blog", blogRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

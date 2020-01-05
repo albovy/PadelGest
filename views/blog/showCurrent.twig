@@ -1,0 +1,14 @@
+{% extends 'layout.twig' %}
+{% include "header.twig" %}
+{% block body %}
+{% include "navbar.twig" %}
+
+<div class=" card-outline-secondary">
+    <div class="card-body">
+        <h2>{{blog.title}}</h2>
+        <p>{{blog.body}}</p>
+        <h6>{{blog.author}} - {{blog.date}}</h6>
+    </div>
+</div>
+  
+{% endblock %}
