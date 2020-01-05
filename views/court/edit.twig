@@ -13,13 +13,13 @@
     <form method="POST" action="/court/edit/{{court._id}}" role="form" autocomplete="off">
       <div class="form-group row">
         <label class="col-lg-3 col-form-label form-control-label">Nombre</label>
-        <div class="col-lg-9">
+        <div class="col-lg-4">
           <input class="form-control" type="text" name="name" value={{court.name}}>
         </div>
       </div>
       <div class="form-group row">
         <label class="col-lg-3 col-form-label form-control-label">Superficie</label>
-        <div class="col-lg-9">
+        <div class="col-lg-4">
           <select class="form-control" name="surface">
             {% if court.surface=="GRASS" %}
             <option value="GRASS" selected>Césped artificial</option>
@@ -49,7 +49,7 @@
       </div>
       <div class="form-group row">
         <label class="col-lg-3 col-form-label form-control-label">Tipo</label>
-        <div class="col-lg-9">
+        <div class="col-lg-4">
           <select class="form-control" name="type">
             {% if court.type=="OUTSIDE" %}
             <option value="OUTSIDE" selected>Exterior</option>
