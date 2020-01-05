@@ -5,6 +5,9 @@
 {% block body %}
 {% include "navbar.twig" %}
 <div class="tournament-showall-container">
+  {% if not privCoach and user.role != "COACH"%}
+  <h1>No hay clases disponibles</h1>
+  {% endif %}
 	{% if user.role == "COACH" %}
 	<a href="/privateCoaching/add">
     <div class="tournament-showall-add">
