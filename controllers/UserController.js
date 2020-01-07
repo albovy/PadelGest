@@ -28,6 +28,7 @@ class UserController {
       try {
         console.log(req.params.id);
         const user = await UserModel.findById(req.params.id);
+        console.log(user);
         if(user == null)throw err;
         console.log(user);
         if (req.method == "GET") {
@@ -35,7 +36,7 @@ class UserController {
           console.log(user);
           res.render("user/edit", { user: user });
         } else {
-          const newData = { $set: { name: req.body.name,gender:req.body.gender} };
+          const newData = { $set: { name: req.body.name,email: req.body.email, gender:req.body.gender} };
           console.log(newData);
           try {
             const newUser = await UserModel.update(user._id, newData);
