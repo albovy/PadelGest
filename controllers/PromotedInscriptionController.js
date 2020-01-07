@@ -10,15 +10,10 @@ class PromotedInscriptionController {
 
   async showAll(req, res) {
     const promos = await PromotedGameModel.findAll();
-    console.log("Hola");
+    console.log(promos);
     const user = await UserModel.findById(req.user.id);
-    let prize = 4;
-    if(user.member==true){
-      prize = 4*0.7;
-      prize = prize.toFixed(2);
-    }
 
-    res.render("promoted/showAll", { promos: promos, user: user, amount: prize });
+    res.render("promoted/showAll", { promos: promos, user: user });
   }
 
   async add(req, res) {

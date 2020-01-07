@@ -22,6 +22,7 @@
       <h3>{{privC.title}}</h3>
       <p>{{privC.date}}</p>
       <h6>{{privC.description}}</h6>
+			<p>Precio: {{privC.price}} €</p>
       {% for creator in creators %}
       {% if privC.coach == creator.id %}
         <h6><strong>{{creator.login}}</strong></h6>
@@ -41,14 +42,13 @@
       {% endif %}
       {% if user.role == "ATHLETE" %}
       {% if not privC.inscripted %}
-      <form method="POST" action="/privateCoachingInscription/add/{{privC._id}}">
-        <button type="submit">
-          <div class="tournament-showall-add">
-            <img src="/static/icons/add.svg" alt="add">
-            <span>Inscribirse</span>
-          </div>
-        </button>
-      </form>
+      <button type="button" class="coachingInscriptionButton" idValue={{privC._id}} 
+			amount={{privC.price}}  data-toggle="modal" data-target="#exampleModal" >
+        <div class="tournament-showall-add">
+          <img src="/static/icons/add.svg" alt="add">
+          <span>Inscribirse</span>
+         </div>
+      </button>
       {% else %}
       <small>Ya estás inscrito</small>
       {% endif %}
@@ -58,5 +58,46 @@
     {% endfor %}
   </div>
 </div>
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+  aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Inscribete</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form id="formInsc" method="POST">
+          <div class="field-wrap">
+            <input type="text" class="form-control" name="billingAddress" placeholder="Dirección de facturación" required />
+          </div>
+          <div class="field-wrap">
+            <input type="text" class="form-control" name="creditCard" placeholder="Nº de tarjeta" required />
+          </div>
+          <div class="field-wrap">
+          {% if user.member == false %}
+            <input type="hidden" class="form-control" name="concept" readonly value="Inscripción a clase particular" />
+          {% else %}
+            <input type="hidden" class="form-control" name="concept" readonly value="Inscripción a clase particular (Precio de socio)" />
+          {% endif %}
+          </div>
+
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+            <button type="submit" class="btn btn-primary">Inscribete</button>
+          </div>
+        </form>
+
+      </div>
+
+    </div>
+  </div>
+</div>
+
+
 {% endblock %}
 

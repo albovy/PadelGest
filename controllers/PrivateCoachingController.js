@@ -19,7 +19,8 @@ class PrivateCoachingController {
           title: req.body.title,
           date: startDate,
           description: req.body.description,
-          coach: req.user.id
+          coach: req.user.id,
+          price: req.body.price
         };
         const privC = await PrivateCoachingModel.add(data);
         return res.redirect("/privateCoaching");
@@ -49,7 +50,7 @@ class PrivateCoachingController {
 
   async showAll(req, res) {
     const privCoach = await PrivateCoachingModel.findAll();
-
+    const user = await UserModel.findById(req.user.id);
     const dateNow = Date.now();
     let creators = [];
     let array = [];
@@ -102,13 +103,16 @@ class PrivateCoachingController {
           }
 
           element.date.setHours(element.date.getHours() - 1);
+          if(user.member==true){
+            element.price=element.price*0.7;
+          }
           let data = {
             _id: element._id,
             title: element.title,
             date: element.date.toLocaleDateString("es-ES", options),
             description: element.description,
             coach: element.coach,
-
+            price: element.price
           };
           let cont = await PrivateCoachingInscriptionModel.findIfImAlreadyInscripted({
             privateCoaching_id: data._id,
@@ -122,7 +126,7 @@ class PrivateCoachingController {
         }
       })
     );
-    res.render("privateCoaching/showAll", { privCoach: array, user: req.user, creators: creators });
+    res.render("privateCoaching/showAll", { privCoach: array, user: user, creators: creators });
   }
 
   async showCoachInscriptions(req, res) {
@@ -150,7 +154,8 @@ class PrivateCoachingController {
           title: privateCoaching.title,
           date: privateCoaching.date.toLocaleDateString("es-ES", options),
           description: privateCoaching.description,
-          coach: req.user
+          coach: req.user,
+          price: privateCoaching.price
         };
         return data;
       })
@@ -188,7 +193,8 @@ class PrivateCoachingController {
           title: privateCoaching.title,
           date: privateCoaching.date.toLocaleDateString("es-ES", options),
           description: privateCoaching.description,
-          coach: req.user
+          coach: req.user,
+          price: privateCoaching.price
         };
         return data;
       })

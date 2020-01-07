@@ -45,6 +45,18 @@ $(function() {
 });
 
 $(function() {
+  $(".coachingInscriptionButton").click(function() {
+    let l = $(this).attr("idValue");
+    let m = $(this).attr("amount");
+    console.log(m);
+    let x = document.getElementById("formInsc");
+    let s = "/privateCoachingInscription/add/" + l + "/" + m;
+    console.log(s);
+    x.action = s;
+  });
+});
+
+$(function() {
   $(".results").blur(function() {
 
     let x = document.getElementById("set1_team1");

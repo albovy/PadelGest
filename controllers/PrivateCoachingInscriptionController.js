@@ -2,17 +2,21 @@ const PrivateCoachingInscriptionModel = require("../models/PrivateCoachingInscri
 const PrivateCoachingModel = require("../models/PrivateCoachingModel");
 const BookModel = require("../models/BookModel");
 const CourtModel = require("../models/CourtModel");
+const UserModel = require("../models/UserModel");
+const PayoutModel = require("../models/PayoutModel");
 
 class PrivateCoachingInscriptionController {
   constructor() {}
 
   async showAll(req, res) {
     const privCoach = await PrivateCoachingModel.findAll();
-    res.render("privateCoaching/showAll", { privCoach: privCoach, user: req.user });
+    const user = await UserModel.findById(req.user.id);
+    res.render("privateCoaching/showAll", { privCoach: privCoach, user: user });
   }
 
   async add(req, res) {
     try {
+      console.log("Hola")
       const dateNow = Date.now();
       const privCoaching = await PrivateCoachingModel.findById(req.params.id);
       if (privCoaching.date < dateNow) {
@@ -28,6 +32,16 @@ class PrivateCoachingInscriptionController {
       }
 
       let data = { user_id: req.user.id, privateCoaching_id: req.params.id };
+      console.log(data);
+      let payData = {
+        user_id: req.user.id,
+        billingAddress: req.body.billingAddress,
+        creditCard: req.body.creditCard,
+        amount: req.params.amount,
+        concept: req.body.concept,
+        date: dateNow
+      };
+      console.log(payData);
 
       if (
         (await PrivateCoachingInscriptionModel.findIfImAlreadyInscripted(data)) > 0
@@ -74,6 +88,7 @@ class PrivateCoachingInscriptionController {
             };
             const book = await BookModel.add(data2);
             await PrivateCoachingInscriptionModel.add(data);
+            await PayoutModel.add(payData);
             console.log(book);
             console.log("Tiene pinta de que ha funcionao");
             await PrivateCoachingModel.edit(req.params.id, {

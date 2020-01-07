@@ -7,7 +7,7 @@ const PrivateCoachingInscriptionSchema = new Schema({
     type: Schema.Types.ObjectId,
     required: true,
     ref: "PrivateCoaching"
-  },
+  }
 });
 
 module.exports = mongoose.model("PrivateCoachingInscription", PrivateCoachingInscriptionSchema);

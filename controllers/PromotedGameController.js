@@ -1,7 +1,6 @@
 const PromotedGameModel = require("../models/PromotedGameModel");
 const PromotedInscriptionModel = require("../models/PromotedInscriptionModel");
 const UserModel = require("../models/UserModel");
-const PayoutModel = require("../models/PayoutModel");
 
 class PromotedGameController {
   constructor() {}
