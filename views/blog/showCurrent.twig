@@ -3,12 +3,21 @@
 {% block body %}
 {% include "navbar.twig" %}
 
-<div class=" card-outline-secondary">
-    <div class="card-body">
-        <h2>{{blog.title}}</h2>
-        <p>{{blog.body}}</p>
-        <h6>{{blog.author}} - {{blog.date}}</h6>
+<div class=" blog-container">
+  <div class="blog-content-container">
+    <div class="blog-header-container">
+      <div class="blog-title-container">
+        <h1 class="blog-title">{{blog.title}}</h1>
+      </div>
+      <div class="blog-author-date-container">
+        <span>Autor: <span class="blog-author"><strong>{{blog.author}}</strong></span></span>
+        <span>Fecha de creación: <span class="blog-date"><strong>{{blog.date}}</strong></span></span>
+      </div>
     </div>
+    <div class="blog-body-container">
+      <p class="blog-body">{{blog.body}}</p>
+    </div>
+  </div>
 </div>
-  
+
 {% endblock %}
