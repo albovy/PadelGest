@@ -1,5 +1,6 @@
 const PayoutModel = require("../models/PayoutModel");
 const UserModel = require("../models/UserModel");
+const nodemailer = require('nodemailer');
 
 class PayoutController {
   constructor() {}
@@ -73,11 +74,34 @@ class PayoutController {
           date: dateNow
         };
         const pay = await PayoutModel.add(data2);
-        //console.log(data2);
         const newData = { $set: { member: true, memberDate: dateNow} };
-        
         const newUser = await UserModel.update(req.user.id, newData);
         console.log(newUser);
+        const user = await UserModel.findById(req.user.id);
+        let transporter = nodemailer.createTransport({
+          service: "gmail",
+          auth: {
+            user: 'padelgest2020@gmail.com',
+            pass: 'padel20gest'
+          },
+          tls: {
+            rejectUnauthorized: false
+          }
+        });
+        
+        const message = {
+          from: 'padelgest2020@gmail.com',
+          to: user.email,
+          subject: 'Bienvenido al programa de socios',
+          html: '<p>Te has suscrito al programa de socios, gracias por confiar en PadelGest.</p><p>Durante este mes disfruta de un 30% de descuento en todas las actividades disponibles</p><p>Un saludo, el equipo de PadelGest.</p>'
+        };
+        transporter.sendMail(message, function(err, info) {
+          if (err) {
+            console.log(err)
+          } else {
+            console.log(info);
+          }
+        });
 
         return res.redirect("/payout");
       } catch (err) {

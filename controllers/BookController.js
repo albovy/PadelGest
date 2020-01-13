@@ -2,6 +2,7 @@ const BookModel = require("../models/BookModel");
 const CourtModel = require("../models/CourtModel");
 const PayoutModel = require("../models/PayoutModel");
 const UserModel = require("../models/UserModel");
+const nodemailer = require('nodemailer');
 
 //FALTA INTRODUCIR RENDER VISTAS (comentarios comenzando por INTRO render)
 class BookController {
@@ -130,12 +131,34 @@ class BookController {
           concept: req.body.concept,
           date: dateNow
         };
-        //let user = UserModel.findOne(req.user.id);
-        //console.log(user);
-        console.log(payData);
         const book = await BookModel.add(data);
         const pay = await PayoutModel.add(payData);
-        console.log(pay);
+        const user = await UserModel.findById(req.user.id);
+        console.log(book);
+        let transporter = nodemailer.createTransport({
+          service: "gmail",
+          auth: {
+            user: 'padelgest2020@gmail.com',
+            pass: 'padel20gest'
+          },
+          tls: {
+            rejectUnauthorized: false
+          }
+        });
+        
+        const message = {
+          from: 'padelgest2020@gmail.com',
+          to: user.email,
+          subject: 'Reserva efectuada',
+          html: '<p>Tu reserva se ha registrado con éxito, gracias por confiar en PadelGest.</p><p>Un saludo, el equipo de PadelGest.</p>'
+        };
+        transporter.sendMail(message, function(err, info) {
+          if (err) {
+            console.log(err)
+          } else {
+            console.log(info);
+          }
+        });
         return res.redirect("/book");
       } catch (err) {
         console.log("Error addBookController");

@@ -4,6 +4,7 @@ const BookModel = require("../models/BookModel");
 const CourtModel = require("../models/CourtModel");
 const UserModel = require("../models/UserModel");
 const PayoutModel = require("../models/PayoutModel");
+const nodemailer = require('nodemailer');
 
 class PrivateCoachingInscriptionController {
   constructor() {}
@@ -92,6 +93,34 @@ class PrivateCoachingInscriptionController {
             console.log(book);
             console.log("Tiene pinta de que ha funcionao");
             await PrivateCoachingModel.edit(req.params.id, {
+            });
+            const inscription = await PrivateCoachingInscriptionModel.findInscriptionsByCoaching( req.params.id );
+            let transporter = nodemailer.createTransport({
+              service: "gmail",
+              auth: {
+                user: 'padelgest2020@gmail.com',
+                pass: 'padel20gest'
+              },
+              tls: {
+                rejectUnauthorized: false
+              }
+            });
+            inscription.forEach(async elemnt => {
+              const user = await UserModel.findById(elemnt.user_id);
+                console.log(user.login);
+                const message = {
+                  from: 'padelgest2020@gmail.com',
+                  to: user.email,
+                  subject: 'Inscripción a clase particular efectuada',
+                  html: '<p>Tu inscripción a la clase particular ha sido efectuada, accede a nuestro sitio Web para comprobarlo.</p><p>Un saludo, el equipo de PadelGest.</p>'
+                };
+                transporter.sendMail(message, function(err, info) {
+                  if (err) {
+                    console.log(err)
+                  } else {
+                    console.log(info);
+                  }
+                });
             });
             res.redirect("/privateCoaching/showInscriptions");
           } else {

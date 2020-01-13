@@ -2,6 +2,7 @@ const InscriptionModel = require("../models/InscriptionModel");
 const UserModel = require("../models/UserModel");
 const TournamentModel = require("../models/TournamentModel");
 const PayoutModel = require("../models/PayoutModel");
+const nodemailer = require('nodemailer');
 
 class InscriptionController {
   constructor() {}
@@ -23,6 +24,7 @@ class InscriptionController {
       }
 
       const user2 = await UserModel.findOne(req.body.user2_login);
+      const user = await UserModel.findById(req.user.id);
       if (user2 == null) throw err;
 
       let count = await InscriptionModel.findIfImAlreadyInscripted(tournament._id, req.user.id);
@@ -61,6 +63,42 @@ class InscriptionController {
       const inscription = await InscriptionModel.add(data);
       const pay = await PayoutModel.add(payData);
       console.log("INSCRITO y pagao");
+      let transporter = nodemailer.createTransport({
+        service: "gmail",
+        auth: {
+          user: 'padelgest2020@gmail.com',
+          pass: 'padel20gest'
+        },
+        tls: {
+          rejectUnauthorized: false
+        }
+      });
+      const message = {
+        from: 'padelgest2020@gmail.com',
+        to: user.email,
+        subject: 'Inscripción a clase particular efectuada',
+        html: '<p>Tu inscripción a la clase particular ha sido efectuada, accede a nuestro sitio Web para comprobarlo.</p><p>Un saludo, el equipo de PadelGest.</p>'
+      };
+      transporter.sendMail(message, function(err, info) {
+        if (err) {
+          console.log(err)
+        } else {
+          console.log(info);
+        }
+      });
+      const message2 = {
+        from: 'padelgest2020@gmail.com',
+        to: user2.email,
+        subject: 'Inscripción a torneo efectuada',
+        html: '<p>Tu inscripción para el torneo ha sido registrada, accede a nuestro sitio Web para comprobarlo y gestionarlo.</p><p>Un saludo, el equipo de PadelGest.</p>'
+      };
+      transporter.sendMail(message2, function(err, info) {
+        if (err) {
+          console.log(err)
+        } else {
+          console.log(info);
+        }
+      });
       return res.redirect("/tournament");
     } catch (err) {
       console.log("Error");
