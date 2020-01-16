@@ -1,0 +1,17 @@
+{% extends 'layout.twig' %} {% include "header.twig" %} {% block body %} {%
+include "navbar.twig" %}
+
+<div class="tournament-showall-container">
+  <div class="promoted-container">
+    <div class="card-container">
+      <div class="promoted-inscripted-container">
+      <h2>Asistentes a <strong>{{promotedGame.title}}</strong></h2>
+      {% for userIns in usersInscripted %}
+      <h4 class="users-login">  <strong>{{ userIns.login }}</strong> - <i>{{userIns.email}}</i></h4>
+      {% endfor %}
+      <h4 class="promoted-show-price">Precio: <strong>{{promotedGame.price}}€</strong></h4>
+    </div>
+  </div>
+  </div>
+</div>
+{% endblock %}

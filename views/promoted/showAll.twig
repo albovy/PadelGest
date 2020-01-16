@@ -1,60 +1,73 @@
+
+
 {% extends 'layout.twig' %}
 {% include "header.twig" %}
-
 {% block body %}
 {% include "navbar.twig" %}
 <div class="tournament-showall-container">
-	{% if user.role == "ADMIN" %}
-	<a href="/promoted/add">
-		<div class="tournament-showall-add">
-			<img src="/static/icons/add.svg" alt="add">
-			<span>Crear partido</span>
-		</div>
-	</a>
-	{% endif %}
-	<div class="tournament-wrapper">
-		{% for promo in promos %}
-		<div class="tournament-container card-container">
-			{% if promo.numPlayers == 4  %}
-			<small>Partido lleno </small>
-			{% endif %}
-
-			<h3>{{promo.title}}</h3>
-			<p>{{promo.date}}</p>
-			<p>Precio: {{promo.price}} €</p>
-			<input type="hidden" name="amount" value={{promo.price}} />
-			<p>
-				{% if user.role == "ADMIN" %}
-
-				<form method="post" action="/promoted/delete/{{promo._id}}">
-					<button type="submit">
-						<div class="tournament-showall-delete">
-							<img src="/static/icons/Delete.svg" alt="delete">
-							<span>Eliminar partido</span>
-						</div>
-					</button>
-				</form>
-
-				{% else %}
-				{% if not promo.inscripted and promo.numPlayers < 4 %}
-				<button type="button" class="promotedInscriptionButton" idValue={{promo._id}} 
-				amount={{promo.price}}  data-toggle="modal" data-target="#exampleModal" >
-					<div class="tournament-showall-add">
-						<img src="/static/icons/add.svg" alt="add">
-						<span>Inscribirse</span>
-					</div>
-				</button>
-				{% else %}
-					<small>Ya estás inscrito</small>
-				{% endif %}
-				{% endif %}
-			</p>
-		</div>
-		{% endfor %}
-	</div>
+  {% if user.role == "ADMIN" %}
+  <a href="/promoted/add">
+    <div class="tournament-showall-add">
+      <img src="/static/icons/add.svg" alt="add">
+      <span>Crear partido</span>
+    </div>
+  </a>
+  {% endif %}
+  <div class="tournament-wrapper">
+    {% for promo in promos %}
+    <div class="promoted-container">
+      <div class="card-container">
+        <div class="promoted-info-container">
+          {% if promo.numPlayers == 4  %}
+          <small>Partido lleno </small>
+          {% endif %}
+          <h3>{{promo.title}}</h3>
+          <p>{{promo.date}}</p>
+          <p>Precio: {{promo.price}} €</p>
+          <input type="hidden" name="amount" value={{promo.price}} />
+          <p>
+            {% if user.role == "ADMIN" %}
+          <form method="post" action="/promoted/delete/{{promo._id}}">
+            <button type="submit">
+              <div class="tournament-showall-delete">
+                <img src="/static/icons/Delete.svg" alt="delete">
+                <span>Eliminar partido</span>
+              </div>
+            </button>
+          </form>
+          {% else %}
+          {% if not promo.inscripted and promo.numPlayers < 4 %}
+          <button type="button" class="promotedInscriptionButton" idValue={{promo._id}} 
+            amount={{promo.price}}  data-toggle="modal" data-target="#exampleModal" >
+            <div class="tournament-showall-add">
+              <img src="/static/icons/add.svg" alt="add">
+              <span>Inscribirse</span>
+            </div>
+          </button>
+          {% else %}
+          <small>Ya estás inscrito</small>
+          {% endif %}
+          {% endif %}
+          </p>
+        </div>
+        <div class="promoted-incriptions-container">
+				  <a href="/promoted/show/{{promo._id}}">
+            <button>
+              <div class="tournament-showall-edit">
+                <img src="/static/icons/Detalle.svg" alt="detalle">
+                <span>Ver inscritos</span>
+              </div>
+            </button>
+          </a>
+        </div>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
 </div>
-
 <!-- Modal -->
+
+
 <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
   aria-hidden="true">
   <div class="modal-dialog" role="document">
@@ -62,7 +75,7 @@
       <div class="modal-header">
         <h5 class="modal-title" id="exampleModalLabel">Inscribete</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
+        <span aria-hidden="true">&times;</span>
         </button>
       </div>
       <div class="modal-body">
@@ -74,23 +87,20 @@
             <input type="text" class="form-control" name="creditCard" placeholder="Nº de tarjeta" required />
           </div>
           <div class="field-wrap">
-			{% if user.member == false %}
-				<input type="hidden" class="form-control" name="concept" readonly value="Inscripción a partido promocionado" />
-			{% else %}
-				<input type="hidden" class="form-control" name="concept" readonly value="Inscripción a partido promocionado (Precio de socio)" />
-			{% endif %}
+            {% if user.member == false %}
+            <input type="hidden" class="form-control" name="concept" readonly value="Inscripción a partido promocionado" />
+            {% else %}
+            <input type="hidden" class="form-control" name="concept" readonly value="Inscripción a partido promocionado (Precio de socio)" />
+            {% endif %}
           </div>
-
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
             <button type="submit" class="btn btn-primary">Inscribete</button>
           </div>
         </form>
-
       </div>
-
     </div>
   </div>
 </div>
-
 {% endblock %}
+

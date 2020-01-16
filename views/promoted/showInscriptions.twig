@@ -15,6 +15,14 @@
 
       <h3>{{promo.title}}</h3>
       <h5>{{promo.date}}</h5>
+      <a href="/promoted/show/{{promo._id}}">
+        <button>
+          <div class="tournament-showall-edit">
+            <img src="/static/icons/Detalle.svg" alt="detalle">
+            <span>Ver inscritos</span>
+          </div>
+        </button>
+      </a>
       <form method="post" action="/promotedInscription/delete/{{promo._id}}">
         <button type="submit">
           <div class="tournament-showall-delete">

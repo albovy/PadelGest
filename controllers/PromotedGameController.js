@@ -3,7 +3,7 @@ const PromotedInscriptionModel = require("../models/PromotedInscriptionModel");
 const UserModel = require("../models/UserModel");
 
 class PromotedGameController {
-  constructor() {}
+  constructor() { }
 
   async showMyInscriptions(req, res) {
     const myPromotedInscriptions = await PromotedInscriptionModel.findMyInscriptions(
@@ -43,6 +43,20 @@ class PromotedGameController {
     });
   }
 
+  async showPromoted(req, res) {
+    let inscriptions = await PromotedInscriptionModel.findInscriptionsByGame(req.params.id);
+    let promotedGame = await PromotedGameModel.findById(req.params.id);
+    const user = await UserModel.findById(req.user.id);
+    let usersInscripted = [];
+    for (let index = 0; index < inscriptions.length; index++) {
+      usersInscripted[index] =  await UserModel.findById(inscriptions[index].user_id);
+    }
+    console.log(usersInscripted);
+
+    res.render("promoted/show", { usersInscripted: usersInscripted, user: user, promotedGame: promotedGame });
+  }
+
+
   async showAll(req, res) {
     const promos = await PromotedGameModel.findAll();
     const dateNow = Date.now();
@@ -51,6 +65,7 @@ class PromotedGameController {
 
     array = await Promise.all(
       promos.map(async element => {
+
         if (element.date < dateNow) {
           try {
             await PromotedGameModel.delete(element._id);
@@ -78,10 +93,9 @@ class PromotedGameController {
             minute: "2-digit"
           };
           element.date.setHours(element.date.getHours() - 1);
-          if(user.member==true){
-            element.price=element.price*0.7;
+          if (user.member == true) {
+            element.price = element.price * 0.7;
           }
-          console.log(element.price);
           let data = {
             _id: element._id,
             title: element.title,
@@ -100,8 +114,9 @@ class PromotedGameController {
         }
       })
     );
-    res.render("promoted/showAll", { promos: array, user: user });
+    res.render("promoted/showAll", { promos: array, user: user});
   }
+
   async add(req, res) {
     if (req.method == "GET") {
       res.render("promoted/add", { user: req.user });
