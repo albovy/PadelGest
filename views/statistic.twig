@@ -2,5 +2,14 @@
 
 <!--Body container statistic view-->
 {% block body %}
+{% include "navbar.twig" %}
+    <div class="stats-container">
+        {% if user.role == 'ADMIN' %}
+            <h3>Stats</h3>
 
+            <div class="canvas-bars">
+                <canvas id="bar-chart-example" width="800" height="450"></canvas>
+            </div>
+        {% endif %}
+    </div>    
 {% endblock %}
