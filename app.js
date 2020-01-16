@@ -27,6 +27,7 @@ const payoutRouter = require("./routes/payout");
 const privateCoachingRouter = require("./routes/privateCoaching");
 const privateCoachingInscriptionRouter = require("./routes/privateCoachingInscription");
 const blogRouter = require("./routes/blog");
+const statisticRouter = require("./routes/statistic.js");
 
 const app = express();
 
@@ -111,6 +112,7 @@ app.use("/privateCoaching", privateCoachingRouter);
 app.use("/privateCoachingInscription", privateCoachingInscriptionRouter);
 app.use("/payout", payoutRouter);
 app.use("/blog", blogRouter);
+app.use("/stat", statisticRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
