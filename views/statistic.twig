@@ -3,13 +3,33 @@
 <!--Body container statistic view-->
 {% block body %}
 {% include "navbar.twig" %}
-    <div class="stats-container">
-        {% if user.role == 'ADMIN' %}
-            <h3>Stats</h3>
-
-            <div class="canvas-bars">
-                <canvas id="bar-chart-example" width="800" height="450"></canvas>
-            </div>
-        {% endif %}
-    </div>    
+<canvas id="bar-chart" width="200" height="150" label="{{prueba}}" ></canvas>  <!-- se pueden crear atributos propios-->
+<script >
+    console.log("inicio script");
+    var prueba= document.getElementById("bar-chart").getAttribute("label");
+    console.log("prueba: ", prueba );
+    //var pruebaNumber=prueba.split(',').map(Number);   //Paso string a array de Number
+    
+// Bar chart
+new Chart(document.getElementById("bar-chart"), {
+    type: 'bar',
+    data: {
+      labels: ["Africa", "Asia", "Europe", "Latin America", "North America"],
+      datasets: [
+        {
+          label: "Population (millions)",
+          backgroundColor: ["#3e95cd", "#8e5ea2","#3cba9f","#e8c3b9","#c45850"],
+          data: prueba.split(',').map(Number)
+        }
+      ]
+    },
+    options: {
+      legend: { display: false },
+      title: {
+        display: true,
+        text: 'Predicted world population (millions) in 2050'
+      }
+    }
+}); 
+</script>
 {% endblock %}

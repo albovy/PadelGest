@@ -27,7 +27,7 @@ const payoutRouter = require("./routes/payout");
 const privateCoachingRouter = require("./routes/privateCoaching");
 const privateCoachingInscriptionRouter = require("./routes/privateCoachingInscription");
 const blogRouter = require("./routes/blog");
-const statisticRouter = require("./routes/statistic.js");
+const statisticRouter = require("./routes/statistic");
 
 const app = express();
 

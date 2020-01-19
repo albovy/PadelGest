@@ -25,6 +25,12 @@ class UserModel {
     return User.findById(id);
   }
 
+  findNumByGender(){
+    let numMen = User.count({role: "ATHLETE", gender: "MAN"});
+    let numWomen = User.count({role: "ATHLETE", gender: "WOMAN"});
+    return {"men":numMen, "women":numWomen};
+  }
+
   async update(id, data) {
     try {
       const user = await User.updateOne({ _id: id }, data);
