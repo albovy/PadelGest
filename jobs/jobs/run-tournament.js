@@ -5,6 +5,7 @@ const GroupModel = require("../../models/GroupModel");
 const CompetitionModel = require("../../models/CompetitionModel");
 const ClasificationModel = require("../../models/ClasificationModel");
 const ClashModel = require("../../models/ClashModel");
+const agenda2 = require("../../jobs/agenda");
 
 module.exports = function(agenda) {
   agenda.define("run tournament", async function(job, done) {
@@ -77,7 +78,6 @@ module.exports = function(agenda) {
                   }
                   if (res < minRes && i + res < 13) {
                     minDiv = i;
-
                     minRes = res;
                   }
                 }
@@ -193,6 +193,12 @@ module.exports = function(agenda) {
             }
           });
         });
+        agenda2.schedule(
+          finishDate,
+          "run playoff",
+          { id: competition._id },
+          ""
+        );
         job.remove(err => {
           console.log(err);
         });

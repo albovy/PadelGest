@@ -1,15 +1,18 @@
 const GameModel = require("../models/GameModel");
 const ClashModel = require("../models/ClashModel");
 const CompetitionModel = require("../models/CompetitionModel");
+const TournamentModel = require("../models/TournamentModel");
 const BookModel = require("../models/BookModel");
 const CourtModel = require("../models/CourtModel");
 const UserModel = require("../models/UserModel");
 const ClasificationModel = require("../models/ClasificationModel");
+const GroupModel = require("../models/GroupModel");
 class GameController {
   constructor() {}
 
   async showForTournament(req, res) {
-    const comp = await CompetitionModel.findByTournament(req.params.id);
+    const torn = await TournamentModel.findById(req.params.id);
+    const comp = await CompetitionModel.findByTournament(torn._id, torn.type);
     console.log(comp);
     let games = [];
     let clashes = [];
@@ -18,8 +21,14 @@ class GameController {
       games = await Promise.all(
         clashes.map(async element => {
           let game = await GameModel.findByClash(element._id);
+          console.log(game);
 
-          if (game != null && game.total_team1 == 0 && game.total_team2 == 0 && game.date <= Date.now() ) {
+          if (
+            game != null &&
+            game.total_team1 == 0 &&
+            game.total_team2 == 0 &&
+            game.date <= Date.now()
+          ) {
             const court = await CourtModel.findById(game.court_id);
 
             const user1 = await UserModel.findById(element.user1_id);
@@ -27,10 +36,15 @@ class GameController {
             const user3 = await UserModel.findById(element.user3_id);
             const user4 = await UserModel.findById(element.user4_id);
 
-            let options ={
-              weekday:"long",year:"numeric",month:"short",day:"numeric",hour:"2-digit",minute:"2-digit"
+            let options = {
+              weekday: "long",
+              year: "numeric",
+              month: "short",
+              day: "numeric",
+              hour: "2-digit",
+              minute: "2-digit"
             };
-            game.date.setHours(game.date.getHours()-1);
+            game.date.setHours(game.date.getHours() - 1);
             let data = {
               set1_team1: game.set1_team1,
               set1_team2: game.set1_team1,
@@ -47,7 +61,7 @@ class GameController {
               user2: user2.login,
               user3: user3.login,
               user4: user4.login,
-              date: game.date.toLocaleDateString("es-ES",options)
+              date: game.date.toLocaleDateString("es-ES", options)
             };
 
             return data;
@@ -70,10 +84,15 @@ class GameController {
           const user2 = await UserModel.findById(element.user2_id);
           const user3 = await UserModel.findById(element.user3_id);
           const user4 = await UserModel.findById(element.user4_id);
-          let options ={
-            weekday:"long",year:"numeric",month:"short",day:"numeric",hour:"2-digit",minute:"2-digit"
+          let options = {
+            weekday: "long",
+            year: "numeric",
+            month: "short",
+            day: "numeric",
+            hour: "2-digit",
+            minute: "2-digit"
           };
-          game.date.setHours(game.date.getHours()-1);
+          game.date.setHours(game.date.getHours() - 1);
           let data = {
             set1_team1: game.set1_team1,
             set1_team2: game.set1_team1,
@@ -90,7 +109,7 @@ class GameController {
             user2: user2.login,
             user3: user3.login,
             user4: user4.login,
-            date: game.date.toLocaleDateString("es-ES",options)
+            date: game.date.toLocaleDateString("es-ES", options)
           };
 
           return data;
@@ -153,7 +172,7 @@ class GameController {
         date: startDate
       };
       let book = {
-        user_id: "5dcd9c80fc13ae03c3000100",
+        user_id: "5e271ee08550ffb1a609b022",
         court_id: courtAv,
         startDate: startDate,
         endDate: endDate
@@ -171,6 +190,9 @@ class GameController {
 
   async results(req, res) {
     let game = await GameModel.findById(req.params.id);
+    let clash = await ClashModel.findById(game.clash_id);
+    let competition = await CompetitionModel.findById(clash.competition_id);
+    console.log("eingg");
 
     console.log(game);
     console.log(req.body);
@@ -204,41 +226,83 @@ class GameController {
     }
     data.total_team1 = total_team1;
     data.total_team2 = total_team2;
-    const clash = await ClashModel.findById(game.clash_id);
     console.log(clash);
     let clasification = await ClasificationModel.findByCompAndUser(
       clash.competition_id,
       clash.user1_id
     );
+    console.log(clasification);
     let clasification2 = await ClasificationModel.findByCompAndUser(
       clash.competition_id,
       clash.user3_id
     );
 
-
     let up = { $set: data };
-    game = await GameModel.update(game._id,up);
-
-    if (total_team1 > total_team2) {
-      let clas = {
-        points: clasification.points + 4
-      };
-      let point = {
-        points: clasification.points + 1
-      };
-      clasification = await ClasificationModel.update(clasification._id,{$set:clas});
-      clasification2 = await ClasificationModel.update(clasification2._id,{$set:point});
-      console.log(clasification);
+    game = await GameModel.update(game._id, up);
+    if (competition.type == "REGULARLEAGUE") {
+      if (total_team1 > total_team2) {
+        let clas = {
+          points: clasification.points + 3
+        };
+        let point = {
+          points: clasification.points + 1
+        };
+        clasification = await ClasificationModel.update(clasification._id, {
+          $set: clas
+        });
+        clasification2 = await ClasificationModel.update(clasification2._id, {
+          $set: point
+        });
+        console.log(clasification);
+      } else {
+        let clas = {
+          points: clasification2.points + 3
+        };
+        let point = {
+          points: clasification.points + 1
+        };
+        clasification = await ClasificationModel.update(clasification._id, {
+          $set: point
+        });
+        clasification2 = await ClasificationModel.update(clasification2._id, {
+          $set: clas
+        });
+        console.log(clasification2);
+      }
     } else {
-      let clas = {
-        points: clasification2.points + 4
-      };
-      let point = {
-        points: clasification.points + 1
-      };
-      clasification = await ClasificationModel.update(clasification._id,{$set:point});
-      clasification2 = await ClasificationModel.update(clasification2._id,{$set:clas});
-      console.log(clasification2);
+      console.log("aquiiiii");
+      let gp;
+      if (total_team1 > total_team2) {
+        let clas = {
+          points: clasification.points + 1
+        };
+        clasification = await ClasificationModel.update(clasification._id, {
+          $set: clas
+        });
+        gp = await GroupModel.findByUserAndTournament(
+          clash.user3_id,
+          competition.tournament_id
+        );
+        await GroupModel.update(gp._id, { $set: { clasificated: false } });
+        console.log("se puso falso");
+      } else {
+        console.log(clasification2);
+        let clas = {
+          points: clasification2.points + 1
+        };
+        clasification = await ClasificationModel.update(clasification2._id, {
+          $set: clas
+        });
+        gp = await GroupModel.findByUserAndTournament(
+          clash.user1_id,
+          competition.tournament_id
+        );
+        await GroupModel.update(gp._id, { $set: { clasificated: false } });
+        console.log("se puso falso");
+      }
+
+     
+
     }
 
     return res.redirect("/tournament");

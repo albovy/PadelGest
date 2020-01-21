@@ -24,6 +24,10 @@ class ClashModel{
         return await Clash.find({$or :[{user3_id: idUser},{user1_id : idUser},{user2_id: idUser},{user4_id: idUser}],competition_id : idCompetition, agree:true});
     }
 
+    async countByUserAndCompetition(idCompetition,idUser){
+        return await Clash.countDocuments({$or :[{user3_id: idUser},{user1_id : idUser},{user2_id: idUser},{user4_id: idUser}],competition_id : idCompetition});
+    }
+
     async add(body){
         let clash = new Clash(body);
         try{

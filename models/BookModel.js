@@ -23,6 +23,10 @@ class BookModel {
     });
   }
 
+  findBooksOnCourtAndDate(court_id,date){
+    return Book.countDocuments({court_id:court_id,startDate:{ $gt: date}})
+  }
+
   //Devuelve todas las fechas de reserva hasta una fecha limite (sin repetidos)
   findAllDistinctDatesInRange() {
     console.log("findAllDistinct");

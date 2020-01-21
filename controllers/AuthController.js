@@ -1,11 +1,10 @@
 const UserModel = require("../models/UserModel");
 const jwt = require("jsonwebtoken");
 
-
 class AuthController {
   constructor() {}
 
-   logout(req,res){
+  logout(req, res) {
     res.clearCookie("token");
     return res.redirect("/auth");
   }
@@ -14,23 +13,23 @@ class AuthController {
     if (req.method == "GET") {
       res.render("user/login");
     } else {
-      
       let user = UserModel.findOne(req.body.login);
       let us = await UserModel.findOne(req.body.login);
-
-      let valid = user.then(user => {
-        if (user) return req.body.passwd == user.passwd;
-        else throw err;
-      });
+      console.log(user);
+        let valid = user.then(user => {
+          console.log(user);
+          if (user) return req.body.passwd == user.passwd;
+          else throw err;
+        });
 
       const dateNow = Date.now();
       let userDate = us.memberDate;
-      if(userDate!=null){
-        userDate.setMonth(userDate.getMonth()+1);
+      if (userDate != null) {
+        userDate.setMonth(userDate.getMonth() + 1);
       }
-      
-      if(userDate<dateNow){
-        const newData = { $set: { member: false} };
+
+      if (userDate < dateNow) {
+        const newData = { $set: { member: false } };
         const newUser = await UserModel.update(us.id, newData);
         console.log(newUser);
       }

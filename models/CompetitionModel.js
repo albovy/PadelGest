@@ -12,9 +12,11 @@ class CompetitionModel {
     return Competition.findById(id);
   }
 
-  findByTournament(idTournament){
-    return Competition.findOne({tournament_id: idTournament});
+  findByTournament(idTournament,type){
+    return Competition.findOne({tournament_id: idTournament,type:type});
   }
+
+  
 
   async add(body) {
     console.log("addCompetitionModel");

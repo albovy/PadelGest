@@ -1,0 +1,31 @@
+{% extends 'layout.twig' %}
+
+{% block body %}
+{% include "navbar.twig" %}
+
+<div class="tournament-showall-container">
+{% if array == null %}
+<h1> No hay ninguno para actualizar </h1>
+{% else %}
+<div class="tournament-wrapper">
+{% for element in array %}
+<div class="tournament-container card-container">
+<form method=POST action="/tournament/{{element.tournament_id}}/generate">
+<h5 name="category">Categoria : {{element.category}}</h5>
+<h5 name="subGroup">Subgroup : {{element.subGroup}}</h5>
+<input type="hidden" name="category" value="{{element.category}}"></input>
+<input type="hidden" name="subGroup" value="{{element.subGroup}}"></input>
+
+<button type="submit" class="">
+    <div class="tournament-showall-add">
+        <img src="/static/icons/edit.svg" alt="edit">
+        <span>Generar enfrentamientos</span>
+    </div>
+</button>
+</form>
+</div>
+{% endfor %}
+</div>
+{% endif %}
+</div>
+{% endblock %}

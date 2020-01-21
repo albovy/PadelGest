@@ -44,17 +44,33 @@
       </form>
       {% else %}
 
+      
+      
       <a href="/game/tournament/{{tournament._id}}">
         <div class="tournament-showall-edit">
           <img src="/static/icons/edit.svg" alt="edit">
           <span>Introducir resultados</span>
         </div>
       </a>
+{% if tournament.type == "PLAYOFF" %}
+
+      <a href="/tournament/{{tournament._id}}/generate">
+        <div class="tournament-showall-edit">
+          <img src="/static/icons/edit.svg" alt="edit">
+          <span>Generar enfrentamientos playoff</span>
+        </div>
+      </a>
+      {% endif %}
+
+      
       {% endif %}
       {% endif %}
       {% if user.role == 'ATHLETE' %}
       {% if tournament.started %}
       {% if tournament.inscripted %}
+      <h5>Liga regular</h5>
+      {% if tournament.finishDate2 > today and tournament.type == "REGULARLEAGUE" %}
+    
       <a href="/clash/tournament/{{tournament._id}}">
         <div class="tournament-showall-my-clashes">
           <img src="/static/icons/calendar.svg" alt="-mis_enfrentamientos">
@@ -67,12 +83,40 @@
           <span>Ver partidos</span>
         </div>
       </a>
-      <a href="/clasification/tournament/{{tournament._id}}">
+      {% endif %}
+      <a href="/clasification/tournament/{{tournament._id}}?type=REGULARLEAGUE">
         <div class="tournament-showall-classification">
           <img src="/static/icons/classification.svg" alt="edit">
           <span>Clasificación</span>
         </div>
       </a>
+      {% if tournament.type == "PLAYOFF" %}
+      <h5>Playoff</h5>
+      {% if tournament.clasificated %}
+      {% if tournament.finishDate2 > today %}
+      <a href="/clash/tournament/{{tournament._id}}">
+        <div class="tournament-showall-my-clashes">
+          <img src="/static/icons/calendar.svg" alt="-mis_enfrentamientos">
+          <span>Proponer fecha a los partidos</span>
+        </div>
+      </a>
+      <a href="/game/tournament/{{tournament._id}}">
+        <div class="tournament-showall-my-clashes">
+          <img src="/static/icons/clashes.svg" alt="-mis_enfrentamientos">
+          <span>Ver partidos</span>
+        </div>
+      </a>
+      {% endif %}
+      {% endif %}
+      <a href="/clasification/tournament/{{tournament._id}}?type=PLAYOFF">
+        <div class="tournament-showall-classification">
+          <img src="/static/icons/classification.svg" alt="edit">
+          <span>Clasificación</span>
+        </div>
+      </a>
+      
+      {% endif %}
+      
       {% endif %}
       {% else %}
       {% if not tournament.inscripted %}

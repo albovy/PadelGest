@@ -11,6 +11,8 @@ router.post("/edit/:id", permit("ADMIN","ATHLETE", "COACH"), userController.edit
 router.post("/delete/:id", permit("ADMIN"), userController.delete);
 router.get("/register", notLogged(), userController.register);
 router.post("/register", notLogged(), userController.register);
+router.get("/add",permit("ADMIN"),userController.add);
+router.post("/add",permit("ADMIN"),userController.add);
 
 //router.get('/edit:id',user.edit);
 

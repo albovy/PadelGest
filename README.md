@@ -90,6 +90,10 @@ Para acceder como un deportista:
 ​	contraseña: **iz4iCG**
 
 
+lgerardi14
+
+gtTxFY9J
+
 
 
 

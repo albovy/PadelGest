@@ -1,5 +1,6 @@
 const ClashModel = require("../models/ClashModel");
 const CompetitionModel = require("../models/CompetitionModel");
+const TournamentModel = require("../models/TournamentModel");
 const CourtModel = require("../models/CourtModel");
 const BookModel = require("../models/BookModel");
 const UserModel = require("../models/UserModel");
@@ -75,20 +76,20 @@ class ClashController {
   async showTournament(req, res) {
     try {
       console.log("showTournament");
-      const comp = await CompetitionModel.findByTournament(req.params.id);
+      const torn = await TournamentModel.findById(req.params.id);
+      const comp = await CompetitionModel.findByTournament(torn._id,torn.type);
       console.log(comp._id);
+      console.log(req.user.id);
       const myClash = await ClashModel.findByUserAndCompetition(
         comp._id,
         req.user.id
       );
-      console.log(comp);
+      console.log(myClash);
       let dateComp = {
         startDate: comp.startDate.getTime(),
         finishDate: comp.finishDate.getTime()
       };
-      console.log(dateComp);
       const atLeastOneBookDates = await BookModel.findAllDistinctDatesInRange2(comp.startDate,comp.finishDate);
-      console.log(atLeastOneBookDates);
       const numCourts = await CourtModel.countCourts();
 
       let arrayDatesFullBooked = await Promise.all(
@@ -96,13 +97,13 @@ class ClashController {
           const numResults = await BookModel.countBooksOnDate(startDate);
 
           if (numResults == numCourts) {
-            console.log("hola");
+            
             return new Date(startDate).getTime() - 3600000;
           }
         })
       );
       arrayDatesFullBooked= arrayDatesFullBooked.filter(element=>element!=null);
-      console.log(arrayDatesFullBooked)
+
       let array = await Promise.all(
         myClash.map(async clash => {
           let user1 = await UserModel.findById(clash.user1_id);

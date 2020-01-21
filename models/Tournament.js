@@ -7,7 +7,8 @@ const TournamentScheme = new Schema({
   startDate: { type: Date, required: true },
   finishDate: { type: Date, required: true },
   started: { type: Boolean, required: true, default:false },
-  price: { type: Number, required: true }
+  price: { type: Number, required: true },
+  type: {type:String, required:true, default:"REGULARLEAGUE"},
 });
 
 module.exports = mongoose.model("Tournament", TournamentScheme);

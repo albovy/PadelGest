@@ -90,6 +90,45 @@ class UserController {
       res.redirect("/");
     }
   }
+
+  async add(req,res){
+    if(req.method == "GET"){
+      res.render("user/add",{user:req.user});
+    }else{
+      try {
+        const user = await UserModel.save(req.body);
+        console.log(user);
+        let transporter = nodemailer.createTransport({
+          service: "gmail",
+          auth: {
+            user: 'padelgest2020@gmail.com',
+            pass: 'padel20gest'
+          },
+          tls: {
+            rejectUnauthorized: false
+          }
+        });
+        
+        const message = {
+          from: 'padelgest2020@gmail.com',
+          to: req.body.email,
+          subject: 'Registro completado',
+          html: '<p>Te has registrado en PadelGest, ya puedes acceder a todas nuestras actividades desde nuestro sitio Web.</p><p>Un saludo, el equipo de PadelGest.</p>'
+        };
+        transporter.sendMail(message, function(err, info) {
+          if (err) {
+            console.log(err)
+          } else {
+            console.log(info);
+          }
+        });
+        return res.redirect("/");
+      } catch (err) {
+        req.flash("error", "Error en el registro");
+        res.redirect("/");
+      }
+    }
+  }
 }
 
 module.exports = new UserController();
