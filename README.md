@@ -85,14 +85,12 @@ Para ver las funciones de administrador:
 
 Para acceder como un deportista:
 
-​	usuario: **adenore0**
+​	usuario: **deportista2**
 
-​	contraseña: **iz4iCG**
+​	contraseña: **deportista2**
 
 
-lgerardi14
 
-gtTxFY9J
 
 
 

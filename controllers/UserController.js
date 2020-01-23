@@ -96,6 +96,7 @@ class UserController {
       res.render("user/add",{user:req.user});
     }else{
       try {
+        console.log(req.body);
         const user = await UserModel.save(req.body);
         console.log(user);
         let transporter = nodemailer.createTransport({
