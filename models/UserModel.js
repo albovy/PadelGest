@@ -25,10 +25,12 @@ class UserModel {
     return User.findById(id);
   }
 
-  findNumByGender(){
-    let numMen = User.count({role: "ATHLETE", gender: "MAN"});
-    let numWomen = User.count({role: "ATHLETE", gender: "WOMAN"});
-    return {"men":numMen, "women":numWomen};
+  findWomen(){
+     return User.countDocuments({role:"ATHLETE",gender:"WOMAN"});
+  }
+
+  findMen(){
+    return User.countDocuments({role:"ATHLETE",gender:"MAN"});
   }
 
   async update(id, data) {

@@ -3,7 +3,8 @@ addEventListener('load', function () {
   topnavDisplay();
   // Check if is a showcurrent of blog post to solve a error with sticky header
   // It isnt a solution, its a temporal patch
- if (!window.location.pathname.startsWith('/blog/show/') && !window.location.pathname.startsWith('/promoted/show/')) {
+ if (!window.location.pathname.startsWith('/blog/show/') && !window.location.pathname.startsWith('/promoted/show/') 
+      && !window.location.pathname.startsWith('/stat') ) {
   // When the user scrolls the page, execute stickyHeader
   window.addEventListener('scroll', function () { stickyHeader(), false });
  

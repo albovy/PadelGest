@@ -41,6 +41,7 @@ Es importante hacerlo después de cada cambio de otra persona para que descargue
 
 
 ### Importar base de datos
+La base de datos es la carpeta PadelGest\padeldb
 
 Linux :  
 
@@ -54,7 +55,7 @@ Windows :
 
 `C:\Program Files\MongoDB\Server\4.0\bin` o dónde sea que esté instalado mongo.
 
-`mongorestore -d padeldb padeldb`
+`mongorestore --db padeldb <ruta_base_datos>`
 
 
 

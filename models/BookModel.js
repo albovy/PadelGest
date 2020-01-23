@@ -23,8 +23,20 @@ class BookModel {
     });
   }
 
+  countUserBooks(){
+    return Book.countDocuments({user_id:  {$ne: "5e271ee08550ffb1a609b022"}});
+  }
+
+  countSystemBooks(){
+    return Book.countDocuments({user_id: "5e271ee08550ffb1a609b022"});
+  }
+
   findBooksOnCourtAndDate(court_id,date){
     return Book.countDocuments({court_id:court_id,startDate:{ $gt: date}})
+  }
+
+  findAllUserBooks(){
+    return Book.find({user_id:  {$ne: "5e271ee08550ffb1a609b022"}});
   }
 
   //Devuelve todas las fechas de reserva hasta una fecha limite (sin repetidos)

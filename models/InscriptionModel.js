@@ -17,6 +17,9 @@ class InscriptionModel {
     return Inscription.findOne({$and :[{$or :[{user1_id : user_id},{user2_id: user_id}]},{tournament_id : tournament_id}]});
   }
   
+  findAll(){
+    return Inscription.find();
+  }
 
   findInscriptionsByTournament(id) {
     return Inscription.find({ tournament_id: id }).sort({inscriptionDate: -1});

@@ -4,33 +4,115 @@
 {% block body %}
 
 {% include "navbar.twig" %}
-<canvas id="bar-chart" width="200" height="150" label="{{prueba}}" ></canvas>  <!-- se pueden crear atributos propios-->
+<div style="margin: 25px">
+  <div class="row" >
+    <div class="col-5" style="padding:50px">
+      <canvas id="pie-chart" width="200" height="150" label="{{atletas}}" ></canvas>  <!-- se pueden crear atributos propios-->
+    </div>
+    <div class="col-5" style="padding:50px">
+      <canvas id="bar-chart" width="200" height="150" label="{{reservas}}"></canvas>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-5" style="padding:50px">
+      <canvas id="diasSemana-chart" width="200" height="150" label={{reservasPorDia}}></canvas>
+    </div>
+    <div class="col-5" style="padding:50px">
+      <canvas id="niveles-chart" width="200" height="150" label="{{nivelesTorneo}}"></canvas>
+    </div>
+  </div>
+</div>
+
 <script >
     console.log("inicio script");
-    var prueba= document.getElementById("bar-chart").getAttribute("label");
-    console.log("prueba: ", prueba );
+    var porcentajesReserva= document.getElementById("bar-chart").getAttribute("label");
+    var atletas = document.getElementById("pie-chart").getAttribute("label");
+    var reservasPorDia = document.getElementById("diasSemana-chart").getAttribute("label");
+    var niveles = document.getElementById("niveles-chart").getAttribute("label");
     //var pruebaNumber=prueba.split(',').map(Number);   //Paso string a array de Number
     
 // Bar chart
 new Chart(document.getElementById("bar-chart"), {
-    type: 'bar',
+  type: 'doughnut',
     data: {
-      labels: ["Africa", "Asia", "Europe", "Latin America", "North America"],
+      labels: ["Reservas de particulares","Reservas torneos y promocionados"],
       datasets: [
         {
-          label: "Population (millions)",
+          label: "Distribucion reservas",
           backgroundColor: ["#3e95cd", "#8e5ea2","#3cba9f","#e8c3b9","#c45850"],
-          data: prueba.split(',').map(Number)
+          data: porcentajesReserva.split(',').map(Number)
         }
       ]
     },
     options: {
-      legend: { display: false },
+      
       title: {
         display: true,
-        text: 'Predicted world population (millions) in 2050'
+        text: 'Distribucion reservas (porcentaje)'
       }
     }
 }); 
+
+//Pie Chart
+new Chart(document.getElementById("pie-chart"), {
+  type: 'pie',
+  data: {
+    labels: ["Mujer","Hombre"],
+    datasets: [{
+      label: "Numero de atletas registrados",
+      backgroundColor: ["#3e95cd", "#8e5ea2","#3cba9f","#e8c3b9","#c45850"],
+      data: atletas.split(',').map(Number)
+    }]
+  },
+  options: {
+    title: {
+      display: true,
+      text: 'Numero de atletas registrados (por género)'
+    }
+  }
+});
+//Media de reservas por dia de la semana
+new Chart(document.getElementById("diasSemana-chart"), {
+  type: 'bar',
+  data: {
+    labels: ["Domingo", "Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado"],
+    datasets: [
+      {
+        backgroundColor: ["#3e95cd", "#8e5ea2","#3cba9f","#e8c3b9","#c45850","#f44611","#2db92d"],
+        data: reservasPorDia.split(',').map(Number)
+      }
+    ]
+  },
+  options: {
+    title: {
+      display: true,
+      text: 'Media de reservas por día de la semana'
+    },
+    legend: {
+      display:false
+    }
+  }
+});
+
+//Media inscripciones por nivel
+new Chart(document.getElementById("niveles-chart"), {
+  type: 'bar',
+  data: {
+    labels: ["Nivel 1", "Nivel 2", "Nivel 3"],
+    datasets: [{
+      backgroundColor: ["#3e95cd", "#8e5ea2","#3cba9f","#e8c3b9","#c45850"],
+      data: niveles.split(',').map(Number)
+    }]
+  },
+  options: {
+    title: {
+      display: true,
+      text: 'Media de inscripciones por nivel'
+    },
+    legend:{
+      display:false
+    }
+  }
+});
 </script>
 {% endblock %}
